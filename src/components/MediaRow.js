@@ -5,6 +5,8 @@ import {
   GridListTileBar,
   IconButton,
   makeStyles,
+  List,
+  ListItem,
 } from '@material-ui/core';
 import PageviewIcon from '@material-ui/icons/Pageview';
 import CreateIcon from '@material-ui/icons/Create';
@@ -17,15 +19,19 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
   },
+  list: {
+    height: '100%',
+    width: '100%',
+  },
 }));
 
 const MediaRow = ({file, myfiles}) => {
   const description = JSON.parse(file.description);
   const classes = useStyles();
   let thumb = 'https://via.placeholder.com/320x200.png?text=Audio';
-  if (file.thumbnails) {
-    thumb = mediaUrl + file.thumbnails.w320;
-  }
+    if (file.thumbnails) {
+      thumb = mediaUrl + file.thumbnails.w320;
+    }
   return (
     <>
       <img
@@ -42,10 +48,14 @@ const MediaRow = ({file, myfiles}) => {
           }
         }
       />
-      <GridListTileBar
-        title={file.title}
-        subtitle={myfiles ? '' : description.desc}
-        actionIcon={
+      <List className={classes.list}>
+        <ListItem>
+          {file.title}
+        </ListItem>
+        <ListItem>
+          {myfiles ? '' : description.desc}
+        </ListItem>
+        {/* actionIcon={
           <>
             <IconButton
               aria-label={`info about ${file.title}`}
@@ -68,7 +78,7 @@ const MediaRow = ({file, myfiles}) => {
                 <IconButton
                   aria-label={`Delete file`}
                   onClick={() => {
-                    const delOK = window.confirm('Do you reallu want to delete?');
+                    const delOK = window.confirm('Do you really want to delete?');
                     if (delOK) {
                       deleteFile(file.file_id);
                     }
@@ -80,9 +90,10 @@ const MediaRow = ({file, myfiles}) => {
               </>
             }
           </>
-        }
-      />
-    </>);
+          } */}
+      </List>
+    </>
+    );
 };
 
 MediaRow.propTypes = {

@@ -23,6 +23,36 @@ const useAllMedia = () => {
   return data;
 };
 
+/* const useAllMedia = (id) => {
+  const [data, setData] = useState([]);
+  const fetchUrl = async () => {
+    const response = await fetch(baseUrl + 'tags/mpjakk');
+    const json = await response.json();
+   
+    // haetaan yksittäiset kuvat, jotta saadan thumbnailit
+    const items = await Promise.all(json.map(async (item) => {
+      const response = await fetch(baseUrl + 'media/' + item.file_id);
+      const kuva =  await response.json();
+    // hae avatar kuva.user_id:n avulla
+    const response2 =await fetch(baseUrl + 'tags/avatar_' + kuva.user_id)
+    const avatar = await response2.json()
+    // lisää avatar kuvaan
+    kuva.avatar = avatar;
+    // samalla tavalla haetaan käyttäjätiedot ja asetetaan kuva.user = haetut tiedot
+    return kuva;
+    }));
+
+    console.log(items);
+    setData(items);
+    };
+
+    useEffect(() => {
+    fetchUrl();
+    }, []);
+
+    return data;
+}; */
+
 const useSingleMedia = (id) => {
   const [data, setData] = useState(null);
   const fetchUrl = async (fileid) => {
