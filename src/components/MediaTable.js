@@ -31,14 +31,14 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
+    /* backgroundColor: theme.palette.background.paper, */
   },
   jaa: {
     display: 'block',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
+    /* backgroundColor: theme.palette.background.paper, */
   },
   gridList: {
     width: '100%',
@@ -50,9 +50,14 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: red[500],
   },
+  container: {
+   /*  display: 'grid', */
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   media: {
+    width: '100%',
     height: '100%',
-    /* paddingTop: '56.25%', // 16:9 */
   },
 }));
 
@@ -102,9 +107,10 @@ const MediaTable = () => {
                   subheader="April 23, 2020"
                 />
                 
-                <CardMedia  className={classes.media}>
-                  <MediaRow file={file}/>
+                <CardMedia  className={classes.container}>
+                  <MediaRow className={classes.media} file={file}/>
                 </CardMedia>
+                
                 <CardActions disableSpacing>
                   <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
