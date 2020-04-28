@@ -118,13 +118,15 @@ const Nav = ({history}) => {
         </Toolbar>
       </AppBar>
 
-      <BottomNavigation value={value} onChange={handleChange} className={classes.root} >
+      {user !== null &&
+    <BottomNavigation value={value} onChange={handleChange} className={classes.root} >
       <BottomNavigationAction label="Home" value="home" icon={<HomeIcon />} component={RouterLink} to="/home"/>
       <BottomNavigationAction label="Search" value="search" icon={<SearchIcon />} component={RouterLink} to="/"/>
       <BottomNavigationAction label="Upload" value="upload" icon={<AddCircleOutlineIcon />} component={RouterLink} to="/upload"/>
       <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} component={RouterLink} to="/"/>
       <BottomNavigationAction label="Profile" value="profile" icon={<AccountBoxIcon />} component={RouterLink} to="/profile"/>
     </BottomNavigation>
+      }
     </>
   );
 };
