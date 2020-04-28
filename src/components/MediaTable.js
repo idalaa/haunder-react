@@ -63,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
   media: {
     width: '100%',
     height: '100%',
+    borderRadius: 6,
     /* marginLeft: '33%' */
   },
   expand: {

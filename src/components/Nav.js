@@ -24,15 +24,33 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PublishIcon from '@material-ui/icons/Publish';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import SearchIcon from '@material-ui/icons/Search';
+
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    /* flexGrow: 1, */
+    width: '100%',
+    position: 'fixed',
+    bottom: 0,
+    zIndex: 1,
+    left: 1,
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
+    justifyContent: 'space-around',
+    paddingLeft: '43%',
+  },
+  logo: {
+    width: '5%',
+    height: '5%',
+    paddingRight: '10px',
   },
 }));
 
@@ -60,8 +78,21 @@ const Nav = ({history}) => {
     checkUser();
   }, [history, setUser]);
 
+  const [value, setValue] = React.useState('home');
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
     <>
+    <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
+      <BottomNavigationAction label="Home" value="home" icon={<HomeIcon />} component={RouterLink} to="/home"/>
+      <BottomNavigationAction label="Search" value="search" icon={<SearchIcon />} component={RouterLink} to="/"/>
+      <BottomNavigationAction label="Upload" value="upload" icon={<AddCircleOutlineIcon />} component={RouterLink} to="/upload"/>
+      <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} component={RouterLink} to="/"/>
+      <BottomNavigationAction label="Profile" value="profile" icon={<AccountBoxIcon />} component={RouterLink} to="/profile"/>
+    </BottomNavigation>
       <AppBar>
         <Toolbar>
           <IconButton
@@ -74,7 +105,8 @@ const Nav = ({history}) => {
             <MenuIcon/>
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            MyApp
+            <img className={classes.logo} src={require("../img/haundrlogo.png")}></img>
+            HAUNDER
           </Typography>
           {user === null ?
             <Button
@@ -96,6 +128,7 @@ const Nav = ({history}) => {
           }
         </Toolbar>
       </AppBar>
+      {/*
       <Drawer open={open} onClose={toggleDrawer(false)}>
         <List>
           <ListItem
@@ -149,7 +182,7 @@ const Nav = ({history}) => {
           </>
           }
         </List>
-      </Drawer>
+      </Drawer> */}
     </>
   );
 };
