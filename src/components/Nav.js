@@ -8,11 +8,6 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
   Button,
   Typography,
   makeStyles,
@@ -38,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     zIndex: 1,
     left: 1,
+    borderTop: '1px solid #bf360c',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -86,13 +82,6 @@ const Nav = ({history}) => {
 
   return (
     <>
-    <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
-      <BottomNavigationAction label="Home" value="home" icon={<HomeIcon />} component={RouterLink} to="/home"/>
-      <BottomNavigationAction label="Search" value="search" icon={<SearchIcon />} component={RouterLink} to="/"/>
-      <BottomNavigationAction label="Upload" value="upload" icon={<AddCircleOutlineIcon />} component={RouterLink} to="/upload"/>
-      <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} component={RouterLink} to="/"/>
-      <BottomNavigationAction label="Profile" value="profile" icon={<AccountBoxIcon />} component={RouterLink} to="/profile"/>
-    </BottomNavigation>
       <AppBar>
         <Toolbar>
           <IconButton
@@ -128,61 +117,14 @@ const Nav = ({history}) => {
           }
         </Toolbar>
       </AppBar>
-      {/*
-      <Drawer open={open} onClose={toggleDrawer(false)}>
-        <List>
-          <ListItem
-            button
-            component={RouterLink}
-            onClick={toggleDrawer(false)}
-            to="/home"
-          >
-            <ListItemIcon>
-              <HomeIcon/>
-            </ListItemIcon>
-            <ListItemText primary="Home"/>
-          </ListItem>
-          {user !== null &&
-          <>
-            <ListItem
-              button
-              component={RouterLink}
-              onClick={toggleDrawer(false)}
-              to="/profile"
-            >
-              <ListItemIcon>
-                <AccountBoxIcon/>
-              </ListItemIcon>
-              <ListItemText primary="Profile"/>
-            </ListItem>
 
-            <ListItem
-              button
-              component={RouterLink}
-              onClick={toggleDrawer(false)}
-              to="/upload"
-            >
-              <ListItemIcon>
-                 <PublishIcon/>
-              </ListItemIcon>
-              <ListItemText primary="Upload"/>
-            </ListItem>
-
-            <ListItem
-              button
-              component={RouterLink}
-              onClick={toggleDrawer(false)}
-              to="/myfiles"
-            >
-              <ListItemIcon>
-                <PhotoLibraryIcon/>
-              </ListItemIcon>
-              <ListItemText primary="My files"/>
-            </ListItem>
-          </>
-          }
-        </List>
-      </Drawer> */}
+      <BottomNavigation value={value} onChange={handleChange} className={classes.root} >
+      <BottomNavigationAction label="Home" value="home" icon={<HomeIcon />} component={RouterLink} to="/home"/>
+      <BottomNavigationAction label="Search" value="search" icon={<SearchIcon />} component={RouterLink} to="/"/>
+      <BottomNavigationAction label="Upload" value="upload" icon={<AddCircleOutlineIcon />} component={RouterLink} to="/upload"/>
+      <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} component={RouterLink} to="/"/>
+      <BottomNavigationAction label="Profile" value="profile" icon={<AccountBoxIcon />} component={RouterLink} to="/profile"/>
+    </BottomNavigation>
     </>
   );
 };
