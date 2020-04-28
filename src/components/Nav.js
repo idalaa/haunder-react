@@ -45,12 +45,12 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     justifyContent: 'space-around',
-    paddingLeft: '43%',
+    /* paddingLeft: '43%', */
   },
   logo: {
     width: '5%',
     height: '5%',
-    paddingRight: '10px',
+    /* paddingRight: '10px', */
   },
 }));
 
