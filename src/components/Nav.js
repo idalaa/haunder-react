@@ -105,7 +105,7 @@ const Nav = ({history}) => {
             <MenuIcon/>
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            <img className={classes.logo} src={require("../img/haundrlogo.png")}></img>
+            {/* <img className={classes.logo} src={require("../img/haundrlogo.png")}></img> */}
             HAUNDER
           </Typography>
           {user === null ?
