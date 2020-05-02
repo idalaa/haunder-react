@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import {Link as RouterLink} from 'react-router-dom';
+import {Link as RouterLink, useLocation} from 'react-router-dom';
 import {checkToken} from '../hooks/ApiHooks';
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Nav = ({history}) => {
   const classes = useStyles();
-  const [user, setUser] = useContext(MediaContext);
+  const [user, setUser, value, setValue] = useContext(MediaContext);
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (opener) => () => {
@@ -70,16 +70,29 @@ const Nav = ({history}) => {
         history.push('/home');
       }
     };
-
+    
     checkUser();
   }, [history, setUser]);
 
-  const [value, setValue] = React.useState('home');
-
+  const location = useLocation();
+  useEffect(() => {
+    const loc = location.pathname.substr(1);
+    console.log(location.pathname);
+    setValue(loc);
+  }, [location, setValue]);
+  
+  
   const handleChange = (event, newValue) => {
+    
+   /*  console.log(location.pathname); */
+
     setValue(newValue);
   };
 
+
+
+  console.log('history', history);
+  console.log('value', value);
   return (
     <>
       <AppBar>
@@ -94,7 +107,6 @@ const Nav = ({history}) => {
             <MenuIcon/>
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            {/* <img className={classes.logo} src={require("../img/haundrlogo.png")}></img> */}
             HAUNDER
           </Typography>
           {user === null ?
@@ -119,7 +131,11 @@ const Nav = ({history}) => {
       </AppBar>
 
       {user !== null &&
-    <BottomNavigation value={value} onChange={handleChange} className={classes.root} >
+    <BottomNavigation 
+      value={value} 
+     /*  onChange={handleChange}  */
+      className={classes.root} 
+    >
       <BottomNavigationAction label="Home" value="home" icon={<HomeIcon />} component={RouterLink} to="/home"/>
       <BottomNavigationAction label="Search" value="search" icon={<SearchIcon />} component={RouterLink} to="/"/>
       <BottomNavigationAction label="Upload" value="upload" icon={<AddCircleOutlineIcon />} component={RouterLink} to="/upload"/>

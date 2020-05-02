@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import MediaRow from './MediaRow';
-import {useAllMedia} from '../hooks/ApiHooks';
+import {useAllMedia, useSingleMedia} from '../hooks/ApiHooks';
 import {
   GridList,
   GridListTile,
@@ -27,6 +27,8 @@ import {getAvatarImage} from '../hooks/ApiHooks';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import Collapse from '@material-ui/core/Collapse';
+import PropTypes from 'prop-types';
+
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
@@ -79,9 +81,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MediaTable = () => {
+
   const classes = useStyles();
   const matches = useMediaQuery('(min-width:697px)');
-
+  /* const file = useSingleMedia(match.params.id);
+  console.log('file', file); */
   const picArray = useAllMedia();
 
   const [expanded, setExpanded] = React.useState(false);
@@ -126,7 +130,7 @@ const MediaTable = () => {
                       <MoreHoriz />
                     </IconButton>
                   } 
-                  title={file.title}
+                  title=/* {file.user.username}  */ "User_name"
                   subheader="April 23, 2020"
                 />
                 
@@ -171,6 +175,10 @@ const MediaTable = () => {
       </List>
     </div>
   );
+};
+
+MediaTable.propTypes = {
+  match: PropTypes.object,
 };
 
 export default MediaTable;
