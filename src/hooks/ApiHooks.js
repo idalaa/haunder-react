@@ -28,7 +28,7 @@ const useAllMedia = () => {
   const fetchUrl = async () => {
     const response = await fetch(baseUrl + 'tags/mpjakk');
     const json = await response.json();
-   
+
     // haetaan yksittäiset kuvat, jotta saadan thumbnailit
     const items = await Promise.all(json.map(async (item) => {
       const response = await fetch(baseUrl + 'media/' + item.file_id);
@@ -60,7 +60,7 @@ const useSingleMedia = (id) => {
     const item = await response.json();
     if (localStorage.getItem('token') !== null) {
       const userResponse = await getUser(item.user_id,
-        localStorage.getItem('token'));
+          localStorage.getItem('token'));
       item.user = userResponse;
     }
     console.log('itemi', item);
@@ -68,8 +68,24 @@ const useSingleMedia = (id) => {
   };
 
   useEffect(() => {
-    fetchUrl(id);
-  }, [id]);
+    fetchUrl();
+  }, []);
+
+  return data;
+};
+
+const useAllComments = (fileId) => {
+  const [data, setData] = useState([fileId]);
+  const fetchUrl = async () => {
+    const response = await fetch(baseUrl + 'comments/file/' + fileId);
+    const items = await response.json();
+    console.log(items);
+    setData(items);
+  };
+
+  useEffect(() => {
+    fetchUrl();
+  }, []);
 
   return data;
 };
@@ -197,6 +213,7 @@ const upload = async (inputs, token) => {
       'x-access-token': token,
     },
   };
+  console.log(fetchOptions);
   try {
     const response = await fetch(baseUrl + 'media', fetchOptions);
     const json = await response.json();
@@ -204,6 +221,32 @@ const upload = async (inputs, token) => {
     // lisää tägi mpjakk
     const tagJson = addTag(json.file_id, 'mpjakk', token);
     return {json, tagJson};
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
+const comment = async (inputs, token) => {
+  const fd = new FormData();
+  fd.append('file_id', inputs.file_id);
+  fd.append('comment', inputs.comment);
+
+  const fetchOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': token,
+    },
+    body: JSON.stringify(inputs),
+  };
+  console.log(fetchOptions);
+  try {
+    const response = await fetch(baseUrl + 'comments', fetchOptions);
+    const json = await response.json();
+    if (!response.ok) throw new Error(json.message + ': ' + json.error);
+    // lisää tägi mpjakk
+    // const tagJson = addTag(json.file_id, 'mpjakk', token);
+    // return {json, tagJson};
   } catch (e) {
     throw new Error(e.message);
   }
@@ -265,6 +308,7 @@ const modifyFile = async (inputs, id) => {
 export {
   useAllMedia,
   useSingleMedia,
+  useAllComments,
   register,
   login,
   checkUserAvailable,
@@ -272,6 +316,7 @@ export {
   getAvatarImage,
   updateProfile,
   upload,
+  comment,
   addTag,
   getUser,
   deleteFile,

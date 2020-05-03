@@ -70,7 +70,7 @@ const Nav = ({history}) => {
         history.push('/home');
       }
     };
-    
+
     checkUser();
   }, [history, setUser]);
 
@@ -80,15 +80,13 @@ const Nav = ({history}) => {
     console.log(location.pathname);
     setValue(loc);
   }, [location, setValue]);
-  
-  
+
+
   const handleChange = (event, newValue) => {
-    
-   /*  console.log(location.pathname); */
+    /*  console.log(location.pathname); */
 
     setValue(newValue);
   };
-
 
 
   console.log('history', history);
@@ -131,10 +129,10 @@ const Nav = ({history}) => {
       </AppBar>
 
       {user !== null &&
-    <BottomNavigation 
-      value={value} 
-     /*  onChange={handleChange}  */
-      className={classes.root} 
+    <BottomNavigation
+      value={value}
+      /*  onChange={handleChange}  */
+      className={classes.root}
     >
       <BottomNavigationAction label="Home" value="home" icon={<HomeIcon />} component={RouterLink} to="/home"/>
       <BottomNavigationAction label="Search" value="search" icon={<SearchIcon />} component={RouterLink} to="/"/>
