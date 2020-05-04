@@ -12,33 +12,33 @@ const useAllMedia = (id) => {
     // haetaan yksittäiset kuvat, jotta saadan thumbnailit
     const items = await Promise.all(json.map(async (item) => {
       const response = await fetch(baseUrl + 'media/' + item.file_id);
-      const kuva =  await response.json();
+      const kuva = await response.json();
 
-    // hae avatar kuva.user_id:n avulla
-    const response2 =await fetch(baseUrl + 'tags/avatar_' + kuva.user_id)
-    const avatar = await response2.json()
-    // lisää avatar kuvaan
-    kuva.avatar = avatar;
-   
-  //jos on token niin näkee muiden nimet
-    if (localStorage.getItem('token') !== null) {
-      const userResponse = await getUser(kuva.user_id,
-        localStorage.getItem('token')); 
-      kuva.user = userResponse;
-    }
-    
-    return kuva;
+      // hae avatar kuva.user_id:n avulla
+      const response2 =await fetch(baseUrl + 'tags/avatar_' + kuva.user_id);
+      const avatar = await response2.json();
+      // lisää avatar kuvaan
+      kuva.avatar = avatar;
+
+      // jos on token niin näkee muiden nimet
+      if (localStorage.getItem('token') !== null) {
+        const userResponse = await getUser(kuva.user_id,
+            localStorage.getItem('token'));
+        kuva.user = userResponse;
+      }
+
+      return kuva;
     }));
 
     console.log(items);
     setData(items);
-    };
+  };
 
-    useEffect(() => {
+  useEffect(() => {
     fetchUrl();
-    }, []);
+  }, []);
 
-    return data;
+  return data;
 };
 
 const useSingleMedia = (id) => {
@@ -68,8 +68,9 @@ const useAllComments = (fileId) => {
   const fetchUrl = async () => {
     const response = await fetch(baseUrl + 'comments/file/' + fileId);
     const items = await response.json();
-    console.log(items);
+    console.log('items', items);
     setData(items);
+    return items;
   };
 
   useEffect(() => {

@@ -1,8 +1,11 @@
 import React, {
- // useContext, useEffect, useState
+// useContext, useEffect, useState
 } from 'react';
 import MediaRow from './MediaRow';
 import {useAllMedia} from '../hooks/ApiHooks';
+// import {MediaContext} from '../contexts/MediaContext';
+// import {getAvatarImage} from '../hooks/ApiHooks';
+
 import {
   // GridList,
   // GridListTile,
@@ -21,18 +24,13 @@ import {
   Typography,
 } from '@material-ui/core';
 import {MoreHoriz} from '@material-ui/icons';
-// import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
-// import FavoriteIcon from '@material-ui/icons/Favorite';
 import {red} from '@material-ui/core/colors';
-// import {MediaContext} from '../contexts/MediaContext';
-// import {getAvatarImage} from '../hooks/ApiHooks';
-// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-// import clsx from 'clsx';
-// import Collapse from '@material-ui/core/Collapse';
-
-/* import Moment from 'react-moment'; */
-
-
+/* import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import clsx from 'clsx';
+import Collapse from '@material-ui/core/Collapse';
+import Moment from 'react-moment'; */
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
@@ -93,7 +91,7 @@ const MediaTable = () => {
   const [expanded, setExpanded] = React.useState(false);
 
   /* const data = user_id.userdata.username; */
-  
+
   return (
     <div className={classes.root}>
       <List
@@ -107,26 +105,25 @@ const MediaTable = () => {
               <Card className={classes.jaa}>
                 <CardHeader
                   avatar={
-                    file.avatar.length > 0 ? 
+                    file.avatar.length > 0 ?
                     <Avatar aria-label="user picture" className={classes.avatar}
                       src={mediaUrl + file.avatar[0].filename}
                       alt="Avatar image"
                       title="Avatar image"
-                    />
-                    : 
+                    /> :
                     <Avatar aria-label="user picture" className={classes.avatar}
                     />
                   }
-                  
+
                   action={
                     <IconButton aria-label="settings">
                       <MoreHoriz />
                     </IconButton>
                   }
-                  
+
                   title={file.user ? file.user.username : 'log in to see user data'}
-                
-                  subheader={/* moment(file.time_added).calendar() */ file.time_added} 
+
+                  subheader={/* moment(file.time_added).calendar() */ file.time_added}
                 />
 
                 <CardMedia className={classes.container}>
