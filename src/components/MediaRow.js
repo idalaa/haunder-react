@@ -44,7 +44,7 @@ const MediaRow = ({file, myfiles}) => {
   const description = JSON.parse(file.description);
   const classes = useStyles();
   let thumb = 'https://via.placeholder.com/320x200.png?text=Audio';
-  
+
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {

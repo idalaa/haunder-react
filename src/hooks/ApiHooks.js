@@ -5,7 +5,7 @@ const baseUrl = 'http://media.mw.metropolia.fi/wbma/';
 const useAllMedia = () => {
   const [data, setData] = useState([]);
   const fetchUrl = async () => {
-    const response = await fetch(baseUrl + 'tags/mpjakk');
+    const response = await fetch(baseUrl + 'tags/haunderTest');
     const json = await response.json();
     // haetaan yksittäiset kuvat, jotta saadan thumbnailit
     const items = await Promise.all(json.map(async (item) => {
@@ -219,7 +219,7 @@ const upload = async (inputs, token) => {
     const json = await response.json();
     if (!response.ok) throw new Error(json.message + ': ' + json.error);
     // lisää tägi mpjakk
-    const tagJson = addTag(json.file_id, 'mpjakk', token);
+    const tagJson = addTag(json.file_id, 'haunderTest', token);
     return {json, tagJson};
   } catch (e) {
     throw new Error(e.message);
