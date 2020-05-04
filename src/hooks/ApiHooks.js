@@ -42,9 +42,10 @@ const useAllMedia = (id) => {
 };
 
 const useSingleMedia = (id) => {
+  console.log('usesingle', id);
   const [data, setData] = useState(null);
   const fetchUrl = async (fileid) => {
-    const response = await fetch(baseUrl + 'media/' + fileid);
+    const response = await fetch(baseUrl + 'media/' + id);
     const item = await response.json();
     if (localStorage.getItem('token') !== null) {
       const userResponse = await getUser(item.user_id,

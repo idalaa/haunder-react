@@ -19,10 +19,10 @@ import {
 } from '@material-ui/core';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-// import PageviewIcon from '@material-ui/icons/Pageview';
-// import CreateIcon from '@material-ui/icons/Create';
-// import DeleteIcon from '@material-ui/icons/Delete';
-// import {deleteFile} from '../hooks/ApiHooks';
+import PageviewIcon from '@material-ui/icons/Pageview';
+import CreateIcon from '@material-ui/icons/Create';
+import DeleteIcon from '@material-ui/icons/Delete';
+import {deleteFile} from '../hooks/ApiHooks';
 import clsx from 'clsx';
 import Collapse from '@material-ui/core/Collapse';
 import CommentTable from './CommentTable';
@@ -111,7 +111,7 @@ const MediaRow = ({file, myfiles}) => {
           </Collapse>
           {/* </Card> */}
         </ListItem>
-        {/* actionIcon={
+        actionIcon={
           <>
             <IconButton
               aria-label={`info about ${file.title}`}
@@ -146,7 +146,7 @@ const MediaRow = ({file, myfiles}) => {
               </>
             }
           </>
-          } */}
+          }
       </List>
     </>
   );
