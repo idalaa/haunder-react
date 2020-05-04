@@ -78,11 +78,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CommentTable = (file) => {
+const CommentTable = (id) => {
   const classes = useStyles();
   const matches = useMediaQuery('(min-width:697px)');
 
-  const commentArray = useAllComments(file.fileId);
+  const commentArray = useAllComments(id.fileId);
   console.log('commentArray', commentArray);
 
   const [expanded, setExpanded] = React.useState(false);
@@ -110,8 +110,8 @@ const CommentTable = (file) => {
         className={classes.gridList}
         cols={matches ? 1 : 1}>
         {
-          commentArray.map((file) =>
-            <ListItem key={file.file_id} className={classes.jaa}>
+          commentArray.map((id) =>
+            <ListItem key={id.file_id} className={classes.jaa}>
 
               <Card className={classes.jaa}>
                 <CardHeader
@@ -127,12 +127,12 @@ const CommentTable = (file) => {
                       <MoreHoriz />
                     </IconButton>
                   }
-                  title={file.title}
+                  title={id.title}
                   subheader="April 23, 2020"
                 />
 
                 <CardMedia className={classes.container}>
-                  <CommentRow className={classes.media} file={file}/>
+                  <CommentRow className={classes.media} file={id}/>
                 </CardMedia>
 
                 <CardActions disableSpacing>

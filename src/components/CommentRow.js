@@ -83,7 +83,7 @@ const CommentRow = ({file, myfiles}) => {
 };
 
 CommentRow.propTypes = {
-  file: PropTypes.number,
+  file: PropTypes.object,
   myfiles: PropTypes.bool,
 };
 

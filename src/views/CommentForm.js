@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import useCommentForm from '../hooks/CommentHooks';
 import {comment} from '../hooks/ApiHooks';
+import {withRouter} from 'react-router-dom';
 import {
   Button,
   Grid,
@@ -107,4 +108,4 @@ CommentForm.propTypes = {
   fileId: PropTypes.number,
 };
 
-export default CommentForm;
+export default withRouter(CommentForm);
