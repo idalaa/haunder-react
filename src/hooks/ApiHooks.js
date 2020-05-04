@@ -2,43 +2,31 @@ import {useState, useEffect} from 'react';
 
 const baseUrl = 'http://media.mw.metropolia.fi/wbma/';
 
-const useAllMedia = () => {
+
+const useAllMedia = (id) => {
   const [data, setData] = useState([]);
   const fetchUrl = async () => {
-    const response = await fetch(baseUrl + 'tags/mpjakk');
-    const json = await response.json();
-    // haetaan yksittäiset kuvat, jotta saadan thumbnailit
-    const items = await Promise.all(json.map(async (item) => {
-      const response = await fetch(baseUrl + 'media/' + item.file_id);
-      return await response.json();
-    }));
-    console.log(items);
-    setData(items);
-  };
-
-  useEffect(() => {
-    fetchUrl();
-  }, []);
-
-  return data;
-};
-
-/* const useAllMedia = (id) => {
-  const [data, setData] = useState([]);
-  const fetchUrl = async () => {
-    const response = await fetch(baseUrl + 'tags/mpjakk');
+    const response = await fetch(baseUrl + 'tags/haunderTest');
     const json = await response.json();
 
     // haetaan yksittäiset kuvat, jotta saadan thumbnailit
     const items = await Promise.all(json.map(async (item) => {
       const response = await fetch(baseUrl + 'media/' + item.file_id);
       const kuva =  await response.json();
+
     // hae avatar kuva.user_id:n avulla
     const response2 =await fetch(baseUrl + 'tags/avatar_' + kuva.user_id)
     const avatar = await response2.json()
     // lisää avatar kuvaan
     kuva.avatar = avatar;
-    // samalla tavalla haetaan käyttäjätiedot ja asetetaan kuva.user = haetut tiedot
+   
+  //jos on token niin näkee muiden nimet
+    if (localStorage.getItem('token') !== null) {
+      const userResponse = await getUser(kuva.user_id,
+        localStorage.getItem('token')); 
+      kuva.user = userResponse;
+    }
+    
     return kuva;
     }));
 
@@ -51,7 +39,7 @@ const useAllMedia = () => {
     }, []);
 
     return data;
-}; */
+};
 
 const useSingleMedia = (id) => {
   const [data, setData] = useState(null);
@@ -219,7 +207,7 @@ const upload = async (inputs, token) => {
     const json = await response.json();
     if (!response.ok) throw new Error(json.message + ': ' + json.error);
     // lisää tägi mpjakk
-    const tagJson = addTag(json.file_id, 'mpjakk', token);
+    const tagJson = addTag(json.file_id, 'haunderTest', token);
     return {json, tagJson};
   } catch (e) {
     throw new Error(e.message);

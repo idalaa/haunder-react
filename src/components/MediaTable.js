@@ -30,8 +30,11 @@ import {red} from '@material-ui/core/colors';
 // import clsx from 'clsx';
 // import Collapse from '@material-ui/core/Collapse';
 
+/* import Moment from 'react-moment'; */
 
-// const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
+
+
+const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -89,22 +92,8 @@ const MediaTable = () => {
 
   const [expanded, setExpanded] = React.useState(false);
 
-  // const handleExpandClick = () => {
-  //   setExpanded(!expanded);
-  // };
-  /*   const userPic = useAllMedia(kuva.avatar); */
-
-  /* const [user] = useContext(MediaContext);
-  const [avatar, setAvatar, kuva] = useState([]);
-  // console.log(user);
-  useEffect(() => {
-    (async () => {
-        setAvatar(await getAvatarImage(kuva.user_id));
-    })();
-  }, [user]);
-
-  console.log(picArray);
- */
+  /* const data = user_id.userdata.username; */
+  
   return (
     <div className={classes.root}>
       <List
@@ -118,19 +107,26 @@ const MediaTable = () => {
               <Card className={classes.jaa}>
                 <CardHeader
                   avatar={
+                    file.avatar.length > 0 ? 
                     <Avatar aria-label="user picture" className={classes.avatar}
-                      /* image={mediaUrl + avatar[0].filename}
+                      src={mediaUrl + file.avatar[0].filename}
                       alt="Avatar image"
-                      title="Avatar image" */
+                      title="Avatar image"
+                    />
+                    : 
+                    <Avatar aria-label="user picture" className={classes.avatar}
                     />
                   }
+                  
                   action={
                     <IconButton aria-label="settings">
                       <MoreHoriz />
                     </IconButton>
                   }
-                  title={file.title}
-                  subheader="April 23, 2020"
+                  
+                  title={file.user ? file.user.username : 'log in to see user data'}
+                
+                  subheader={/* moment(file.time_added).calendar() */ file.time_added} 
                 />
 
                 <CardMedia className={classes.container}>

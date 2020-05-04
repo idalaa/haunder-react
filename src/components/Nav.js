@@ -67,7 +67,7 @@ const Nav = ({history}) => {
         setUser(userdata);
       } catch (e) {
         // send to login
-        history.push('/home');
+        history.push('/login');
       }
     };
 
@@ -89,8 +89,8 @@ const Nav = ({history}) => {
   };
 
 
-  console.log('history', history);
-  console.log('value', value);
+  /* console.log('history', history);
+  console.log('value', value); */
   return (
     <>
       <AppBar>
