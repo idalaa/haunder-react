@@ -89,7 +89,7 @@ const GroupTable = () => {
           <ListItem key={file.file_id} className={classes.jaa}>
             <Card className={classes.jaa}>
               <CardHeader
-                group={
+                avatar={
                   file.avatar.length > 0 ? (
                     <Avatar
                       aria-label='user group'

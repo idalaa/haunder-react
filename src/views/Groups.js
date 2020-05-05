@@ -138,7 +138,6 @@ const Groups = ({ history }) => {
               </Grid>
             </Grid>
           </ValidatorForm>
-          <GroupTable />
         </Grid>
       </Grid>
     </>

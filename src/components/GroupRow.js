@@ -11,7 +11,7 @@ import {
 // import PageviewIcon from '@material-ui/icons/Pageview';
 // import CreateIcon from '@material-ui/icons/Create';
 // import DeleteIcon from '@material-ui/icons/Delete';
-import { getFavourites, useAllGroups } from '../hooks/ApiHooks';
+import { useAllGroups } from '../hooks/ApiHooks';
 
 const groupUrl = 'http://media.mw.metropolia.fi/wbma/favourites/';
 
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const GroupRow = ({ file, myfiles }) => {
+const GroupRow = ({ file, mygroups }) => {
   const classes = useStyles();
   const groups = useAllGroups();
   console.log('groups', groups);
@@ -42,7 +42,7 @@ const GroupRow = ({ file, myfiles }) => {
 
 GroupRow.propTypes = {
   file: PropTypes.object,
-  myfavourites: PropTypes.bool,
+  mygroups: PropTypes.bool,
 };
 
 export default GroupRow;
