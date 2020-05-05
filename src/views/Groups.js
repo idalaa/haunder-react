@@ -15,12 +15,6 @@ const Groups = ({ history }) => {
         title: inputs.title,
         description: JSON.stringify({
           desc: inputs.description,
-          filters: {
-            brightness: inputs.brightness,
-            contrast: inputs.contrast,
-            saturation: inputs.saturation,
-            sepia: inputs.sepia,
-          },
         }),
         file: inputs.file,
       };

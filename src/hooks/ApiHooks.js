@@ -327,6 +327,12 @@ const createGroup = async(inputs, token) => {
     }
 };
 
+const getGroups = async(id) => {
+    console.log('gp', id);
+    const response = await fetch(baseUrl + 'tags/haunderGroup_' + id);
+    return await response.json();
+};
+
 const addFavourite = async(file_id, token) => {
     const fetchOptions = {
         method: 'POST',
@@ -401,6 +407,7 @@ export {
     deleteFile,
     modifyFile,
     createGroup,
+    getGroups,
     addFavourite,
     getFavourites,
     deleteFavourite,
