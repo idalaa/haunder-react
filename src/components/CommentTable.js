@@ -1,6 +1,9 @@
 import React from 'react';
 import CommentRow from './CommentRow';
 import {useAllComments} from '../hooks/ApiHooks';
+// import {MediaContext} from '../contexts/MediaContext';
+// import {getAvatarImage} from '../hooks/ApiHooks';
+
 import {
 //   GridList,
 //   GridListTile,
@@ -22,8 +25,6 @@ import {MoreHoriz} from '@material-ui/icons';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import {red} from '@material-ui/core/colors';
-// import {MediaContext} from '../contexts/MediaContext';
-// import {getAvatarImage} from '../hooks/ApiHooks';
 // import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import Collapse from '@material-ui/core/Collapse';
@@ -127,7 +128,7 @@ const CommentTable = (file) => {
                       <MoreHoriz />
                     </IconButton>
                   }
-                  title={file.title}
+                  title={file.user_id}
                   subheader="April 23, 2020"
                 />
 
