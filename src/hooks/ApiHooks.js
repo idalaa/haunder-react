@@ -301,8 +301,34 @@ const modifyFile = async(inputs, id) => {
 };
 
 //this is for groups
+const createGroup = async(inputs, token) => {
+    const fd = new FormData();
+    fd.append('title', inputs.title);
+    fd.append('description', inputs.description);
+    fd.append('file', inputs.file);
+
+    const fetchOptions = {
+        method: 'POST',
+        body: fd,
+        headers: {
+            'x-access-token': token,
+        },
+    };
+    console.log(fetchOptions);
+    try {
+        const response = await fetch(baseUrl + 'media', fetchOptions);
+        const json = await response.json();
+        if (!response.ok) throw new Error(json.message + ': ' + json.error);
+        // lisää tägi mpjakk
+        const tagJson = addTag(json.file_id, 'haunderGroup', token);
+        return { json, tagJson };
+    } catch (e) {
+        throw new Error(e.message);
+    }
+};
+
 const addFavourite = async(file_id, token) => {
-    const favouriteOptions = {
+    const fetchOptions = {
         method: 'POST',
         body: JSON.stringify(file_id),
         headers: {
@@ -311,10 +337,7 @@ const addFavourite = async(file_id, token) => {
         },
     };
     try {
-        const favouriteResponse = await fetch(
-            baseUrl + 'favourites',
-            favouriteOptions
-        );
+        const favouriteResponse = await fetch(baseUrl + 'favourites', fetchOptions);
         const favouriteJson = await favouriteResponse.json();
         return favouriteJson;
     } catch (e) {
@@ -322,12 +345,12 @@ const addFavourite = async(file_id, token) => {
     }
 };
 
-const getFavourites = async(id) => {
+const getFavourites = async(id, token) => {
     const fetchOptions = {
         body: JSON.stringify(id),
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json',
+            'x-access-token': token,
         },
     };
     try {
@@ -377,6 +400,7 @@ export {
     getUser,
     deleteFile,
     modifyFile,
+    createGroup,
     addFavourite,
     getFavourites,
     deleteFavourite,
