@@ -25,7 +25,7 @@ import {
 } from '@material-ui/core';
 import {MoreHoriz} from '@material-ui/icons';
 import {red} from '@material-ui/core/colors';
-<<<<<<< HEAD
+
 // import {MediaContext} from '../contexts/MediaContext';
 // import {getAvatarImage} from '../hooks/ApiHooks';
 // import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -102,7 +102,7 @@ const MediaTable = () => {
   const file = useAllMedia();
   const [expanded, setExpanded] = React.useState(false);
 
-
+  
   
   //Time functions
   const date1 = new Date()
