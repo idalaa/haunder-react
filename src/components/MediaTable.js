@@ -35,6 +35,9 @@ import Moment from 'react-moment';
 
 import moment from 'moment';
 import 'moment/locale/en-gb';
+import 'moment-timezone';
+
+moment.tz.add('Europe/Helsinki|HMT EET EEST|-1D.N -20 -30|0121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121|-1WuND.N OULD.N 1dA0 1xGq0 1cM0 1cM0 1cM0 1cN0 1cM0 1cM0 1fA0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1fA0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1fA0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|12e5');
 
 /* import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -101,13 +104,15 @@ const MediaTable = () => {
   const file = useAllMedia();
   const [expanded, setExpanded] = React.useState(false);
 
-/*   //Time functions
-  const date1 = new Date();
-  const date2 = new Date(file.time_added);
+  
+  //Time functions
+  const laskeEro = (time) =>{
 
-  const difference = Math.abs(date1 - date2) / 3.6e6; // muuttaa mm tunneiks */
-
-
+    const date1 =new Date();
+    const date2 = new Date(time);
+  
+    return Math.abs(date1 - date2) / /* 3.6e6 */ 3600000; 
+  }
 
   return (
     <div className={classes.root}>
@@ -145,12 +150,17 @@ const MediaTable = () => {
                   file.user ? file.user.username : 'log in to see user data'
                 }
                 subheader={
-                  /* difference >= 24 ? (
-                    <Moment format='DD.MM.YYYY'>{file.time_added}</Moment>
+                  (laskeEro(file.time_added) >= 24) ? (
+                    console.log("TIME DD.MM.YYYY", file.time_added),
+                    <Moment tz='Europe/Helsinki' format='DD.MM.YYYY'>{file.time_added}</Moment>
                   ) : (
-                    <Moment fromNow>{file.time_added}</Moment>
-                  ) */
-                  moment(file.time_added).calendar()
+                    console.log("TIME FROM NOW", file.time_added),
+                    <Moment tz='Europe/Helsinki' fromNow>{file.time_added}</Moment>
+                  )
+                  //british backup time
+                  /* console.log("aika", file.time_added),
+                  
+                   moment(file.time_added).calendar() */
                 }
               />
 
