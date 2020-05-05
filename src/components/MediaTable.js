@@ -33,6 +33,9 @@ import { red } from '@material-ui/core/colors';
 
 import Moment from 'react-moment';
 
+import moment from 'moment';
+import 'moment/locale/en-gb';
+
 /* import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -98,11 +101,13 @@ const MediaTable = () => {
   const file = useAllMedia();
   const [expanded, setExpanded] = React.useState(false);
 
-  //Time functions
+/*   //Time functions
   const date1 = new Date();
   const date2 = new Date(file.time_added);
 
-  const difference = Math.abs(date1 - date2) / 3.6e6; // muuttaa mm tunneiks
+  const difference = Math.abs(date1 - date2) / 3.6e6; // muuttaa mm tunneiks */
+
+
 
   return (
     <div className={classes.root}>
@@ -140,11 +145,12 @@ const MediaTable = () => {
                   file.user ? file.user.username : 'log in to see user data'
                 }
                 subheader={
-                  difference >= 24 ? (
+                  /* difference >= 24 ? (
                     <Moment format='DD.MM.YYYY'>{file.time_added}</Moment>
                   ) : (
                     <Moment fromNow>{file.time_added}</Moment>
-                  )
+                  ) */
+                  moment(file.time_added).calendar()
                 }
               />
 
