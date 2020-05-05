@@ -35,14 +35,14 @@ import {red} from '@material-ui/core/colors';
 import Moment from 'react-moment';
 
 
-=======
+
 /* import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import Collapse from '@material-ui/core/Collapse';
 import Moment from 'react-moment'; */
->>>>>>> 77057cd386bd2a33d51df822223021c9bc59fdab
+
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
@@ -102,7 +102,7 @@ const MediaTable = () => {
   const file = useAllMedia();
   const [expanded, setExpanded] = React.useState(false);
 
-<<<<<<< HEAD
+
   
   //Time functions
   const date1 = new Date()
@@ -111,10 +111,7 @@ const MediaTable = () => {
   const difference = Math.abs(date1-date2) /3.6e6; // muuttaa mm tunneiks
 
   
-=======
-  /* const data = user_id.userdata.username; */
 
->>>>>>> 77057cd386bd2a33d51df822223021c9bc59fdab
   return (
     <div className={classes.root}>
       <List
@@ -145,7 +142,6 @@ const MediaTable = () => {
                   }
 
                   title={file.user ? file.user.username : 'log in to see user data'}
-<<<<<<< HEAD
                 
                   subheader={
                     (difference >= 24)
@@ -154,10 +150,6 @@ const MediaTable = () => {
                     :
                     <Moment fromNow>{file.time_added}</Moment> 
                   } 
-=======
-
-                  subheader={/* moment(file.time_added).calendar() */ file.time_added}
->>>>>>> 77057cd386bd2a33d51df822223021c9bc59fdab
                 />
 
                 <CardMedia className={classes.container}>
