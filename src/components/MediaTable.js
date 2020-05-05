@@ -30,7 +30,7 @@ import {red} from '@material-ui/core/colors';
 // import clsx from 'clsx';
 // import Collapse from '@material-ui/core/Collapse';
 
-/* import Moment from 'react-moment'; */
+import Moment from 'react-moment';
 
 
 
@@ -89,10 +89,16 @@ const MediaTable = () => {
   const matches = useMediaQuery('(min-width:697px)');
 
   const picArray = useAllMedia();
-
+  const file = useAllMedia();
   const [expanded, setExpanded] = React.useState(false);
 
-  /* const data = user_id.userdata.username; */
+  
+  //Time functions
+  const date1 = new Date()
+  const date2 = new Date(file.time_added);
+
+  const difference = Math.abs(date1-date2) /3.6e6; // muuttaa mm tunneiks
+
   
   return (
     <div className={classes.root}>
@@ -126,7 +132,13 @@ const MediaTable = () => {
                   
                   title={file.user ? file.user.username : 'log in to see user data'}
                 
-                  subheader={/* moment(file.time_added).calendar() */ file.time_added} 
+                  subheader={
+                    (difference >= 24)
+                    ?
+                    <Moment format="DD.MM.YYYY">{file.time_added}</Moment>
+                    :
+                    <Moment fromNow>{file.time_added}</Moment> 
+                  } 
                 />
 
                 <CardMedia className={classes.container}>
