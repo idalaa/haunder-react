@@ -355,27 +355,28 @@ const joinGroup = async(file_id, token) => {
 };
 
 //get groups
-const getGroups = async(id, token) => {
-    const fetchOptions = {
-        body: JSON.stringify(id),
-        method: 'GET',
-        headers: {
-            'x-access-token': token,
-        },
-    };
-    try {
-        const response = await fetch(baseUrl + 'favourites', fetchOptions);
-        const json = await response.json();
-        if (!response.ok) throw new Error(json.message + ': ' + json.error);
-        return json;
-    } catch (e) {
-        throw new Error(e.message);
-    }
-};
+// const getGroups = async(id, token) => {
+//     const fetchOptions = {
+//         body: JSON.stringify(id),
+//         method: 'GET',
+//         headers: {
+//             'x-access-token': token,
+//         },
+//     };
+//     try {
+//         const response = await fetch(baseUrl + 'favourites', fetchOptions);
+//         const json = await response.json();
+//         if (!response.ok) throw new Error(json.message + ': ' + json.error);
+//         return json;
+//     } catch (e) {
+//         throw new Error(e.message);
+//     }
+// };
 
 const useAllGroups = (id) => {
     const [data, setData] = useState([]);
     const fetchUrl = async() => {
+        // haetaan ryhmät tagilla
         const response = await fetch(baseUrl + 'tags/haunderGroup');
         const json = await response.json();
 
@@ -386,24 +387,6 @@ const useAllGroups = (id) => {
                     baseUrl + 'favourites/file' + item.file_id
                 );
                 const group = await response.json();
-
-                // hae suosikki tagin perusteella
-                const response2 = await fetch(
-                    baseUrl + 'tags/haunderGroup' + group.user_id
-                );
-                const avatar = await response2.json();
-                // lisää avatar kuvaan
-                group.avatar = avatar;
-
-                // jos on token niin näkee muiden nimet
-                if (localStorage.getItem('token') !== null) {
-                    const userResponse = await getUser(
-                        group.user_id,
-                        localStorage.getItem('token')
-                    );
-                    group.user = userResponse;
-                }
-
                 return group;
             })
         );
@@ -458,7 +441,6 @@ export {
     modifyFile,
     createGroup,
     joinGroup,
-    getGroups,
     useAllGroups,
     deleteGroup,
 };
