@@ -1,8 +1,7 @@
-import React, {
-// useContext, useEffect, useState
-} from 'react';
+import React from // useContext, useEffect, useState
+'react';
 import MediaRow from './MediaRow';
-import {useAllMedia} from '../hooks/ApiHooks';
+import { useAllMedia } from '../hooks/ApiHooks';
 // import {MediaContext} from '../contexts/MediaContext';
 // import {getAvatarImage} from '../hooks/ApiHooks';
 
@@ -23,8 +22,8 @@ import {
   CardContent,
   Typography,
 } from '@material-ui/core';
-import {MoreHoriz} from '@material-ui/icons';
-import {red} from '@material-ui/core/colors';
+import { MoreHoriz } from '@material-ui/icons';
+import { red } from '@material-ui/core/colors';
 
 // import {MediaContext} from '../contexts/MediaContext';
 // import {getAvatarImage} from '../hooks/ApiHooks';
@@ -34,15 +33,12 @@ import {red} from '@material-ui/core/colors';
 
 import Moment from 'react-moment';
 
-
-
 /* import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import Collapse from '@material-ui/core/Collapse';
 import Moment from 'react-moment'; */
-
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
@@ -102,61 +98,61 @@ const MediaTable = () => {
   const file = useAllMedia();
   const [expanded, setExpanded] = React.useState(false);
 
-  
-  
   //Time functions
-  const date1 = new Date()
+  const date1 = new Date();
   const date2 = new Date(file.time_added);
 
-  const difference = Math.abs(date1-date2) /3.6e6; // muuttaa mm tunneiks
-
-  
+  const difference = Math.abs(date1 - date2) / 3.6e6; // muuttaa mm tunneiks
 
   return (
     <div className={classes.root}>
       <List
         cellHeight={580}
         className={classes.gridList}
-        cols={matches ? 1 : 1}>
-        {
-          picArray.map((file) =>
-            <ListItem key={file.file_id} className={classes.jaa}>
-
-              <Card className={classes.jaa}>
-                <CardHeader
-                  avatar={
-                    file.avatar.length > 0 ?
-                    <Avatar aria-label="user picture" className={classes.avatar}
+        cols={matches ? 1 : 1}
+      >
+        {picArray.map((file) => (
+          <ListItem key={file.file_id} className={classes.jaa}>
+            <Card className={classes.jaa}>
+              <CardHeader
+                avatar={
+                  file.avatar.length > 0 ? (
+                    <Avatar
+                      aria-label='user picture'
+                      className={classes.avatar}
                       src={mediaUrl + file.avatar[0].filename}
-                      alt="Avatar image"
-                      title="Avatar image"
-                    /> :
-                    <Avatar aria-label="user picture" className={classes.avatar}
+                      alt='Avatar image'
+                      title='Avatar image'
                     />
-                  }
+                  ) : (
+                    <Avatar
+                      aria-label='user picture'
+                      className={classes.avatar}
+                    />
+                  )
+                }
+                action={
+                  <IconButton aria-label='settings'>
+                    <MoreHoriz />
+                  </IconButton>
+                }
+                title={
+                  file.user ? file.user.username : 'log in to see user data'
+                }
+                subheader={
+                  difference >= 24 ? (
+                    <Moment format='DD.MM.YYYY'>{file.time_added}</Moment>
+                  ) : (
+                    <Moment fromNow>{file.time_added}</Moment>
+                  )
+                }
+              />
 
-                  action={
-                    <IconButton aria-label="settings">
-                      <MoreHoriz />
-                    </IconButton>
-                  }
+              <CardMedia className={classes.container}>
+                <MediaRow className={classes.media} file={file} />
+              </CardMedia>
 
-                  title={file.user ? file.user.username : 'log in to see user data'}
-                
-                  subheader={
-                    (difference >= 24)
-                    ?
-                    <Moment format="DD.MM.YYYY">{file.time_added}</Moment>
-                    :
-                    <Moment fromNow>{file.time_added}</Moment> 
-                  } 
-                />
-
-                <CardMedia className={classes.container}>
-                  <MediaRow className={classes.media} file={file}/>
-                </CardMedia>
-
-                {/* <CardActions disableSpacing>
+              {/* <CardActions disableSpacing>
                   <IconButton aria-label="Add to favorites">
                     <FavoriteIcon />
                   </IconButton>
@@ -187,10 +183,9 @@ const MediaTable = () => {
                     <CommentTable />
                   </CardContent>
                 </Collapse> */}
-              </Card>
-
-            </ListItem>)
-        }
+            </Card>
+          </ListItem>
+        ))}
       </List>
     </div>
   );

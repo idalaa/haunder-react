@@ -1,5 +1,5 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {MediaContext} from '../contexts/MediaContext';
+import React, { useContext, useEffect, useState } from 'react';
+import { MediaContext } from '../contexts/MediaContext';
 import {
   Card,
   CardMedia,
@@ -15,13 +15,14 @@ import {
   Grid,
   ButtonBase,
 } from '@material-ui/core';
-import {getAvatarImage} from '../hooks/ApiHooks';
+import { getAvatarImage } from '../hooks/ApiHooks';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
 import ProfileForm from '../components/ProfileForm';
+
 import BackButton from '../components/BackButton';
-import {Link as RouterLink} from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import MyFiles from './MyFiles';
 
@@ -34,13 +35,12 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     margin: 'auto',
-   
+
     /* maxWidth: 500, */
   },
   image: {
     width: 125,
     height: 176,
-    
   },
   img: {
     margin: 'auto',
@@ -69,64 +69,69 @@ const Profile = () => {
   // console.log('avatar', avatar);
   return (
     <>
-      <BackButton
-        pekka="home"
-      />
-      <Typography
-        component="h1"
-        variant="h2"
-        gutterBottom>Profile</Typography>
-      {user !== null && avatar.length > 0 &&
-         <Paper className={classes.paper}>
-           <Grid container spacing={2}>
+      <BackButton pekka='home' />
+      <Typography component='h1' variant='h2' gutterBottom>
+        Profile{' '}
+      </Typography>{' '}
+      {user !== null && avatar.length > 0 && (
+        <Paper className={classes.paper}>
+          <Grid container spacing={2}>
             <Grid item>
               <ButtonBase className={classes.image}>
-                <CardMedia className={classes.img}
-                  component="img"
+                <CardMedia
+                  className={classes.img}
+                  component='img'
                   image={mediaUrl + avatar[0].filename}
-                  alt="Avatar image"
-                  title="Avatar image"
+                  alt='Avatar image'
+                  title='Avatar image'
                 />
-              </ButtonBase>
-            </Grid>
+              </ButtonBase>{' '}
+            </Grid>{' '}
             <Grid item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={2} className={classes.text}>
-              <ListItem>
-                <ListItemIcon>
-                  <AccountBoxIcon />
-                </ListItemIcon>
-                <ListItemText primary={user.username} />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <EmailIcon />
-                </ListItemIcon>
-                <ListItemText primary={user.email} />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <PersonIcon />
-                </ListItemIcon>
-                <ListItemText primary={user.full_name} />
-              </ListItem>
-              {/* <ListItem>
-                <Button
-                  color="inherit"
-                  component={RouterLink}
-                  to="/myfiles"
-                >
-                  My files
-                </Button>
-              </ListItem> */}
-              <ListItem>
-                <ProfileForm />
-              </ListItem>
-            </Grid>
-          </Grid>
-          </Grid>
+              <Grid
+                item
+                xs
+                container
+                direction='column'
+                spacing={2}
+                className={classes.text}
+              >
+                <ListItem>
+                  <ListItemIcon>
+                    <AccountBoxIcon />
+                  </ListItemIcon>{' '}
+                  <ListItemText primary={user.username} />{' '}
+                </ListItem>{' '}
+                <ListItem>
+                  <ListItemIcon>
+                    <EmailIcon />
+                  </ListItemIcon>{' '}
+                  <ListItemText primary={user.email} />{' '}
+                </ListItem>{' '}
+                <ListItem>
+                  <ListItemIcon>
+                    <PersonIcon />
+                  </ListItemIcon>{' '}
+                  <ListItemText primary={user.full_name} />{' '}
+                </ListItem>{' '}
+                {/* <ListItem>
+                                    <Button
+                                      color="inherit"
+                                      component={RouterLink}
+                                      to="/myfiles"
+                                    >
+                                      My files
+                                    </Button>
+                                  </ListItem> */}{' '}
+                <ListItem>
+                  <ProfileForm />
+                </ListItem>{' '}
+              </Grid>{' '}
+            </Grid>{' '}
+          </Grid>{' '}
         </Paper>
-      }
-      <MyFiles/>
+      )}{' '}
+      <MyFiles />
     </>
   );
 };

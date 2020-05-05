@@ -1,13 +1,13 @@
 import React from 'react';
 import CommentRow from './CommentRow';
-import {useAllComments} from '../hooks/ApiHooks';
+import { useAllComments } from '../hooks/ApiHooks';
 // import {MediaContext} from '../contexts/MediaContext';
 // import {getAvatarImage} from '../hooks/ApiHooks';
 
 import {
-//   GridList,
-//   GridListTile,
-//   ListSubheader,
+  //   GridList,
+  //   GridListTile,
+  //   ListSubheader,
   makeStyles,
   useMediaQuery,
   Card,
@@ -21,10 +21,10 @@ import {
   CardContent,
   Typography,
 } from '@material-ui/core';
-import {MoreHoriz} from '@material-ui/icons';
+import { MoreHoriz } from '@material-ui/icons';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import {red} from '@material-ui/core/colors';
+import { red } from '@material-ui/core/colors';
 // import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import Collapse from '@material-ui/core/Collapse';
@@ -109,48 +109,49 @@ const CommentTable = (file) => {
       <List
         cellHeight={580}
         className={classes.gridList}
-        cols={matches ? 1 : 1}>
-        {
-          commentArray.map((file) =>
-            <ListItem key={file.file_id} className={classes.jaa}>
-
-              <Card className={classes.jaa}>
-                <CardHeader
-                  avatar={
-                    <Avatar aria-label="user picture" clamenssName={classes.avatar}
-                      /* image={commentUrl + avatar[0].filename}
+        cols={matches ? 1 : 1}
+      >
+        {commentArray.map((file) => (
+          <ListItem key={file.file_id} className={classes.jaa}>
+            <Card className={classes.jaa}>
+              <CardHeader
+                avatar={
+                  <Avatar
+                    aria-label='user picture'
+                    clamenssName={classes.avatar}
+                    /* image={commentUrl + avatar[0].filename}
                       alt="Avatar image"
                       title="Avatar image" */
-                    />
-                  }
-                  action={
-                    <IconButton aria-label="settings">
-                      <MoreHoriz />
-                    </IconButton>
-                  }
-                  title={file.user_id}
-                  subheader="April 23, 2020"
-                />
-
-                <CardMedia className={classes.container}>
-                  <CommentRow className={classes.media} file={file}/>
-                </CardMedia>
-
-                <CardActions disableSpacing>
-                  <IconButton aria-label="Add to favorites">
-                    <FavoriteIcon />
+                  />
+                }
+                action={
+                  <IconButton aria-label='settings'>
+                    <MoreHoriz />
                   </IconButton>
-                  <IconButton
-                    aria-label="Comment"
-                    className={clsx(classes.expand, {
-                      [classes.expandOpen]: expanded,
-                    })}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                  >
-                    <ChatBubbleIcon />
-                  </IconButton>
-                  {/*  <IconButton
+                }
+                title={file.user_id}
+                subheader='April 23, 2020'
+              />
+
+              <CardMedia className={classes.container}>
+                <CommentRow className={classes.media} file={file} />
+              </CardMedia>
+
+              <CardActions disableSpacing>
+                <IconButton aria-label='Add to favorites'>
+                  <FavoriteIcon />
+                </IconButton>
+                <IconButton
+                  aria-label='Comment'
+                  className={clsx(classes.expand, {
+                    [classes.expandOpen]: expanded,
+                  })}
+                  onClick={handleExpandClick}
+                  aria-expanded={expanded}
+                >
+                  <ChatBubbleIcon />
+                </IconButton>
+                {/*  <IconButton
                     className={clsx(classes.expand, {
                       [classes.expandOpen]: expanded,
                     })}
@@ -160,16 +161,15 @@ const CommentTable = (file) => {
                   >
                     <ExpandMoreIcon />
                   </IconButton> */}
-                </CardActions>
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
-                  <CardContent>
-                    <Typography paragraph>Comments:</Typography>
-                  </CardContent>
-                </Collapse>
-              </Card>
-
-            </ListItem>)
-        }
+              </CardActions>
+              <Collapse in={expanded} timeout='auto' unmountOnExit>
+                <CardContent>
+                  <Typography paragraph>Comments:</Typography>
+                </CardContent>
+              </Collapse>
+            </Card>
+          </ListItem>
+        ))}
       </List>
     </div>
   );

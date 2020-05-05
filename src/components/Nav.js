@@ -1,9 +1,9 @@
-import React, {useContext, useEffect} from 'react';
-import {Link as RouterLink, useLocation} from 'react-router-dom';
-import {checkToken} from '../hooks/ApiHooks';
-import {withRouter} from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { checkToken } from '../hooks/ApiHooks';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {MediaContext} from '../contexts/MediaContext';
+import { MediaContext } from '../contexts/MediaContext';
 import {
   AppBar,
   Toolbar,
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Nav = ({history}) => {
+const Nav = ({ history }) => {
   const classes = useStyles();
   const [user, setUser, value, setValue] = useContext(MediaContext);
   const [open, setOpen] = React.useState(false);
@@ -81,13 +81,11 @@ const Nav = ({history}) => {
     setValue(loc);
   }, [location, setValue]);
 
-
   const handleChange = (event, newValue) => {
     /*  console.log(location.pathname); */
 
     setValue(newValue);
   };
-
 
   /* console.log('history', history);
   console.log('value', value); */
@@ -96,51 +94,82 @@ const Nav = ({history}) => {
       <AppBar>
         <Toolbar>
           <IconButton
-            edge="start"
+            edge='start'
             className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
+            color='inherit'
+            aria-label='menu'
             onClick={toggleDrawer(true)}
           >
-            <MenuIcon/>
+            <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant='h6' className={classes.title}>
             HAUNDER
           </Typography>
-          {user === null ?
+          {user === null ? (
             <Button
-              color="inherit"
-              startIcon={<ExitToAppIcon/>}
+              color='inherit'
+              startIcon={<ExitToAppIcon />}
               component={RouterLink}
-              to="/"
+              to='/'
             >
               Login
-            </Button> :
+            </Button>
+          ) : (
             <Button
-              color="inherit"
-              startIcon={<ExitToAppIcon/>}
+              color='inherit'
+              startIcon={<ExitToAppIcon />}
               component={RouterLink}
-              to="/logout"
+              to='/logout'
             >
               Logout
             </Button>
-          }
+          )}
         </Toolbar>
       </AppBar>
 
-      {user !== null &&
-    <BottomNavigation
-      value={value}
-      /*  onChange={handleChange}  */
-      className={classes.root}
-    >
-      <BottomNavigationAction label="Home" value="home" icon={<HomeIcon />} component={RouterLink} to="/home"/>
-      <BottomNavigationAction label="Search" value="search" icon={<SearchIcon />} component={RouterLink} to="/"/>
-      <BottomNavigationAction label="Upload" value="upload" icon={<AddCircleOutlineIcon />} component={RouterLink} to="/upload"/>
-      <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} component={RouterLink} to="/"/>
-      <BottomNavigationAction label="Profile" value="profile" icon={<AccountBoxIcon />} component={RouterLink} to="/profile"/>
-    </BottomNavigation>
-      }
+      {user !== null && (
+        <BottomNavigation
+          value={value}
+          /*  onChange={handleChange}  */
+          className={classes.root}
+        >
+          <BottomNavigationAction
+            label='Home'
+            value='home'
+            icon={<HomeIcon />}
+            component={RouterLink}
+            to='/home'
+          />
+          <BottomNavigationAction
+            label='Search'
+            value='search'
+            icon={<SearchIcon />}
+            component={RouterLink}
+            to='/'
+          />
+          <BottomNavigationAction
+            label='Upload'
+            value='upload'
+            icon={<AddCircleOutlineIcon />}
+            component={RouterLink}
+            to='/upload'
+          />
+          <BottomNavigationAction
+            label='Favorites'
+            value='favorites'
+            icon={<FavoriteIcon />}
+            component={RouterLink}
+            to='/'
+          />
+          <BottomNavigationAction
+            label='Profile'
+            value='profile'
+            icon={<AccountBoxIcon />}
+            component={RouterLink}
+            to='/profile'
+          />
+        </BottomNavigation>
+      )}
     </>
   );
 };
@@ -148,6 +177,5 @@ const Nav = ({history}) => {
 Nav.propTypes = {
   history: PropTypes.object,
 };
-
 
 export default withRouter(Nav);

@@ -11,7 +11,7 @@ import {
 // import PageviewIcon from '@material-ui/icons/Pageview';
 // import CreateIcon from '@material-ui/icons/Create';
 // import DeleteIcon from '@material-ui/icons/Delete';
-import {useAllComments} from '../hooks/ApiHooks';
+import { useAllComments } from '../hooks/ApiHooks';
 
 //const commentUrl = 'http://media.mw.metropolia.fi/wbma/comments/file/';
 
@@ -25,22 +25,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CommentRow = ({file, myfiles}) => {
-
+const CommentRow = ({ file, myfiles }) => {
   const classes = useStyles();
   const comments = useAllComments(file.file_id);
   console.log('comments', comments);
 
-
   return (
     <>
       <List className={classes.list}>
-        <ListItem>
-          {file.comment}
-        </ListItem>
-        <ListItem>
-          {/* {myfiles ? '' : description.desc} */}
-        </ListItem>
+        <ListItem>{file.comment}</ListItem>
+        <ListItem>{/* {myfiles ? '' : description.desc} */}</ListItem>
         {/* actionIcon={
           <>
             <IconButton
