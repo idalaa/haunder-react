@@ -11,9 +11,9 @@ import {
 // import PageviewIcon from '@material-ui/icons/Pageview';
 // import CreateIcon from '@material-ui/icons/Create';
 // import DeleteIcon from '@material-ui/icons/Delete';
-import { getFavourites } from '../hooks/ApiHooks';
+import { getFavourites, useAllGroups } from '../hooks/ApiHooks';
 
-const groupUrl = 'http://media.mw.metropolia.fi/wbma/favourites/file/';
+const groupUrl = 'http://media.mw.metropolia.fi/wbma/favourites/';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -27,8 +27,8 @@ const useStyles = makeStyles((theme) => ({
 
 const GroupRow = ({ file, myfiles }) => {
   const classes = useStyles();
-  const favourites = getFavourites();
-  console.log('favourites', favourites);
+  const groups = useAllGroups();
+  console.log('groups', groups);
 
   return (
     <>

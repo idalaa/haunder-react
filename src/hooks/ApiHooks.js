@@ -319,7 +319,7 @@ const createGroup = async(inputs, token) => {
         const response = await fetch(baseUrl + 'media', fetchOptions);
         const json = await response.json();
         if (!response.ok) throw new Error(json.message + ': ' + json.error);
-        // lisää tägi mpjakk
+        // add tag haunderGroup
         const tagJson = addTag(json.file_id, 'haunderGroup', token);
         return { json, tagJson };
     } catch (e) {
@@ -333,40 +333,86 @@ const getGroups = async(id) => {
     return await response.json();
 };
 
-const addFavourite = async(file_id, token) => {
-    const fetchOptions = {
-        method: 'POST',
-        body: JSON.stringify(file_id),
-        headers: {
-            'Content-Type': 'application/json',
-            'x-access-token': token,
-        },
-    };
-    try {
-        const favouriteResponse = await fetch(baseUrl + 'favourites', fetchOptions);
-        const favouriteJson = await favouriteResponse.json();
-        return favouriteJson;
-    } catch (e) {
-        throw new Error(e.message);
-    }
-};
+// const addFavourite = async(file_id, token) => {
+//     const fetchOptions = {
+//         method: 'POST',
+//         body: JSON.stringify(file_id),
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'x-access-token': token,
+//         },
+//     };
+//     try {
+//         const favouriteResponse = await fetch(baseUrl + 'favourites', fetchOptions);
+//         const favouriteJson = await favouriteResponse.json();
+//         return favouriteJson;
+//     } catch (e) {
+//         throw new Error(e.message);
+//     }
+// };
 
-const getFavourites = async(id, token) => {
-    const fetchOptions = {
-        body: JSON.stringify(id),
-        method: 'GET',
-        headers: {
-            'x-access-token': token,
-        },
-    };
-    try {
-        const response = await fetch(baseUrl + 'favourites', fetchOptions);
+// const getFavourites = async(id, token) => {
+//     const fetchOptions = {
+//         body: JSON.stringify(id),
+//         method: 'GET',
+//         headers: {
+//             'x-access-token': token,
+//         },
+//     };
+//     try {
+//         const response = await fetch(baseUrl + 'favourites', fetchOptions);
+//         const json = await response.json();
+//         if (!response.ok) throw new Error(json.message + ': ' + json.error);
+//         return json;
+//     } catch (e) {
+//         throw new Error(e.message);
+//     }
+// };
+
+const useAllGroups = (id) => {
+    const [data, setData] = useState([]);
+    const fetchUrl = async() => {
+        const response = await fetch(baseUrl + 'tags/haunderGroup');
         const json = await response.json();
-        if (!response.ok) throw new Error(json.message + ': ' + json.error);
-        return json;
-    } catch (e) {
-        throw new Error(e.message);
-    }
+
+        // haetaan yksittäiset kuvat, jotta saadan thumbnailit
+        const items = await Promise.all(
+            json.map(async(item) => {
+                const response = await fetch(
+                    baseUrl + 'favourites/file' + item.file_id
+                );
+                const kuva = await response.json();
+
+                // hae avatar kuva.user_id:n avulla
+                const response2 = await fetch(
+                    baseUrl + 'tags/haunderGroup_' + kuva.user_id
+                );
+                const avatar = await response2.json();
+                // lisää avatar kuvaan
+                kuva.avatar = avatar;
+
+                // jos on token niin näkee muiden nimet
+                if (localStorage.getItem('token') !== null) {
+                    const userResponse = await getUser(
+                        kuva.user_id,
+                        localStorage.getItem('token')
+                    );
+                    kuva.user = userResponse;
+                }
+
+                return kuva;
+            })
+        );
+
+        console.log(items);
+        setData(items);
+    };
+
+    useEffect(() => {
+        fetchUrl();
+    }, []);
+
+    return data;
 };
 
 const deleteFavourite = async(id) => {
@@ -408,7 +454,6 @@ export {
     modifyFile,
     createGroup,
     getGroups,
-    addFavourite,
-    getFavourites,
+    useAllGroups,
     deleteFavourite,
 };
