@@ -107,18 +107,18 @@ const CommentTable = (file) => {
   return (
     <div className={classes.root}>
       <List
-        cellHeight={580}
+        cellheight={580}
         className={classes.gridList}
         cols={matches ? 1 : 1}
       >
         {commentArray.map((file) => (
-          <ListItem key={file.file_id} className={classes.jaa}>
+          <ListItem key={file.comment_id} className={classes.jaa}>
             <Card className={classes.jaa}>
               <CardHeader
                 avatar={
                   <Avatar
                     aria-label='user picture'
-                    clamenssName={classes.avatar}
+                    className={classes.avatar}
                     /* image={commentUrl + avatar[0].filename}
                       alt="Avatar image"
                       title="Avatar image" */

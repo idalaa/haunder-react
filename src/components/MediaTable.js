@@ -117,7 +117,7 @@ const MediaTable = () => {
   return (
     <div className={classes.root}>
       <List
-        cellHeight={580}
+        cellheight={580}
         className={classes.gridList}
         cols={matches ? 1 : 1}
       >
