@@ -1,7 +1,7 @@
 import React from // useContext, useEffect, useState
-'react';
+  'react';
 import MediaRow from './MediaRow';
-import { useAllMedia } from '../hooks/ApiHooks';
+import {useAllMedia} from '../hooks/ApiHooks';
 // import {MediaContext} from '../contexts/MediaContext';
 // import {getAvatarImage} from '../hooks/ApiHooks';
 
@@ -9,6 +9,9 @@ import {
   // GridList,
   // GridListTile,
   // ListSubheader,
+  // CardContent,
+  // Typography,
+  // CardActions,
   makeStyles,
   useMediaQuery,
   Card,
@@ -16,14 +19,12 @@ import {
   IconButton,
   Avatar,
   CardMedia,
-  CardActions,
   List,
   ListItem,
-  CardContent,
-  Typography,
 } from '@material-ui/core';
-import { MoreHoriz } from '@material-ui/icons';
-import { red } from '@material-ui/core/colors';
+
+import {MoreHoriz} from '@material-ui/icons';
+import {red} from '@material-ui/core/colors';
 
 // import {MediaContext} from '../contexts/MediaContext';
 // import {getAvatarImage} from '../hooks/ApiHooks';
@@ -104,15 +105,14 @@ const MediaTable = () => {
   const file = useAllMedia();
   const [expanded, setExpanded] = React.useState(false);
 
-  
-  //Time functions
-  const laskeEro = (time) =>{
 
+  // Time functions
+  const laskeEro = (time) =>{
     const date1 =new Date();
     const date2 = new Date(time);
-  
-    return Math.abs(date1 - date2) / /* 3.6e6 */ 3600000; 
-  }
+
+    return Math.abs(date1 - date2) / /* 3.6e6 */ 3600000;
+  };
 
   return (
     <div className={classes.root}>
@@ -151,15 +151,15 @@ const MediaTable = () => {
                 }
                 subheader={
                   (laskeEro(file.time_added) >= 24) ? (
-                    console.log("TIME DD.MM.YYYY", file.time_added),
+                    console.log('TIME DD.MM.YYYY', file.time_added),
                     <Moment tz='Europe/Helsinki' format='DD.MM.YYYY'>{file.time_added}</Moment>
                   ) : (
-                    console.log("TIME FROM NOW", file.time_added),
+                    console.log('TIME FROM NOW', file.time_added),
                     <Moment tz='Europe/Helsinki' fromNow>{file.time_added}</Moment>
                   )
-                  //british backup time
+                  // british backup time
                   /* console.log("aika", file.time_added),
-                  
+
                    moment(file.time_added).calendar() */
                 }
               />

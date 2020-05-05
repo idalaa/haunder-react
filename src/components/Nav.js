@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
-import { checkToken } from '../hooks/ApiHooks';
-import { withRouter } from 'react-router-dom';
+import React, {useContext, useEffect} from 'react';
+import {Link as RouterLink, useLocation} from 'react-router-dom';
+import {checkToken} from '../hooks/ApiHooks';
+import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { MediaContext } from '../contexts/MediaContext';
+import {MediaContext} from '../contexts/MediaContext';
 import {
   AppBar,
   Toolbar,
@@ -16,8 +16,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import PublishIcon from '@material-ui/icons/Publish';
-import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
+// import PublishIcon from '@material-ui/icons/Publish';
+// import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Nav = ({ history }) => {
+const Nav = ({history}) => {
   const classes = useStyles();
   const [user, setUser, value, setValue] = useContext(MediaContext);
   const [open, setOpen] = React.useState(false);

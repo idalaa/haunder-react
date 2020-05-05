@@ -1,29 +1,29 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { MediaContext } from '../contexts/MediaContext';
+import React, {useContext, useEffect, useState} from 'react';
+import {MediaContext} from '../contexts/MediaContext';
 import {
-  Card,
+  // Card,
+  // CardContent,
+  // List,
+  // Button,
+  // ListItemAvatar,
   CardMedia,
-  CardContent,
   Typography,
-  List,
   ListItem,
   ListItemText,
   ListItemIcon,
-  Button,
-  ListItemAvatar,
   Paper,
   Grid,
   ButtonBase,
 } from '@material-ui/core';
-import { getAvatarImage } from '../hooks/ApiHooks';
+import {getAvatarImage} from '../hooks/ApiHooks';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
 import ProfileForm from '../components/ProfileForm';
 
 import BackButton from '../components/BackButton';
-import { Link as RouterLink } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+// import {Link as RouterLink} from 'react-router-dom';
+import {makeStyles} from '@material-ui/core/styles';
 import MyFiles from './MyFiles';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
