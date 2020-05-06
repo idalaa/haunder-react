@@ -1,13 +1,7 @@
 import React from 'react';
 import GroupRow from './GroupRow';
-import { getFavourites } from '../hooks/ApiHooks';
-// import {MediaContext} from '../contexts/MediaContext';
-// import {getAvatarImage} from '../hooks/ApiHooks';
-
+import { useAllGroups } from '../hooks/ApiHooks';
 import {
-  //   GridList,
-  //   GridListTile,
-  //   ListSubheader,
   makeStyles,
   useMediaQuery,
   Card,
@@ -25,11 +19,9 @@ import { MoreHoriz } from '@material-ui/icons';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { red } from '@material-ui/core/colors';
-// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import clsx from 'clsx';
 import Collapse from '@material-ui/core/Collapse';
 
-// const groupUrl = 'http://media.mw.metropolia.fi/wbma/favourites/';
+const groupUrl = 'http://media.mw.metropolia.fi/wbma/favourites/';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,14 +71,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const GroupTable = (file) => {
-  const file = getFavourites();
+const GroupTable = () => {
   const classes = useStyles();
   const matches = useMediaQuery('(min-width:697px)');
 
-  const favouritesArray = getFavourites();
-  console.log('favouritesArray', favouritesArray);
-
+  const groupArray = useAllGroups();
+  const file = useAllGroups();
+  const [expanded, setExpanded] = React.useState(false);
   return (
     <div className={classes.root}>
       <List
@@ -94,21 +85,39 @@ const GroupTable = (file) => {
         className={classes.gridList}
         cols={matches ? 1 : 1}
       >
-        {favouritesArray.map((file) => (
+        {groupArray.map((file) => (
           <ListItem key={file.file_id} className={classes.jaa}>
             <Card className={classes.jaa}>
+              <CardHeader
+                avatar={
+                  file.avatar.length > 0 ? (
+                    <Avatar
+                      aria-label='user group'
+                      className={classes.avatar}
+                      src={groupUrl + file.avatar[0].filename}
+                      alt='Group '
+                      title='Avatar image'
+                    />
+                  ) : (
+                    <Avatar
+                      aria-label='user picture'
+                      className={classes.avatar}
+                    />
+                  )
+                }
+                action={
+                  <IconButton aria-label='settings'>
+                    <MoreHoriz />
+                  </IconButton>
+                }
+                title={
+                  file.user ? file.user.username : 'log in to see user data'
+                }
+              />
+
               <CardMedia className={classes.container}>
-                <groupRow className={classes.media} file={file} />
+                <GroupRow className={classes.media} file={file} />
               </CardMedia>
-              <CardActions disableSpacing></CardActions>
-              <Collapse in={expanded} timeout='auto' unmountOnExit>
-                <CardContent>
-                  <Typography paragraph>Groups:</Typography>
-                </CardContent>
-                <CardMedia className={classes.container}>
-                  <GroupRow className={classes.media} file={file} />
-                </CardMedia>
-              </Collapse>
             </Card>
           </ListItem>
         ))}

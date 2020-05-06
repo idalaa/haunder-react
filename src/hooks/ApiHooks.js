@@ -300,115 +300,147 @@ const modifyFile = async (inputs, id) => {
   }
 };
 
-// this is for groups
-const createGroup = async (inputs, token) => {
-  const fd = new FormData();
-  fd.append('title', inputs.title);
-  fd.append('description', inputs.description);
-  fd.append('file', inputs.file);
+//this is for groups
+//create groups
+const createGroup = async(inputs, token) => {
+    const fd = new FormData();
+    fd.append('title', inputs.title);
+    fd.append('description', inputs.description);
+    fd.append('file', inputs.file);
 
-  const fetchOptions = {
-    method: 'POST',
-    body: fd,
-    headers: {
-      'x-access-token': token,
-    },
-  };
-  console.log(fetchOptions);
-  try {
-    const response = await fetch(baseUrl + 'media', fetchOptions);
-    const json = await response.json();
-    if (!response.ok) throw new Error(json.message + ': ' + json.error);
-    // lisää tägi mpjakk
-    const tagJson = addTag(json.file_id, 'haunderGroup', token);
-    return {json, tagJson};
-  } catch (e) {
-    throw new Error(e.message);
-  }
+    const fetchOptions = {
+        method: 'POST',
+        body: fd,
+        headers: {
+            'x-access-token': token,
+        },
+    };
+    console.log(fetchOptions);
+    try {
+        const response = await fetch(baseUrl + 'media', fetchOptions);
+        const json = await response.json();
+        if (!response.ok) throw new Error(json.message + ': ' + json.error);
+        // add tag haunderGroup
+        const tagJson = addTag(json.file_id, 'haunderGroup', token);
+        return { json, tagJson };
+    } catch (e) {
+        throw new Error(e.message);
+    }
 };
 
-const getGroups = async (id) => {
-  console.log('gp', id);
-  const response = await fetch(baseUrl + 'tags/haunderGroup_' + id);
-  return await response.json();
+//get groups
+// const getGroups = async(id) => {
+//     console.log('gp', id);
+//     const response = await fetch(baseUrl + 'tags/haunderGroup' + id);
+//     return await response.json();
+// };
+
+//join group
+const joinGroup = async(file_id, token) => {
+    const fetchOptions = {
+        method: 'POST',
+        body: JSON.stringify(file_id),
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+        },
+    };
+    try {
+        const favouriteResponse = await fetch(baseUrl + 'favourites', fetchOptions);
+        const favouriteJson = await favouriteResponse.json();
+        return favouriteJson;
+    } catch (e) {
+        throw new Error(e.message);
+    }
 };
 
-const addFavourite = async (file_id, token) => {
-  const fetchOptions = {
-    method: 'POST',
-    body: JSON.stringify(file_id),
-    headers: {
-      'Content-Type': 'application/json',
-      'x-access-token': token,
-    },
-  };
-  try {
-    const favouriteResponse = await fetch(baseUrl + 'favourites', fetchOptions);
-    const favouriteJson = await favouriteResponse.json();
-    return favouriteJson;
-  } catch (e) {
-    throw new Error(e.message);
-  }
+//get groups
+// const getGroups = async(id, token) => {
+//     const fetchOptions = {
+//         body: JSON.stringify(id),
+//         method: 'GET',
+//         headers: {
+//             'x-access-token': token,
+//         },
+//     };
+//     try {
+//         const response = await fetch(baseUrl + 'favourites', fetchOptions);
+//         const json = await response.json();
+//         if (!response.ok) throw new Error(json.message + ': ' + json.error);
+//         return json;
+//     } catch (e) {
+//         throw new Error(e.message);
+//     }
+// };
+
+const useAllGroups = (id) => {
+    const [data, setData] = useState([]);
+    const fetchUrl = async() => {
+        // haetaan ryhmät tagilla
+        const response = await fetch(baseUrl + 'tags/haunderGroup');
+        const json = await response.json();
+
+        // haetaan suosikit
+        const items = await Promise.all(
+            json.map(async(item) => {
+                const response = await fetch(
+                    baseUrl + 'favourites/file' + item.file_id
+                );
+                const group = await response.json();
+                return group;
+            })
+        );
+
+        console.log(items);
+        setData(items);
+    };
+
+    useEffect(() => {
+        fetchUrl();
+    }, []);
+
+    return data;
 };
 
-const getFavourites = async (id, token) => {
-  const fetchOptions = {
-    body: JSON.stringify(id),
-    method: 'GET',
-    headers: {
-      'x-access-token': token,
-    },
-  };
-  try {
-    const response = await fetch(baseUrl + 'favourites', fetchOptions);
-    const json = await response.json();
-    if (!response.ok) throw new Error(json.message + ': ' + json.error);
-    return json;
-  } catch (e) {
-    throw new Error(e.message);
-  }
-};
-
-const deleteFavourite = async (id) => {
-  const fetchOptions = {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-access-token': localStorage.getItem('token'),
-    },
-  };
-  try {
-    const response = await fetch(
-        baseUrl + 'favourites/file/' + id,
-        fetchOptions,
-    );
-    const json = await response.json();
-    if (!response.ok) throw new Error(json.message + ': ' + json.error);
-    return json;
-  } catch (e) {
-    throw new Error(e.message);
-  }
+const deleteGroup = async(id) => {
+    const fetchOptions = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': localStorage.getItem('token'),
+        },
+    };
+    try {
+        const response = await fetch(
+            baseUrl + 'favourites/file/' + id,
+            fetchOptions
+        );
+        const json = await response.json();
+        if (!response.ok) throw new Error(json.message + ': ' + json.error);
+        return json;
+    } catch (e) {
+        throw new Error(e.message);
+    }
 };
 
 export {
-  useAllMedia,
-  useSingleMedia,
-  useAllComments,
-  register,
-  login,
-  checkUserAvailable,
-  checkToken,
-  getAvatarImage,
-  updateProfile,
-  upload,
-  comment,
-  addTag,
-  getUser,
-  deleteFile,
-  modifyFile,
-  createGroup,
-  getGroups,
-  addFavourite,
-  getFavourites,
-  deleteFavourite,
+    useAllMedia,
+    useSingleMedia,
+    useAllComments,
+    register,
+    login,
+    checkUserAvailable,
+    checkToken,
+    getAvatarImage,
+    updateProfile,
+    upload,
+    comment,
+    addTag,
+    getUser,
+    deleteFile,
+    modifyFile,
+    createGroup,
+    joinGroup,
+    useAllGroups,
+    deleteGroup,
 };
