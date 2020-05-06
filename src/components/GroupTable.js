@@ -1,6 +1,6 @@
 import React from 'react';
 import GroupRow from './GroupRow';
-import { useAllGroups } from '../hooks/ApiHooks';
+import {useAllGroups} from '../hooks/ApiHooks';
 import {
   makeStyles,
   useMediaQuery,
@@ -9,17 +9,17 @@ import {
   IconButton,
   Avatar,
   CardMedia,
-  CardActions,
   List,
   ListItem,
+  /* CardActions,
   CardContent,
-  Typography,
+  Typography,*/
 } from '@material-ui/core';
-import { MoreHoriz } from '@material-ui/icons';
-import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import {red} from '@material-ui/core/colors';
+import {MoreHoriz} from '@material-ui/icons';
+/* import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { red } from '@material-ui/core/colors';
-import Collapse from '@material-ui/core/Collapse';
+import Collapse from '@material-ui/core/Collapse';*/
 
 const groupUrl = 'http://media.mw.metropolia.fi/wbma/favourites/';
 
@@ -76,7 +76,9 @@ const GroupTable = () => {
   const matches = useMediaQuery('(min-width:697px)');
 
   const groupArray = useAllGroups();
+  // eslint-disable-next-line
   const file = useAllGroups();
+  // eslint-disable-next-line
   const [expanded, setExpanded] = React.useState(false);
   return (
     <div className={classes.root}>

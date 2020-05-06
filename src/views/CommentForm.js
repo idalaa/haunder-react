@@ -14,6 +14,7 @@ import BackButton from '../components/BackButton';
 
 const CommentForm = ({fileId, history}) => {
   const [loading, setLoading] = useState(false);
+
   const doUpload = async () => {
     setLoading(true);
     try {
@@ -39,7 +40,6 @@ const CommentForm = ({fileId, history}) => {
     handleInputChange,
     handleSubmit,
   } = useCommentForm(doUpload);
-
 
   useEffect(() => {
   },
