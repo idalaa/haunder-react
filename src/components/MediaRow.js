@@ -23,27 +23,72 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import clsx from 'clsx';
 import {MoreHoriz} from '@material-ui/icons';
 import Collapse from '@material-ui/core/Collapse';
+import {red} from '@material-ui/core/colors';
+
 import CommentTable from './CommentTable';
 import CommentForm from '../views/CommentForm';
 
-import Moment from 'react-moment';
+// import Moment from 'react-moment';
 
-import moment from 'moment';
-import 'moment/locale/en-gb';
-import 'moment-timezone';
+// import moment from 'moment';
+// import 'moment/locale/en-gb';
+// import 'moment-timezone';
+import TimeConvert from './TimeConvert';
 
-moment.tz.add('Europe/Helsinki|HMT EET EEST|-1D.N -20 -30|0121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121|-1WuND.N OULD.N 1dA0 1xGq0 1cM0 1cM0 1cM0 1cN0 1cM0 1cM0 1fA0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1fA0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1fA0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|12e5');
+//moment.tz.add('Europe/Helsinki|HMT EET EEST|-1D.N -20 -30|0121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121|-1WuND.N OULD.N 1dA0 1xGq0 1cM0 1cM0 1cM0 1cN0 1cM0 1cM0 1fA0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1fA0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1fA0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|12e5');
 
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const useStyles = makeStyles((theme) => ({
-  icon: {
-    color: 'rgba(255, 255, 255, 0.54)',
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    /* backgroundColor: theme.palette.background.paper, */
   },
   list: {
     height: '100%',
     width: '100%',
+  },
+  jaa: {
+    display: 'block',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    /* backgroundColor: theme.palette.background.paper, */
+  },
+  gridList: {
+    width: '100%',
+    height: '100%',
+  },
+  icon: {
+    color: 'rgba(255, 0, 0, 0.54)',
+  },
+  avatar: {
+    backgroundColor: red[500],
+  },
+  container: {
+    display: 'grid',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  media: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 6,
+    /* marginLeft: '33%' */
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    /* marginLeft: 'auto', */
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: 'rotate(360deg)',
   },
 }));
 
@@ -60,13 +105,13 @@ const MediaRow = ({file, myfiles}) => {
     thumb = mediaUrl + file.thumbnails.w320;
   }
 
-  // Time functions
-  const laskeEro = (time) =>{
-    const date1 =new Date();
-    const date2 = new Date(time);
+  // // Time functions
+  // const laskeEro = (time) =>{
+  //   const date1 =new Date();
+  //   const date2 = new Date(time);
 
-    return Math.abs(date1 - date2) / /* 3.6e6 */ 3600000;
-  };
+  //   return Math.abs(date1 - date2) / /* 3.6e6 */ 3600000;
+  // };
   return (
     <>
       <ListItem key={file.file_id} className={classes.jaa}>
@@ -97,17 +142,7 @@ const MediaRow = ({file, myfiles}) => {
                   file.user ? file.user.username : 'log in to see user data'
             }
             subheader={
-                  (laskeEro(file.time_added) >= 24) ? (
-                    console.log('TIME DD.MM.YYYY', file.time_added),
-                    <Moment tz='Europe/Helsinki' format='DD.MM.YYYY'>{file.time_added}</Moment>
-                  ) : (
-                    console.log('TIME FROM NOW', file.time_added),
-                    <Moment tz='Europe/Helsinki' fromNow>{file.time_added}</Moment>
-                  )
-                  // british backup time
-                  /* console.log("aika", file.time_added),
-
-                   moment(file.time_added).calendar() */
+              <TimeConvert time = {file.time_added}/>
             }
           />
           <ButtonBase component={RouterLink}

@@ -32,33 +32,6 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '100%',
   },
-  icon: {
-    color: 'rgba(255, 0, 0, 0.54)',
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
-  container: {
-    display: 'grid',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  media: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 6,
-    /* marginLeft: '33%' */
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    /* marginLeft: 'auto', */
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(360deg)',
-  },
 }));
 
 const MediaTable = () => {
