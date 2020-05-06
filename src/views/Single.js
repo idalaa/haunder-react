@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {useSingleMedia} from '../hooks/ApiHooks';
-import {Typography, Paper} from '@material-ui/core';
+import {Typography, Paper, Card, Avatar, CardContent,} from '@material-ui/core';
 import BackButton from '../components/BackButton';
 import Media from '../components/Media';
 
+
+const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const Single = ({match}) => {
   console.log('match', match.params.id);
@@ -20,27 +22,46 @@ const Single = ({match}) => {
       {file !== null &&
         <>
           <BackButton />
-          <Typography
-            component="h1"
-            variant="h2"
-            gutterBottom>{file.title}</Typography>
-          <Typography
-            component="h5"
-            variant="h5"
-            gutterBottom>
-            {file.user ? file.user.username : 'login to see userdata'}
-          </Typography>
-          <Paper>
-            {description &&
-              <Media file={file} description={description} />
-            }
-          </Paper>
-          <Typography
-            component="p"
-            variant="caption"
-            gutterBottom>
-            {description.desc}
-          </Typography>
+          <Card>
+            <Paper>
+              {description &&
+                <Media file={file} description={description} />
+              }
+            </Paper>
+            <CardContent>
+              {/* avatar={
+                    file.avatar.length > 0 ? (
+                      <Avatar
+                        aria-label='user picture'
+                        src={mediaUrl + file.avatar[0].filename}
+                        alt='Avatar image'
+                        title='Avatar image'
+                      />
+                    ) : (
+                      <Avatar
+                        aria-label='user picture'
+                      />
+                    )
+                  } */}
+              <Typography
+                component="h5"
+                variant="h5"
+                gutterBottom>
+                {file.user ? file.user.username : 'login to see userdata'}
+              </Typography>
+              <Typography
+                component="h4"
+                variant="h4"
+                gutterBottom>{file.title}
+              </Typography>
+              <Typography
+                component="p"
+                variant="caption"
+                gutterBottom>
+                {description.desc}
+              </Typography>
+            </CardContent>
+          </Card>
         </>
       }
     </>
