@@ -43,12 +43,10 @@ const MyTable = () => {
     <div className={classes.root}>
       {user !== null &&
         <GridList
-          cellHeight={180}
+          cellHeight={580}
           className={classes.gridList}
-          cols={matches ? 3 : 2}>
-          <GridListTile key="Subheader" cols={3} style={{height: 'auto'}}>
-            <ListSubheader component="div">All Media</ListSubheader>
-          </GridListTile>
+          cols={matches ? 3 : 1}>
+          <GridListTile key="Subheader" cols={3} style={{height: 'auto'}}></GridListTile>
           {
             newPicArray.map((file) =>
               <GridListTile key={file.file_id}>

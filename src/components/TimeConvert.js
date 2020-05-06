@@ -14,20 +14,20 @@ const TimeConvert = (time) => {
   // Time functions
   const laskeEro = (time) =>{
     const date1 =new Date();
-    console.log('1', date1);
-    const date2 = new Date(time);
-    console.log('2', date2);
+    //console.log('1', date1);
+    const date2 = new Date(time.time);
+    //console.log('2', date2);
 
-    return Math.abs(date1 - time) / /* 3.6e6 */ 3600000;
+    return Math.abs(date1 - date2) / /* 3.6e6 */ 3600000;
   };
   return (
     <>
       {
   (laskeEro(time) >= 24) ? (
-    console.log('TIME DD.MM.YYYY', time),
+    //console.log('TIME DD.MM.YYYY', time),
     <Moment tz='Europe/Helsinki' format='DD.MM.YYYY'>{time}</Moment>
   ) : (
-    console.log('TIME FROM NOW', time),
+    //console.log('TIME FROM NOW', time),
     <Moment tz='Europe/Helsinki' fromNow>{time}</Moment>
   )
       /* british backup time
