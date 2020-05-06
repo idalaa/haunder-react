@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link as RouterLink} from 'react-router-dom';
 import {
-  // GridListTileBar,
-  // IconButton,
-  makeStyles,
+  /* GridListTileBar,
+  IconButton,
   useMediaQuery,
   Card,
   CardHeader,
-  IconButton,
   Avatar,
-  CardMedia,
+  CardMedia,*/
+  IconButton,
+  makeStyles,
   CardActions,
   List,
   ListItem,
@@ -44,7 +44,6 @@ const MediaRow = ({file, myfiles}) => {
   const description = JSON.parse(file.description);
   const classes = useStyles();
   let thumb = 'https://via.placeholder.com/320x200.png?text=Audio';
-  
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -106,7 +105,7 @@ const MediaRow = ({file, myfiles}) => {
             <CardContent>
               <CommentForm fileId = {file.file_id}/>
               <Typography paragraph>Comments:</Typography>
-              <CommentTable fileId = {file.file_id}/>
+              <CommentTable file = {file.file_id}/>
             </CardContent>
           </Collapse>
           {/* </Card> */}
@@ -146,14 +145,14 @@ const MediaRow = ({file, myfiles}) => {
               </>
             }
           </>
-          }
+        }
       </List>
     </>
   );
 };
 
 MediaRow.propTypes = {
-  file: PropTypes.object,
+  file: PropTypes.any,
   myfiles: PropTypes.bool,
 };
 

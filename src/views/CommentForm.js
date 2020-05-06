@@ -13,7 +13,6 @@ import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import BackButton from '../components/BackButton';
 
 const CommentForm = ({fileId, history}) => {
-  console.log('formhistory', history);
   const [loading, setLoading] = useState(false);
   const doUpload = async () => {
     setLoading(true);
@@ -23,7 +22,7 @@ const CommentForm = ({fileId, history}) => {
         comment: inputs.comment,
       };
       const result = await comment(uploadObject, localStorage.getItem('token'));
-      console.log('juu', result);
+      console.log('comment posted', result);
       setTimeout(() => {
         setLoading(false);
         history.push('/home');
@@ -43,8 +42,8 @@ const CommentForm = ({fileId, history}) => {
 
 
   useEffect(() => {
-
-  }, [inputs.comment, setInputs]);
+  },
+  [inputs.comment, setInputs]);
   console.log('inputs', inputs);
 
   return (
