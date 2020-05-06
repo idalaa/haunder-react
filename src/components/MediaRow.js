@@ -16,6 +16,7 @@ import {
   ListItem,
   CardContent,
   Typography,
+  ButtonBase,
 } from '@material-ui/core';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -54,9 +55,12 @@ const MediaRow = ({file, myfiles}) => {
   }
   return (
     <>
+    <ButtonBase component={RouterLink}
+        to={'/single/' + file.file_id}>
       <img
         src={thumb}
         alt={file.title}
+        
         style={
           {
             filter: `
@@ -68,6 +72,7 @@ const MediaRow = ({file, myfiles}) => {
           }
         }
       />
+      </ButtonBase>
       <List className={classes.list}>
         <ListItem>
           {file.title}
