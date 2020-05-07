@@ -328,21 +328,13 @@ const createGroup = async(inputs, token) => {
     }
 };
 
-//get groups
-// const getGroups = async(id) => {
-//     console.log('gp', id);
-//     const response = await fetch(baseUrl + 'tags/haunderGroup' + id);
-//     return await response.json();
-// };
-
 //join group
 const joinGroup = async(file_id, token) => {
     const fetchOptions = {
         method: 'POST',
-        body: JSON.stringify(file_id),
         headers: {
             'Content-Type': 'application/json',
-            'x-access-token': token,
+            'x-access-token': localStorage.getItem('token'),
         },
     };
     try {
@@ -355,16 +347,34 @@ const joinGroup = async(file_id, token) => {
 };
 
 //get groups
-// const getGroups = async(id, token) => {
+const getGroups = async(id) => {
+    const fetchOptions = {
+        body: JSON.stringify(id),
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': localStorage.getItem('token'),
+        },
+    };
+    try {
+        const response = await fetch(baseUrl + 'favourites', fetchOptions);
+        const json = await response.json();
+        if (!response.ok) throw new Error(json.message + ': ' + json.error);
+        return json;
+    } catch (e) {
+        throw new Error(e.message);
+    }
+};
+
+// const getGroups = async(id) => {
 //     const fetchOptions = {
-//         body: JSON.stringify(id),
-//         method: 'GET',
 //         headers: {
-//             'x-access-token': token,
+//             'Content-Type': 'application/json',
+//             'x-access-token': localStorage.getItem('token'),
 //         },
 //     };
 //     try {
-//         const response = await fetch(baseUrl + 'favourites', fetchOptions);
+//         const response = await fetch(baseUrl + 'favourites/' + id, fetchOptions);
 //         const json = await response.json();
 //         if (!response.ok) throw new Error(json.message + ': ' + json.error);
 //         return json;
@@ -373,6 +383,7 @@ const joinGroup = async(file_id, token) => {
 //     }
 // };
 
+// fetch all groups
 const useAllGroups = (id) => {
     const [data, setData] = useState([]);
     const fetchUrl = async() => {
@@ -380,14 +391,13 @@ const useAllGroups = (id) => {
         const response = await fetch(baseUrl + 'tags/haunderGroup');
         const json = await response.json();
 
-        // haetaan suosikit
+        // fetch individual groups
         const items = await Promise.all(
             json.map(async(item) => {
-                const response = await fetch(
-                    baseUrl + 'favourites/file' + item.file_id
-                );
-                const group = await response.json();
-                return group;
+                const response = await fetch(baseUrl + 'media/' + item.file_id);
+                const kuva = await response.json();
+
+                return kuva;
             })
         );
 
@@ -402,6 +412,7 @@ const useAllGroups = (id) => {
     return data;
 };
 
+//delete groups
 const deleteGroup = async(id) => {
     const fetchOptions = {
         method: 'DELETE',
@@ -440,6 +451,7 @@ export {
     deleteFile,
     modifyFile,
     createGroup,
+    getGroups,
     joinGroup,
     useAllGroups,
     deleteGroup,

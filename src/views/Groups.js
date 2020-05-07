@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import useGroupForm from '../hooks/GroupHooks';
 import { createGroup } from '../hooks/ApiHooks';
 import GroupTable from '../components/GroupTable';
+import MyGroups from '../components/MyGroups';
 import { Button, Grid, Typography } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import BackButton from '../components/BackButton';
@@ -139,6 +140,8 @@ const Groups = ({ history }) => {
             </Grid>
           </ValidatorForm>
         </Grid>
+        <GroupTable />
+        {/* <MyGroups /> */}
       </Grid>
     </>
   );
