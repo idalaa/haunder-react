@@ -59,6 +59,7 @@ const CommentForm = ({fileId, history}) => {
       console.log('comment posted', result);
       setTimeout(() => {
         setLoading(false);
+        clearForm();
         history.push('/home');
       }, 1000);
     } catch (e) {
@@ -72,6 +73,7 @@ const CommentForm = ({fileId, history}) => {
     setInputs,
     handleInputChange,
     handleSubmit,
+    clearForm,
   } = useCommentForm(doUpload);
 
   useEffect(() => {
