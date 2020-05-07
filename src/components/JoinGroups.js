@@ -22,7 +22,7 @@ const JoinGroup = () => {
       </ul>
       <input value={draft} type='text' onChange={handleChange} />
       <Button color='primary' type='submit' onClick={handleAdd}>
-        Join Groupaaa
+        Join Group
       </Button>
     </div>
   );

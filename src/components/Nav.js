@@ -24,6 +24,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import SearchIcon from '@material-ui/icons/Search';
+import FadeMenu from './Hamburger';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -97,7 +98,8 @@ const Nav = ({ history }) => {
             aria-label='menu'
             onClick={toggleDrawer(true)}
           >
-            <MenuIcon />
+            {/* <MenuIcon /> */}
+            <FadeMenu />
           </IconButton>
           <Typography variant='h6' className={classes.title}>
             HAUNDER
