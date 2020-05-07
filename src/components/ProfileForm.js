@@ -129,8 +129,11 @@ const ProfileForm = ({history}) => {
                 <TextValidator
                   fullWidth
                   type="file"
-                  name="test"
-                  validators={['allowedExtensions:image/png,image/jpeg,image/jpg']}
+                  name="Profile_picture"
+                  label="Profile picture"
+                  value={inputs.file_name}
+                  /* validators={['allowedExtensions:image/png,image/jpg,image/jpeg']} */
+                  accept='image/*'
                   errorMessages={['images only']}
                 />
               </Grid>
