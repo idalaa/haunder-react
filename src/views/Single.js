@@ -4,6 +4,7 @@ import {useSingleMedia} from '../hooks/ApiHooks';
 import {Typography, Paper, Card, CardContent} from '@material-ui/core';
 import BackButton from '../components/BackButton';
 import Media from '../components/Media';
+import CommentTable from '../components/CommentTable';
 
 
 const Single = ({match}) => {
@@ -58,6 +59,9 @@ const Single = ({match}) => {
                 gutterBottom>
                 {description.desc}
               </Typography>
+            </CardContent>
+            <CardContent>
+              <CommentTable file ={file.file_id}/>
             </CardContent>
           </Card>
         </>
