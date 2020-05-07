@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import MediaRow from './MediaRow';
+import MyRow from './MyRow';
 import {useAllMedia} from '../hooks/ApiHooks';
 import {
   GridList,
@@ -50,7 +50,7 @@ const MyTable = () => {
           {
             newPicArray.map((file) =>
               <GridListTile key={file.file_id}>
-                <MediaRow file={file} myfiles={true} />
+                <MyRow file={file} myfiles={true} />
               </GridListTile>)
           }
         </GridList>
