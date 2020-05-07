@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import useGroupForm from '../hooks/GroupHooks';
-import {createGroup} from '../hooks/ApiHooks';
+import JoinGroup from '../components/JoinGroups';
+import { createGroup } from '../hooks/ApiHooks';
 import GroupTable from '../components/GroupTable';
-// import MyGroups from '../components/MyGroups';
-import {Button, Grid, Typography} from '@material-ui/core';
-import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import { Button, Grid, Typography } from '@material-ui/core';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import BackButton from '../components/BackButton';
 
-const Groups = ({history}) => {
+const Groups = ({ history }) => {
   const [loading, setLoading] = useState(false); // eslint-disable-line no-unused-vars
   const doGroup = async () => {
     setLoading(true);
@@ -21,8 +21,8 @@ const Groups = ({history}) => {
         file: inputs.file,
       };
       const result = await createGroup(
-          uploadObject,
-          localStorage.getItem('token'),
+        uploadObject,
+        localStorage.getItem('token')
       );
       console.log(result);
       setTimeout(() => {
@@ -48,17 +48,17 @@ const Groups = ({history}) => {
     const reader = new FileReader();
 
     reader.addEventListener(
-        'load',
-        () => {
+      'load',
+      () => {
         // convert image file to base64 string
-          setInputs((inputs) => {
-            return {
-              ...inputs,
-              dataUrl: reader.result,
-            };
-          });
-        },
-        false,
+        setInputs((inputs) => {
+          return {
+            ...inputs,
+            dataUrl: reader.result,
+          };
+        });
+      },
+      false
     );
 
     if (inputs.file !== null) {
@@ -141,6 +141,7 @@ const Groups = ({history}) => {
           </ValidatorForm>
         </Grid>
         <GroupTable />
+        <JoinGroup />
         {/* <MyGroups /> */}
       </Grid>
     </>

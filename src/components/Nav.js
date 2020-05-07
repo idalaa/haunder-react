@@ -1,9 +1,9 @@
-import React, {useContext, useEffect} from 'react';
-import {Link as RouterLink, useLocation} from 'react-router-dom';
-import {checkToken} from '../hooks/ApiHooks';
-import {withRouter} from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { checkToken } from '../hooks/ApiHooks';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {MediaContext} from '../contexts/MediaContext';
+import { MediaContext } from '../contexts/MediaContext';
 import {
   AppBar,
   Toolbar,
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Nav = ({history}) => {
+const Nav = ({ history }) => {
   const classes = useStyles();
   const [user, setUser, value, setValue] = useContext(MediaContext);
   const [open, setOpen] = React.useState(false);
