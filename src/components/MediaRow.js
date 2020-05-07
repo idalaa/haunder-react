@@ -179,7 +179,7 @@ const MediaRow = ({file, myfiles}) => {
                 <CardContent>
                   <Typography paragraph>COMMENTS</Typography>
                   <CommentTable file = {file.file_id}/>
-                  <CommentForm fileId = {file.comment_id}/>
+                  <CommentForm fileId = {file.file_id}/>
                 </CardContent>
               </Collapse>
 

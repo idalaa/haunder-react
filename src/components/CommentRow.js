@@ -75,7 +75,7 @@ const CommentRow = ({file, myfiles}) => {
   const classes = useStyles();
   // const comments = useAllComments(file.file_id);
   // console.log('comments', comments);
-  const commentArray = useAllComments(file.file);
+  // const commentArray = useAllComments(file.file);
   return (
     <>
       <List className={classes.list}>

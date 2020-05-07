@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 const CommentTable = (file) => {
   const classes = useStyles();
   const commentArray = useAllComments(file.file);
-  console.log('ca', commentArray);
+  console.log('cA', commentArray);
 
   return (
     <div className={classes.root}>
