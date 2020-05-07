@@ -140,9 +140,9 @@ const Groups = ({ history }) => {
             </Grid>
           </ValidatorForm>
         </Grid>
-        <JoinGroup>
-          <GroupTable />
-        </JoinGroup>
+        {/* <JoinGroup> */}
+        <GroupTable />
+        {/* </JoinGroup> */}
         {/* <MyGroups /> */}
       </Grid>
     </>
