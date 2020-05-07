@@ -71,7 +71,6 @@ const Nav = ({history}) => {
         history.push('/login');
       }
     };
-
     checkUser();
   }, [history, setUser]);
 
