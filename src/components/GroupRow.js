@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link as RouterLink } from 'react-router-dom';
-import { joinGroup } from '../hooks/ApiHooks';
+import {Link as RouterLink} from 'react-router-dom';
+import {joinGroup} from '../hooks/ApiHooks';
 import {
   // GridListTileBar,
+  // useMediaQuery,
+  // Card,
+  // CardHeader,
+  // Avatar,
+  // CardMedia,
   Button,
   makeStyles,
-  useMediaQuery,
-  Card,
-  CardHeader,
   IconButton,
-  Avatar,
-  CardMedia,
   CardActions,
   List,
   ListItem,
@@ -19,11 +19,11 @@ import {
   Typography,
 } from '@material-ui/core';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import PageviewIcon from '@material-ui/icons/Pageview';
+// import FavoriteIcon from '@material-ui/icons/Favorite';
+// import PageviewIcon from '@material-ui/icons/Pageview';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { deleteFile } from '../hooks/ApiHooks';
+import {deleteFile} from '../hooks/ApiHooks';
 import clsx from 'clsx';
 import Collapse from '@material-ui/core/Collapse';
 import CommentTable from './CommentTable';
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const GroupRow = ({ file, myfiles }) => {
+const GroupRow = ({file, myfiles}) => {
   const description = JSON.parse(file.description);
   const classes = useStyles();
   let thumb = 'https://via.placeholder.com/320x200.png?text=Audio';
@@ -109,7 +109,7 @@ const GroupRow = ({ file, myfiles }) => {
                   aria-label={`Delete file`}
                   onClick={() => {
                     const delOK = window.confirm(
-                      'Do you really want to delete?'
+                        'Do you really want to delete?',
                     );
                     if (delOK) {
                       deleteFile(file.file_id);

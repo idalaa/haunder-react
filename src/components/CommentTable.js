@@ -68,7 +68,7 @@ const CommentTable = (file) => {
   console.log('commentArray', commentArray);
 
   const [expanded, setExpanded] = React.useState(false);
-
+// eslint-disable-next-line
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
