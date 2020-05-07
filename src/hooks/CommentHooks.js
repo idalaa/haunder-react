@@ -21,7 +21,7 @@ const useCommentForm = (callback) => {
     });
   };
 
-  const clearForm = (event) =>{
+  const clearForm = (fileId) =>{
     setInputs({
       file_id: null,
       comment: '',

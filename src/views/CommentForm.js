@@ -59,7 +59,7 @@ const CommentForm = ({fileId, history}) => {
       console.log('comment posted', result);
       setTimeout(() => {
         setLoading(false);
-        clearForm();
+        clearForm(fileId);
         history.push('/home');
       }, 1000);
     } catch (e) {

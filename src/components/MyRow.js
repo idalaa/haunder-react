@@ -100,43 +100,43 @@ const MyRow = ({file, myfiles}) => {
         <Card className={classes.jaa}>
           <CardHeader
             action={
-                <>
+              <>
                 <IconButton aria-label='settings'
-                    className={clsx(classes.expand, {
+                  className={clsx(classes.expand, {
                     [classes.expandOpen]: expanded,
-                    })}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}>
-                    <MoreHoriz />
+                  })}
+                  onClick={handleExpandClick}
+                  aria-expanded={expanded}>
+                  <MoreHoriz />
                 </IconButton>
 
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
-                    {myfiles &&
+                  {myfiles &&
                     <>
-                        <IconButton
+                      <IconButton
                         aria-label={`Modify file`}
                         component={RouterLink}
                         to={'/modify/' + file.file_id}
                         className={classes.icon}
-                        >
+                      >
                         <CreateIcon fontSize="large" />
-                        </IconButton>
-                        <IconButton
+                      </IconButton>
+                      <IconButton
                         aria-label={`Delete file`}
                         onClick={() => {
-                            const delOK = window.confirm('Do you reallu want to delete?');
-                            if (delOK) {
+                          const delOK = window.confirm('Do you reallu want to delete?');
+                          if (delOK) {
                             deleteFile(file.file_id);
-                            }
+                          }
                         }}
                         className={classes.icon}
-                        >
+                      >
                         <DeleteIcon fontSize="large" />
-                        </IconButton>
+                      </IconButton>
                     </>
-                    }
+                  }
                 </Collapse>
-                </>
+              </>
             }
             subheader={
               <TimeConvert time = {file.time_added}/>
@@ -160,7 +160,7 @@ const MyRow = ({file, myfiles}) => {
               }
             />
           </ButtonBase>
-          
+
         </Card>
       </ListItem>
     </>

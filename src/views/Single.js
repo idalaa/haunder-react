@@ -57,31 +57,31 @@ const Single = ({match, myfiles}) => {
                     )
                   } */}
 
-                  {file.user_id === true && myfiles &&
+              {file.user_id === true && myfiles &&
                   console.log('useri', file.user.username),
-                    <>
-                        <IconButton
-                        aria-label={`Modify file`}
-                        component={RouterLink}
-                        to={'/modify/' + file.file_id}
-                        className={classes.icon}
-                        >
-                        <CreateIcon fontSize="large" />
-                        </IconButton>
-                        <IconButton
-                        aria-label={`Delete file`}
-                        onClick={() => {
-                            const delOK = window.confirm('Do you really want to delete?');
-                            if (delOK) {
-                            deleteFile(file.file_id);
-                            }
-                        }}
-                        className={classes.icon}
-                        >
-                        <DeleteIcon fontSize="large" />
-                        </IconButton>
-                    </>
+              <>
+                <IconButton
+                  aria-label={`Modify file`}
+                  component={RouterLink}
+                  to={'/modify/' + file.file_id}
+                  className={classes.icon}
+                >
+                  <CreateIcon fontSize="large" />
+                </IconButton>
+                <IconButton
+                  aria-label={`Delete file`}
+                  onClick={() => {
+                    const delOK = window.confirm('Do you really want to delete?');
+                    if (delOK) {
+                      deleteFile(file.file_id);
                     }
+                  }}
+                  className={classes.icon}
+                >
+                  <DeleteIcon fontSize="large" />
+                </IconButton>
+              </>
+              }
 
               <Typography
                 component="h6"
@@ -114,6 +114,7 @@ const Single = ({match, myfiles}) => {
 
 Single.propTypes = {
   match: PropTypes.object,
+  myfiles: PropTypes.bool,
 };
 
 

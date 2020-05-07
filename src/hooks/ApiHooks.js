@@ -69,19 +69,15 @@ const useSingleMedia = (id) => {
 };
 
 const useAllComments = (fileId) => {
-  const [data, setData] = useState([fileId]);
+  const [data, setData] = useState([]);
   const fetchUrl = async () => {
     const response = await fetch(baseUrl + 'comments/file/' + fileId);
     const items = await response.json();
-    console.log('items', items);
     setData(items);
-    return items;
   };
-
   useEffect(() => {
     fetchUrl();
   }, []);
-
   return data;
 };
 

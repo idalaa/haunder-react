@@ -76,34 +76,32 @@ const CommentRow = ({file, myfiles}) => {
   // const comments = useAllComments(file.file_id);
   // console.log('comments', comments);
   const commentArray = useAllComments(file.file);
-  console.log('commentArray', commentArray);
   return (
     <>
       <List className={classes.list}>
-        <ListItem key={commentArray.comment_id} className={classes.jaa}>
-          <Card className={classes.jaa}>
-            <CardHeader
-              avatar={
-                <Avatar
-                  aria-label='user picture'
-                  className={classes.avatar}
-                  /* image={commentUrl + avatar[0].filename}
+        <Card className={classes.jaa}>
+          <CardHeader
+            avatar={
+              <Avatar
+                aria-label='user picture'
+                className={classes.avatar}
+                /* image={commentUrl + avatar[0].filename}
                       alt="Avatar image"
                       title="Avatar image" */
-                />
-              }
-              action={
-                <IconButton aria-label='settings'>
-                  <MoreHoriz />
-                </IconButton>
-              }
-              title={file.user_id}
-              subheader='April 23, 2020'
-            />
-            <ListItem key={file.comment_id}>{file.comment}</ListItem>
-            <ListItem>{/* {myfiles ? '' : description.desc} */}</ListItem>
-          </Card>
-        </ListItem>
+              />
+            }
+            action={
+              <IconButton aria-label='settings'>
+                <MoreHoriz />
+              </IconButton>
+            }
+            title={file.user_id}
+            subheader='April 23, 2020'
+          />
+          <ListItem key={file.comment_id}>{file.comment}</ListItem>
+          <ListItem>{/* {myfiles ? '' : description.desc} */}</ListItem>
+        </Card>
+
       </List>
     </>
   );
