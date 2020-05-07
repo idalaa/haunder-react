@@ -2,27 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link as RouterLink} from 'react-router-dom';
 import {
-  // GridListTileBar,
-  // IconButton,
-  makeStyles,
+  /* GridListTileBar,
+  IconButton,
   useMediaQuery,
   Card,
   CardHeader,
-  IconButton,
   Avatar,
-  CardMedia,
+  CardMedia,*/
+  IconButton,
+  makeStyles,
   CardActions,
   List,
   ListItem,
   CardContent,
   Typography,
+  ButtonBase,
 } from '@material-ui/core';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import PageviewIcon from '@material-ui/icons/Pageview';
-import CreateIcon from '@material-ui/icons/Create';
-import DeleteIcon from '@material-ui/icons/Delete';
-import {deleteFile} from '../hooks/ApiHooks';
+// import PageviewIcon from '@material-ui/icons/Pageview';
+// import CreateIcon from '@material-ui/icons/Create';
+// import DeleteIcon from '@material-ui/icons/Delete';
+// import {deleteFile} from '../hooks/ApiHooks';
 import clsx from 'clsx';
 import Collapse from '@material-ui/core/Collapse';
 import CommentTable from './CommentTable';
@@ -44,7 +45,6 @@ const MediaRow = ({file, myfiles}) => {
   const description = JSON.parse(file.description);
   const classes = useStyles();
   let thumb = 'https://via.placeholder.com/320x200.png?text=Audio';
-  
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -55,20 +55,24 @@ const MediaRow = ({file, myfiles}) => {
   }
   return (
     <>
-      <img
-        src={thumb}
-        alt={file.title}
-        style={
-          {
-            filter: `
+      <ButtonBase component={RouterLink}
+        to={'/single/' + file.file_id}>
+        <img
+          src={thumb}
+          alt={file.title}
+
+          style={
+            {
+              filter: `
                  brightness(${description.filters.brightness}%)
                  contrast(${description.filters.contrast}%) 
                  saturate(${description.filters.saturation}%)
                  sepia(${description.filters.sepia}%)
                  `,
+            }
           }
-        }
-      />
+        />
+      </ButtonBase>
       <List className={classes.list}>
         <ListItem>
           {file.title}
@@ -106,54 +110,18 @@ const MediaRow = ({file, myfiles}) => {
             <CardContent>
               <CommentForm fileId = {file.file_id}/>
               <Typography paragraph>Comments:</Typography>
-              <CommentTable fileId = {file.file_id}/>
+              <CommentTable file = {file.file_id}/>
             </CardContent>
           </Collapse>
           {/* </Card> */}
         </ListItem>
-        actionIcon={
-          <>
-            <IconButton
-              aria-label={`info about ${file.title}`}
-              component={RouterLink}
-              to={'/single/' + file.file_id}
-              className={classes.icon}
-            >
-              <PageviewIcon fontSize="large" />
-            </IconButton>
-            {myfiles &&
-              <>
-                <IconButton
-                  aria-label={`Modify file`}
-                  component={RouterLink}
-                  to={'/modify/' + file.file_id}
-                  className={classes.icon}
-                >
-                  <CreateIcon fontSize="large" />
-                </IconButton>
-                <IconButton
-                  aria-label={`Delete file`}
-                  onClick={() => {
-                    const delOK = window.confirm('Do you really want to delete?');
-                    if (delOK) {
-                      deleteFile(file.file_id);
-                    }
-                  }}
-                  className={classes.icon}
-                >
-                  <DeleteIcon fontSize="large" />
-                </IconButton>
-              </>
-            }
-          </>
-          }
       </List>
     </>
   );
 };
 
 MediaRow.propTypes = {
-  file: PropTypes.object,
+  file: PropTypes.any,
   myfiles: PropTypes.bool,
 };
 

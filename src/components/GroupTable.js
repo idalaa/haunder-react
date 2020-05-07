@@ -104,6 +104,7 @@ const GroupTable = () => {
 
   const picArray = useAllGroups();
   const file = useAllGroups();
+  // eslint-disable-next-line
   const [expanded, setExpanded] = React.useState(false);
 
   return (

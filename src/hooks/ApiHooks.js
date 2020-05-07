@@ -28,15 +28,12 @@ const useAllMedia = (id) => {
                     );
                     kuva.user = userResponse;
                 }
-
                 return kuva;
             })
         );
-
         console.log(items);
         setData(items);
     };
-
     useEffect(() => {
         fetchUrl();
     }, []);

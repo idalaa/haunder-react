@@ -1,6 +1,6 @@
 import React from 'react';
 import CommentRow from './CommentRow';
-import { useAllComments } from '../hooks/ApiHooks';
+import {useAllComments} from '../hooks/ApiHooks';
 // import {MediaContext} from '../contexts/MediaContext';
 // import {getAvatarImage} from '../hooks/ApiHooks';
 
@@ -21,10 +21,10 @@ import {
   CardContent,
   Typography,
 } from '@material-ui/core';
-import { MoreHoriz } from '@material-ui/icons';
+import {MoreHoriz} from '@material-ui/icons';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { red } from '@material-ui/core/colors';
+import {red} from '@material-ui/core/colors';
 // import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import Collapse from '@material-ui/core/Collapse';
@@ -82,8 +82,7 @@ const useStyles = makeStyles((theme) => ({
 const CommentTable = (file) => {
   const classes = useStyles();
   const matches = useMediaQuery('(min-width:697px)');
-
-  const commentArray = useAllComments(file.fileId);
+  const commentArray = useAllComments(file.file);
   console.log('commentArray', commentArray);
 
   const [expanded, setExpanded] = React.useState(false);
@@ -112,7 +111,7 @@ const CommentTable = (file) => {
         cols={matches ? 1 : 1}
       >
         {commentArray.map((file) => (
-          <ListItem key={file.comment_id} className={classes.jaa}>
+          <ListItem key={commentArray.comment_id} className={classes.jaa}>
             <Card className={classes.jaa}>
               <CardHeader
                 avatar={

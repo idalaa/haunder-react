@@ -54,6 +54,7 @@ const Nav = ({history}) => {
   const classes = useStyles();
   const [user, setUser, value, setValue] = useContext(MediaContext);
   const [open, setOpen] = React.useState(false);
+  console.log('open', open);
 
   const toggleDrawer = (opener) => () => {
     setOpen(opener);
@@ -81,14 +82,11 @@ const Nav = ({history}) => {
     setValue(loc);
   }, [location, setValue]);
 
+  // eslint-disable-next-line no-unused-vars
   const handleChange = (event, newValue) => {
-    /*  console.log(location.pathname); */
-
     setValue(newValue);
   };
 
-  /* console.log('history', history);
-  console.log('value', value); */
   return (
     <>
       <AppBar>

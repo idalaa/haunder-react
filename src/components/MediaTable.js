@@ -103,8 +103,8 @@ const MediaTable = () => {
   const matches = useMediaQuery('(min-width:697px)');
 
   const picArray = useAllMedia();
-  const file = useAllMedia();
-  const [expanded, setExpanded] = React.useState(false);
+  // const file = useAllMedia();
+  // const [expanded, setExpanded] = React.useState(false);
 
   // Time functions
   const laskeEro = (time) => {
