@@ -21,11 +21,19 @@ const useCommentForm = (callback) => {
     });
   };
 
+  const clearForm = (event) =>{
+    setInputs({
+      file_id: null,
+      comment: '',
+    });
+  };
+
   return {
     handleSubmit,
     handleInputChange,
     inputs,
     setInputs,
+    clearForm,
   };
 };
 
