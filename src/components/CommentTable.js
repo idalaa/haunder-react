@@ -1,34 +1,16 @@
 import React from 'react';
 import CommentRow from './CommentRow';
 import {useAllComments} from '../hooks/ApiHooks';
-// import {MediaContext} from '../contexts/MediaContext';
-// import {getAvatarImage} from '../hooks/ApiHooks';
 
 import {
-  //   GridList,
-  //   GridListTile,
-  //   ListSubheader,
   makeStyles,
   useMediaQuery,
-  Card,
-  CardHeader,
-  IconButton,
-  Avatar,
   CardMedia,
-  CardActions,
   List,
-  ListItem,
-  CardContent,
-  Typography,
 } from '@material-ui/core';
-import {MoreHoriz} from '@material-ui/icons';
-import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+
 import {red} from '@material-ui/core/colors';
 // import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import clsx from 'clsx';
-import Collapse from '@material-ui/core/Collapse';
-
 // const commentUrl = 'http://media.mw.metropolia.fi/wbma/comments/';
 
 const useStyles = makeStyles((theme) => ({
@@ -90,85 +72,18 @@ const CommentTable = (file) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  /*   const userPic = useAllMedia(kuva.avatar); */
-
-  /* const [user] = useContext(MediaContext);
-  const [avatar, setAvatar, kuva] = useState([]);
-  // console.log(user);
-  useEffect(() => {
-    (async () => {
-        setAvatar(await getAvatarImage(kuva.user_id));
-    })();
-  }, [user]);
-
-  console.log(picArray);
- */
   return (
     <div className={classes.root}>
       <List
         cellheight={580}
         className={classes.gridList}
-        cols={matches ? 1 : 1}
-      >
-        {commentArray.map((file) => (
-          <ListItem key={commentArray.comment_id} className={classes.jaa}>
-            <Card className={classes.jaa}>
-              <CardHeader
-                avatar={
-                  <Avatar
-                    aria-label='user picture'
-                    className={classes.avatar}
-                    /* image={commentUrl + avatar[0].filename}
-                      alt="Avatar image"
-                      title="Avatar image" */
-                  />
-                }
-                action={
-                  <IconButton aria-label='settings'>
-                    <MoreHoriz />
-                  </IconButton>
-                }
-                title={file.user_id}
-                subheader='April 23, 2020'
-              />
-
-              <CardMedia className={classes.container}>
-                <CommentRow className={classes.media} file={file} />
-              </CardMedia>
-
-              <CardActions disableSpacing>
-                <IconButton aria-label='Add to favorites'>
-                  <FavoriteIcon />
-                </IconButton>
-                <IconButton
-                  aria-label='Comment'
-                  className={clsx(classes.expand, {
-                    [classes.expandOpen]: expanded,
-                  })}
-                  onClick={handleExpandClick}
-                  aria-expanded={expanded}
-                >
-                  <ChatBubbleIcon />
-                </IconButton>
-                {/*  <IconButton
-                    className={clsx(classes.expand, {
-                      [classes.expandOpen]: expanded,
-                    })}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                  >
-                    <ExpandMoreIcon />
-                  </IconButton> */}
-              </CardActions>
-              <Collapse in={expanded} timeout='auto' unmountOnExit>
-                <CardContent>
-                  <Typography paragraph>Comments:</Typography>
-                </CardContent>
-              </Collapse>
-            </Card>
-          </ListItem>
-        ))}
+        cols={matches ? 1 : 1}>
+        {
+          commentArray.map((file) =>
+            <CardMedia key={file.file_id} className={classes.container}>
+              <CommentRow className={classes.media} file={file} />
+            </CardMedia>)
+        }
       </List>
     </div>
   );

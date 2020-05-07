@@ -9,20 +9,12 @@ import {
   CardMedia,
   List,
 } from '@material-ui/core';
-import {red} from '@material-ui/core/colors';
 
 // const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    /* backgroundColor: theme.palette.background.paper, */
-  },
-  jaa: {
-    display: 'block',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',

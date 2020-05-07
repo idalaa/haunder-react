@@ -5,16 +5,49 @@ import {withRouter} from 'react-router-dom';
 import {comment} from '../hooks/ApiHooks';
 import {
   Button,
-  Grid,
+  makeStyles,
+  List,
+  ListItem,
+  Card,
+  CardHeader,
   CircularProgress,
   Typography,
 } from '@material-ui/core';
+import {red} from '@material-ui/core/colors';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
-import BackButton from '../components/BackButton';
+
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    color: 'rgba(255, 255, 255, 0.54)',
+  },
+  list: {
+    height: '100%',
+    width: '100%',
+  },
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    /* backgroundColor: theme.palette.background.paper, */
+  },
+  jaa: {
+    display: 'block',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    /* backgroundColor: theme.palette.background.paper, */
+  },
+  container: {
+    display: 'grid',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+}));
 
 const CommentForm = ({fileId, history}) => {
   const [loading, setLoading] = useState(false);
-
+  const classes = useStyles();
   const doUpload = async () => {
     setLoading(true);
     try {
@@ -48,56 +81,52 @@ const CommentForm = ({fileId, history}) => {
 
   return (
     <>
-      <BackButton />
-      <Grid container>
-        <Grid item xs={12}>
-          <Typography
-            component="h1"
-            variant="h2"
-            gutterBottom>Comment</Typography>
-        </Grid>
-        <Grid item>
+      <List>
+        <Card className={classes.jaa}>
+          <CardHeader title={
+            <Typography paragraph>NEW COMMENT</Typography>}
+          />
+
           <ValidatorForm
             onSubmit={handleSubmit}
             instantValidate={false}
             noValidate
           >
-            <Grid container>
-              <Grid container item>
-                <TextValidator
-                  fullWidth
-                  label="Comment"
-                  type="text"
-                  name="comment"
-                  value={inputs.comment}
-                  onChange={handleInputChange}
-                  validators={[
-                    'required',
-                  ]}
-                  errorMessages={[
-                    'this field is required',
-                  ]}
-                />
-              </Grid>
-              <Grid container item>
-                <Button
-                  fullWidth
-                  color="primary"
-                  type="submit"
-                  variant="contained"
-                >
+            <ListItem>
+              <TextValidator
+                fullWidth
+                label="Comment"
+                type="text"
+                name="comment"
+                value={inputs.comment}
+                onChange={handleInputChange}
+                validators={[
+                  'required',
+                ]}
+                errorMessages={[
+                  'this field is required',
+                ]}
+              />
+            </ListItem>
+            <ListItem>
+              <Button
+                fullWidth
+                color="primary"
+                type="submit"
+                variant="contained"
+              >
                   Post
-                </Button>
-              </Grid>
-            </Grid>
+              </Button>
+            </ListItem>
+
           </ValidatorForm>
           {loading &&
-          <Grid item>
+          <ListItem>
             <CircularProgress/>
-          </Grid>
+          </ListItem>
           }
-        </Grid>
-      </Grid>
+        </Card>
+      </List>
     </>
   );
 };

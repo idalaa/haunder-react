@@ -5,6 +5,7 @@ import {Typography, Paper, Card, CardContent} from '@material-ui/core';
 import BackButton from '../components/BackButton';
 import Media from '../components/Media';
 import CommentTable from '../components/CommentTable';
+import CommentForm from './CommentForm';
 
 
 const Single = ({match}) => {
@@ -61,6 +62,7 @@ const Single = ({match}) => {
               </Typography>
             </CardContent>
             <CardContent>
+              <CommentForm fileId = {file.file_id}/>
               <CommentTable file ={file.file_id}/>
             </CardContent>
           </Card>

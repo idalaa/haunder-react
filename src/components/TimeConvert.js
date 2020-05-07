@@ -40,7 +40,7 @@ const TimeConvert = (time) => {
 };
 
 TimeConvert.propTypes = {
-  time: PropTypes.any,
+  time: PropTypes.string,
 };
 
 export default TimeConvert;

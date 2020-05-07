@@ -27,27 +27,11 @@ import {red} from '@material-ui/core/colors';
 
 import CommentTable from './CommentTable';
 import CommentForm from '../views/CommentForm';
-
-// import Moment from 'react-moment';
-
-// import moment from 'moment';
-// import 'moment/locale/en-gb';
-// import 'moment-timezone';
 import TimeConvert from './TimeConvert';
-
-//moment.tz.add('Europe/Helsinki|HMT EET EEST|-1D.N -20 -30|0121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121212121|-1WuND.N OULD.N 1dA0 1xGq0 1cM0 1cM0 1cM0 1cN0 1cM0 1cM0 1fA0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1fA0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1fA0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|12e5');
-
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    /* backgroundColor: theme.palette.background.paper, */
-  },
   list: {
     height: '100%',
     width: '100%',
@@ -78,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '100%',
     borderRadius: 6,
-    /* marginLeft: '33%' */
+    // marginLeft: '33%',
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -105,13 +89,6 @@ const MediaRow = ({file, myfiles}) => {
     thumb = mediaUrl + file.thumbnails.w320;
   }
 
-  // // Time functions
-  // const laskeEro = (time) =>{
-  //   const date1 =new Date();
-  //   const date2 = new Date(time);
-
-  //   return Math.abs(date1 - date2) / /* 3.6e6 */ 3600000;
-  // };
   return (
     <>
       <ListItem key={file.file_id} className={classes.jaa}>
@@ -196,13 +173,16 @@ const MediaRow = ({file, myfiles}) => {
                     <ExpandMoreIcon />
                   </IconButton> */}
               </CardActions>
+            </ListItem>
+            <ListItem>
               <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                  <CommentForm fileId = {file.file_id}/>
-                  <Typography paragraph>Comments:</Typography>
+                  <Typography paragraph>COMMENTS</Typography>
                   <CommentTable file = {file.file_id}/>
+                  <CommentForm fileId = {file.file_id}/>
                 </CardContent>
               </Collapse>
+
             </ListItem>
           </List>
         </Card>
