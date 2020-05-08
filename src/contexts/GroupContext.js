@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
-const FavouritesContext = React.createContext({ favourites: [] });
+const FavContext = React.createContext({ favourites: [] });
 
-const FavouritesProvider = ({ children }) => {
+const FavProvider = ({ children }) => {
   const [favourites, setFavourites] = useState([]);
 
   const add = useCallback(
@@ -12,14 +12,14 @@ const FavouritesProvider = ({ children }) => {
   );
 
   return (
-    <FavouritesContext.Provider value={{ favourites, add }}>
+    <FavContext.Provider value={{ favourites, add }}>
       {children}
-    </FavouritesContext.Provider>
+    </FavContext.Provider>
   );
 };
 
-FavouritesProvider.propTypes = {
+FavProvider.propTypes = {
   children: PropTypes.node,
 };
 
-export default { FavouritesContext, FavouritesProvider };
+export default { FavContext, FavProvider };

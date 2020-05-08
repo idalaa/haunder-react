@@ -1,14 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link as RouterLink} from 'react-router-dom';
-import {joinGroup} from '../hooks/ApiHooks';
+import { Link as RouterLink } from 'react-router-dom';
+import JoinGroup from '../components/JoinGroup';
 import {
-  // GridListTileBar,
-  // useMediaQuery,
-  // Card,
-  // CardHeader,
-  // Avatar,
-  // CardMedia,
   Button,
   makeStyles,
   IconButton,
@@ -19,11 +13,9 @@ import {
   Typography,
 } from '@material-ui/core';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
-// import FavoriteIcon from '@material-ui/icons/Favorite';
-// import PageviewIcon from '@material-ui/icons/Pageview';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
-import {deleteFile} from '../hooks/ApiHooks';
+import { deleteFile } from '../hooks/ApiHooks';
 import clsx from 'clsx';
 import Collapse from '@material-ui/core/Collapse';
 import CommentTable from './CommentTable';
@@ -41,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const GroupRow = ({file, myfiles}) => {
+const GroupRow = ({ file, myfiles }) => {
   const description = JSON.parse(file.description);
   const classes = useStyles();
   let thumb = 'https://via.placeholder.com/320x200.png?text=Audio';
@@ -64,7 +56,7 @@ const GroupRow = ({file, myfiles}) => {
           <CardActions disableSpacing>
             <Button color='primary'>
               <Button
-                onClick={joinGroup}
+                onClick={JoinGroup}
                 fullWidth
                 color='primary'
                 type='submit'
@@ -73,25 +65,25 @@ const GroupRow = ({file, myfiles}) => {
                 Join Group
               </Button>
             </Button>
-            <IconButton
-              aria-label='Comment'
-              className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded,
-              })}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-            >
-              <ChatBubbleIcon />
-            </IconButton>
           </CardActions>
-          <Collapse in={expanded} timeout='auto' unmountOnExit>
-            <CardContent>
-              <CommentForm fileId={file.file_id} />
-              <Typography paragraph>Comments:</Typography>
-              <CommentTable fileId={file.file_id} />
-            </CardContent>
-          </Collapse>
-          {/* </Card> */}
+          <IconButton
+            aria-label='Comment'
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded,
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+          >
+            <ChatBubbleIcon />
+          </IconButton>
+          <ListItem>
+            <Collapse in={expanded} timeout='auto' unmountOnExit>
+              <CardContent>
+                <CommentTable file={file.file_id} />
+                <CommentForm fileId={file.file_id} />
+              </CardContent>
+            </Collapse>
+          </ListItem>
         </ListItem>
         {
           <>
@@ -109,7 +101,7 @@ const GroupRow = ({file, myfiles}) => {
                   aria-label={`Delete file`}
                   onClick={() => {
                     const delOK = window.confirm(
-                        'Do you really want to delete?',
+                      'Do you really want to delete?'
                     );
                     if (delOK) {
                       deleteFile(file.file_id);

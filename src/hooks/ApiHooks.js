@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 
 const baseUrl = 'http://media.mw.metropolia.fi/wbma/';
 
@@ -10,27 +10,27 @@ const useAllMedia = (id) => {
 
     // haetaan yksittäiset kuvat, jotta saadan thumbnailit
     const items = await Promise.all(
-        json.map(async (item) => {
-          const response = await fetch(baseUrl + 'media/' + item.file_id);
-          const kuva = await response.json();
+      json.map(async (item) => {
+        const response = await fetch(baseUrl + 'media/' + item.file_id);
+        const kuva = await response.json();
 
-          // hae avatar kuva.user_id:n avulla
-          const response2 = await fetch(baseUrl + 'tags/avatar_' + kuva.user_id);
-          const avatar = await response2.json();
-          // lisää avatar kuvaan
-          kuva.avatar = avatar;
+        // hae avatar kuva.user_id:n avulla
+        const response2 = await fetch(baseUrl + 'tags/avatar_' + kuva.user_id);
+        const avatar = await response2.json();
+        // lisää avatar kuvaan
+        kuva.avatar = avatar;
 
-          // jos on token niin näkee muiden nimet
-          if (localStorage.getItem('token') !== null) {
-            const userResponse = await getUser(
-                kuva.user_id,
-                localStorage.getItem('token'),
-            );
-            kuva.user = userResponse;
-          }
+        // jos on token niin näkee muiden nimet
+        if (localStorage.getItem('token') !== null) {
+          const userResponse = await getUser(
+            kuva.user_id,
+            localStorage.getItem('token')
+          );
+          kuva.user = userResponse;
+        }
 
-          return kuva;
-        }),
+        return kuva;
+      })
     );
 
     console.log(items);
@@ -52,8 +52,8 @@ const useSingleMedia = (id) => {
     const item = await response.json();
     if (localStorage.getItem('token') !== null) {
       const userResponse = await getUser(
-          item.user_id,
-          localStorage.getItem('token'),
+        item.user_id,
+        localStorage.getItem('token')
       );
       item.user = userResponse;
     }
@@ -215,17 +215,13 @@ const upload = async (inputs, token) => {
     if (!response.ok) throw new Error(json.message + ': ' + json.error);
     // lisää tägi mpjakk
     const tagJson = addTag(json.file_id, 'haunderTest', token);
-    return {json, tagJson};
+    return { json, tagJson };
   } catch (e) {
     throw new Error(e.message);
   }
 };
 
-const comment = async (inputs, token) => {
-  const fd = new FormData();
-  fd.append('file_id', inputs.file_id);
-  fd.append('comment', inputs.comment);
-
+const comment = async (fileId, favId, token) => {
   const fetchOptions = {
     method: 'POST',
     headers: {
@@ -242,6 +238,28 @@ const comment = async (inputs, token) => {
     // lisää tägi mpjakk
     // const tagJson = addTag(json.file_id, 'mpjakk', token);
     // return {json, tagJson};
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
+const favourite = async (fileId, favId, token) => {
+  const fetchOptions = {
+    method: 'POST',
+    body: JSON.stringify({
+      file_id,
+      favoirite_id,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': token,
+    },
+  };
+  console.log(fetchOptions);
+  try {
+    const favResponse = await fetch(baseUrl + 'favourites', fetchOptions);
+    const favJson = await favResponse.json();
+    return favJson;
   } catch (e) {
     throw new Error(e.message);
   }
@@ -300,7 +318,6 @@ const modifyFile = async (inputs, id) => {
   }
 };
 
-
 // this is for groups
 // create groups
 const createGroup = async (inputs, token) => {
@@ -323,25 +340,7 @@ const createGroup = async (inputs, token) => {
     if (!response.ok) throw new Error(json.message + ': ' + json.error);
     // add tag haunderGroup
     const tagJson = addTag(json.file_id, 'haunderGroup', token);
-    return {json, tagJson};
-  } catch (e) {
-    throw new Error(e.message);
-  }
-};
-
-// join group
-const joinGroup = async (file_id, token) => {
-  const fetchOptions = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-access-token': localStorage.getItem('token'),
-    },
-  };
-  try {
-    const favouriteResponse = await fetch(baseUrl + 'favourites', fetchOptions);
-    const favouriteJson = await favouriteResponse.json();
-    return favouriteJson;
+    return { json, tagJson };
   } catch (e) {
     throw new Error(e.message);
   }
@@ -394,12 +393,12 @@ const useAllGroups = (id) => {
 
     // fetch individual groups
     const items = await Promise.all(
-        json.map(async (item) => {
-          const response = await fetch(baseUrl + 'media/' + item.file_id);
-          const kuva = await response.json();
+      json.map(async (item) => {
+        const response = await fetch(baseUrl + 'media/' + item.file_id);
+        const kuva = await response.json();
 
-          return kuva;
-        }),
+        return kuva;
+      })
     );
 
     console.log(items);
@@ -424,8 +423,8 @@ const deleteGroup = async (id) => {
   };
   try {
     const response = await fetch(
-        baseUrl + 'favourites/file/' + id,
-        fetchOptions,
+      baseUrl + 'favourites/file/' + id,
+      fetchOptions
     );
     const json = await response.json();
     if (!response.ok) throw new Error(json.message + ': ' + json.error);
@@ -447,13 +446,13 @@ export {
   updateProfile,
   upload,
   comment,
+  favourite,
   addTag,
   getUser,
   deleteFile,
   modifyFile,
   createGroup,
   getGroups,
-  joinGroup,
   useAllGroups,
   deleteGroup,
 };
