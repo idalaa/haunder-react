@@ -1,11 +1,13 @@
 import {useState} from 'react';
 
 const useCommentForm = (callback) => {
+  console.log('useCForm');
   const [inputs, setInputs] = useState({
     file_id: null,
     comment: '',
   });
   const handleSubmit = (event) => {
+    console.log('handleSub');
     if (event) {
       event.preventDefault();
     }

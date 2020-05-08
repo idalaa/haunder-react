@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CommentForm = ({fileId, history}) => {
+  console.log('commentForm');
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
   const doUpload = async () => {
@@ -61,7 +62,8 @@ const CommentForm = ({fileId, history}) => {
         setLoading(false);
         clearForm(fileId);
         history.push('/home');
-      }, 1000);
+        console.log('end');
+      }, 500);
     } catch (e) {
       console.log(e.message);
       // TODO: näytä vihe

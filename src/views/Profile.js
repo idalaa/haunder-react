@@ -58,7 +58,7 @@ const Profile = () => {
   const [user] = useContext(MediaContext);
   const [avatar, setAvatar] = useState([]);
   const classes = useStyles();
-  let thumb = 'https://placekitten.com';
+  const thumb = 'https://placekitten.com';
   // console.log(user);
   useEffect(() => {
     (async () => {
@@ -68,7 +68,7 @@ const Profile = () => {
     })();
   }, [user]);
 
-   
+
   return (
     <>
       <BackButton pekka='home' />
@@ -94,10 +94,10 @@ const Profile = () => {
             ):(
             <Grid item>
               <ButtonBase className={classes.image}>
-              <Avatar
-                      aria-label='user picture'
-                      className={classes.avatar}
-                    />
+                <Avatar
+                  aria-label='user picture'
+                  className={classes.avatar}
+                />
               </ButtonBase>
             </Grid>
             )}

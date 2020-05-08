@@ -68,20 +68,20 @@ const useSingleMedia = (id) => {
   return data;
 };
 
-const useAllComments = (fileId) => {
-  const [data, setData] = useState([fileId]);
+const useAllComments = (postId) => {
+  console.log('fileId', postId);
+  const [data, setData] = useState([postId]);
   const fetchUrl = async () => {
-    const response = await fetch(baseUrl + 'comments/file/' + fileId);
+    const response = await fetch(baseUrl + 'comments/file/' + postId);
     const items = await response.json();
-    console.log('items', items);
     setData(items);
-    return items;
+    console.log('setData');
   };
-
   useEffect(() => {
+    console.log('fetchUrl');
     fetchUrl();
   }, []);
-
+  console.log('return data');
   return data;
 };
 
@@ -225,7 +225,7 @@ const comment = async (inputs, token) => {
   const fd = new FormData();
   fd.append('file_id', inputs.file_id);
   fd.append('comment', inputs.comment);
-
+  console.log('commFD', fd);
   const fetchOptions = {
     method: 'POST',
     headers: {
@@ -234,17 +234,16 @@ const comment = async (inputs, token) => {
     },
     body: JSON.stringify(inputs),
   };
-  console.log(fetchOptions);
+
   try {
     const response = await fetch(baseUrl + 'comments', fetchOptions);
     const json = await response.json();
+    console.log('json', json);
     if (!response.ok) throw new Error(json.message + ': ' + json.error);
-    // lisää tägi mpjakk
-    // const tagJson = addTag(json.file_id, 'mpjakk', token);
-    // return {json, tagJson};
   } catch (e) {
     throw new Error(e.message);
   }
+  console.log('commentEnd');
 };
 
 const getUser = async (id, token) => {
