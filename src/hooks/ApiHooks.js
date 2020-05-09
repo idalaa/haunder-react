@@ -239,7 +239,7 @@ const addTag = async (file_id, tag, token) => {
   }
 };
 
-const delTag = async (id, token) => {
+const delTag = async (id) => {
   const tagOptions = {
     method: 'DELETE',
     body: JSON.stringify({
@@ -247,7 +247,7 @@ const delTag = async (id, token) => {
     }),
     headers: {
       'Content-Type': 'application/json',
-      'x-access-token': token,
+      'x-access-token': localStorage.getItem('token'),
     },
   };
   try {

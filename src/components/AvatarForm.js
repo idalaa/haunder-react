@@ -2,7 +2,7 @@ import React, {useEffect, useState, useContext} from 'react';
 import PropTypes from 'prop-types';
 import useUploadForm from '../hooks/UploadHooks';
 import {withRouter} from 'react-router-dom';
-import {upload, delTag, addTag, getAvatarImage, useAllMedia, useAllAvatars} from '../hooks/ApiHooks';
+import {upload, delTag, addTag, getAvatarImage, useAllMedia, useAllAvatars, deleteFile} from '../hooks/ApiHooks';
 import {
   Button,
   Grid,
@@ -16,6 +16,11 @@ import {MediaContext} from '../contexts/MediaContext';
 const AvatarForm = ({history}) => {
   const [user] = useContext(MediaContext);
   const tag = 'Avatar_' + user.user_id;
+  const deleteOldAvatar = async () => {
+    const oldAvatar = await getAvatarImage(user.user_id);
+    console.log('old', oldAvatar);
+    deleteFile(oldAvatar[0].file_id);
+  };
   // const avatarArray = useAllAvatars().reverse();
   // console.log('AVATARARRAY', avatarArray);
 
@@ -37,6 +42,8 @@ const AvatarForm = ({history}) => {
         }),
         file: inputs.file,
       };
+
+      deleteOldAvatar();
       const result = await upload(uploadObject,
           localStorage.getItem('token'), tag);
       console.log('result', result, 'tag', tag);

@@ -57,7 +57,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Profile = () => {
   const [user] = useContext(MediaContext);
-  // console.log('user', user);
   const [avatar, setAvatar] = useState([]);
   const classes = useStyles();
 
@@ -69,9 +68,7 @@ const Profile = () => {
     })();
   }, [user]);
 
-
   return (
-    console.log('ava', avatar),
     <>
       <BackButton pekka='home' />
       <Typography component='h1' variant='h2' gutterBottom>
