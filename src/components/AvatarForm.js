@@ -15,11 +15,11 @@ import {MediaContext} from '../contexts/MediaContext';
 
 const AvatarForm = ({history}) => {
   const [user] = useContext(MediaContext);
-  const tag = 'Avatar_' + user.user_id;
+  const tag = 'Havatar_' + user.user_id;
   const deleteOldAvatar = async () => {
     const oldAvatar = await getAvatarImage(user.user_id);
     console.log('old', oldAvatar);
-    deleteFile(oldAvatar[0].file_id);
+    if (oldAvatar.length > 0) deleteFile(oldAvatar[0].file_id);
   };
   // const avatarArray = useAllAvatars().reverse();
   // console.log('AVATARARRAY', avatarArray);
