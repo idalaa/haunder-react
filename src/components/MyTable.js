@@ -31,8 +31,8 @@ const MyTable = () => {
   const [user] = useContext(MediaContext);
   const classes = useStyles();
   const matches = useMediaQuery('(min-width:697px)');
-
-  const picArray = useAllMedia();
+  const tag = 'haunderTest';
+  const picArray = useAllMedia(tag);
   console.log(picArray);
   let newPicArray = [];
   if (picArray.length > 0 && user !== null) {
@@ -43,7 +43,7 @@ const MyTable = () => {
     <div className={classes.root}>
       {user !== null && (
         <GridList
-          cellHeight={580}
+          cellHeight={280}
           className={classes.gridList}
           cols={matches ? 3 : 1}
         >

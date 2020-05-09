@@ -26,6 +26,7 @@ import BackButton from '../components/BackButton';
 // import {Link as RouterLink} from 'react-router-dom';
 import {makeStyles} from '@material-ui/core/styles';
 import MyFiles from './MyFiles';
+// import AvatarForm from '../components/AvatarForm';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
@@ -58,8 +59,7 @@ const Profile = () => {
   const [user] = useContext(MediaContext);
   const [avatar, setAvatar] = useState([]);
   const classes = useStyles();
-  const thumb = 'https://placekitten.com';
-  // console.log(user);
+
   useEffect(() => {
     (async () => {
       if (user !== null) {
@@ -68,7 +68,6 @@ const Profile = () => {
     })();
   }, [user]);
 
-
   return (
     <>
       <BackButton pekka='home' />
@@ -76,21 +75,21 @@ const Profile = () => {
         Profile
       </Typography>
       {user !== null && (
-        console.log('MITAE', avatar),
         <Paper className={classes.paper}>
           <Grid container spacing={2}>
             {avatar.length > 0 ? (
-            <Grid item>
-              <ButtonBase className={classes.image}>
-                <CardMedia
-                  className={classes.img}
-                  component='img'
-                  image={mediaUrl + avatar[0].filename}
-                  alt='Avatar image'
-                  title='Avatar image'
-                />
-              </ButtonBase>
-            </Grid>
+              console.log('MITAE', avatar),
+              <Grid item>
+                <ButtonBase className={classes.image}>
+                  <CardMedia
+                    className={classes.img}
+                    component='img'
+                    image={mediaUrl + avatar[0].filename}
+                    alt='Avatar image'
+                    title='Avatar image'
+                  />
+                </ButtonBase>
+              </Grid>
             ):(
             <Grid item>
               <ButtonBase className={classes.image}>
@@ -100,7 +99,8 @@ const Profile = () => {
                 />
               </ButtonBase>
             </Grid>
-            )}
+            )
+            }
             <Grid item xs={12} sm container>
               <Grid
                 item

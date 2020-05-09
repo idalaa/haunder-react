@@ -50,20 +50,22 @@ const CommentForm = ({fileId, history}) => {
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
   const doUpload = async () => {
+    console.log('doUpload');
     setLoading(true);
     try {
       const uploadObject = {
         file_id: fileId,
         comment: inputs.comment,
       };
+      console.log('try');
       const result = await comment(uploadObject, localStorage.getItem('token'));
       console.log('comment posted', result);
-      setTimeout(() => {
-        setLoading(false);
-        clearForm(fileId);
-        history.push('/home');
-        console.log('end');
-      }, 500);
+      // setTimeout(() => {
+      clearForm(fileId);
+      setLoading(false);
+      history.push('/home');
+      console.log('end');
+      // }, 500);
     } catch (e) {
       console.log(e.message);
       // TODO: näytä vihe
@@ -77,7 +79,7 @@ const CommentForm = ({fileId, history}) => {
     handleSubmit,
     clearForm,
   } = useCommentForm(doUpload);
-
+  console.log('cForm useFx');
   useEffect(() => {
   },
   [inputs.comment, setInputs]);

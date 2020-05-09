@@ -112,7 +112,7 @@ const MyRow = ({file, myfiles}) => {
 
   return (
     <>
-      <ListItem key={file.file_id} className={classes.jaa}>
+      <ListItem key={file.file_id} >
         <Card className={classes.jaa}>
           <CardHeader
             action={

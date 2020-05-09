@@ -144,7 +144,7 @@ const Nav = ({history}) => {
             value='search'
             icon={<SearchIcon />}
             component={RouterLink}
-            to='/'
+            to='/search'
           />
           <BottomNavigationAction
             label='Upload'

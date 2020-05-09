@@ -13,6 +13,7 @@ import Upload from './views/Upload';
 import MyFiles from './views/MyFiles';
 import Modify from './views/Modify';
 import Groups from './views/Groups';
+import Search from './views/Search';
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
               <Route path='/myfiles' component={MyFiles} />
               <Route path='/modify/:id' component={Modify} />
               <Route path='/groups' component={Groups} />
+              <Route path='/search' component={Search} />
             </Switch>
           </main>
         </Container>

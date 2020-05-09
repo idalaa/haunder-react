@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 
 const baseUrl = 'http://media.mw.metropolia.fi/wbma/';
 
-const useAllMedia = (id) => {
+const useAllMedia = (tag) => {
   const [data, setData] = useState([]);
+
   const fetchUrl = async () => {
-    const response = await fetch(baseUrl + 'tags/haunderTest');
+    const response = await fetch(baseUrl + 'tags/' + tag);
     const json = await response.json();
 
     // haetaan yksittäiset kuvat, jotta saadan thumbnailit
@@ -15,7 +16,10 @@ const useAllMedia = (id) => {
         const kuva = await response.json();
 
         // hae avatar kuva.user_id:n avulla
-        const response2 = await fetch(baseUrl + 'tags/avatar_' + kuva.user_id);
+        // eslint-disable-next-line
+        const response2 = await fetch(
+          baseUrl + 'tags/haunderAvatar_' + kuva.user_id
+        );
         const avatar = await response2.json();
         // lisää avatar kuvaan
         kuva.avatar = avatar;
@@ -68,27 +72,68 @@ const useSingleMedia = (id) => {
   return data;
 };
 
-const useAllComments = (postId) => {
-  console.log('fileId', postId);
-  const [data, setData] = useState([postId]);
+const useAllComments = (fileId) => {
+  const [data, setData] = useState([fileId]);
   const fetchUrl = async () => {
-    const response = await fetch(baseUrl + 'comments/file/' + postId);
+    const response = await fetch(baseUrl + 'comments/file/' + fileId);
     const items = await response.json();
+    console.log('items', items);
     setData(items);
-    console.log('setData');
+    return items;
   };
+
   useEffect(() => {
-    console.log('fetchUrl');
     fetchUrl();
   }, []);
-  console.log('return data');
+
   return data;
 };
 
 const getAvatarImage = async (id) => {
   console.log('ai', id);
-  const response = await fetch(baseUrl + 'tags/avatar_' + id);
+  const response = await fetch(baseUrl + 'tags/Havatar_' + id);
   return await response.json();
+};
+
+const useAllAvatars = (id) => {
+  const [data, setData] = useState([]);
+  const fetchUrl = async () => {
+    const response = await fetch(baseUrl + 'tags/Havatar_');
+    const json = await response.json();
+    // haetaan yksittäiset kuvat, jotta saadan thumbnailit
+    const items = await Promise.all(
+      json.map(async (item) => {
+        const response = await fetch(baseUrl + 'media/' + item.file_id);
+        const kuva = await response.json();
+
+        // hae avatar kuva.user_id:n avulla
+        const response2 = await fetch(baseUrl + 'tags/Havatar_' + kuva.user_id);
+        const avatar = await response2.json();
+        // lisää avatar kuvaan
+        kuva.avatar = avatar;
+
+        // jos on token niin näkee muiden nimet
+        if (localStorage.getItem('token') !== null) {
+          const userResponse = await getUser(
+            kuva.user_id,
+            localStorage.getItem('token')
+          );
+          kuva.user = userResponse;
+        }
+
+        return kuva;
+      })
+    );
+
+    console.log(items);
+    setData(items);
+  };
+
+  useEffect(() => {
+    fetchUrl();
+  }, []);
+
+  return data;
 };
 
 const register = async (inputs) => {
@@ -139,6 +184,7 @@ const checkUserAvailable = async (name) => {
 };
 
 const checkToken = async (token) => {
+  // console.log('HALOOOO', token);
   const fetchOptions = {
     headers: {
       'x-access-token': token,
@@ -195,7 +241,27 @@ const addTag = async (file_id, tag, token) => {
   }
 };
 
-const upload = async (inputs, token) => {
+const delTag = async (id) => {
+  const tagOptions = {
+    method: 'DELETE',
+    body: JSON.stringify({
+      id,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': localStorage.getItem('token'),
+    },
+  };
+  try {
+    const tagResponse = await fetch(baseUrl + 'tags/', tagOptions);
+    const tagJson = await tagResponse.json();
+    return tagJson;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
+const upload = async (inputs, token, tag) => {
   const fd = new FormData();
   fd.append('title', inputs.title);
   fd.append('description', inputs.description);
@@ -214,7 +280,8 @@ const upload = async (inputs, token) => {
     const json = await response.json();
     if (!response.ok) throw new Error(json.message + ': ' + json.error);
     // lisää tägi mpjakk
-    const tagJson = addTag(json.file_id, 'haunderTest', token);
+    console.log('jOOOO', tag);
+    const tagJson = addTag(json.file_id, tag, token);
     return { json, tagJson };
   } catch (e) {
     throw new Error(e.message);
@@ -225,7 +292,7 @@ const comment = async (inputs, token) => {
   const fd = new FormData();
   fd.append('file_id', inputs.file_id);
   fd.append('comment', inputs.comment);
-  console.log('commFD', fd);
+
   const fetchOptions = {
     method: 'POST',
     headers: {
@@ -234,16 +301,17 @@ const comment = async (inputs, token) => {
     },
     body: JSON.stringify(inputs),
   };
-
+  console.log(fetchOptions);
   try {
     const response = await fetch(baseUrl + 'comments', fetchOptions);
     const json = await response.json();
-    console.log('json', json);
     if (!response.ok) throw new Error(json.message + ': ' + json.error);
+    // lisää tägi mpjakk
+    // const tagJson = addTag(json.file_id, 'mpjakk', token);
+    // return {json, tagJson};
   } catch (e) {
     throw new Error(e.message);
   }
-  console.log('commentEnd');
 };
 
 const favourite = async (file_id, token) => {
@@ -490,4 +558,6 @@ export {
   getGroups,
   useAllGroups,
   deleteGroup,
+  delTag,
+  useAllAvatars,
 };
