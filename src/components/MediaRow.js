@@ -28,6 +28,7 @@ import {red} from '@material-ui/core/colors';
 import CommentTable from './CommentTable';
 import CommentForm from '../views/CommentForm';
 import TimeConvert from './TimeConvert';
+import { useAllMedia } from '../hooks/ApiHooks';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 

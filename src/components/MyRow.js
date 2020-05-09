@@ -116,63 +116,63 @@ const MyRow = ({file, myfiles}) => {
         <Card className={classes.jaa}>
           <CardHeader
             action={
-                <>
-                    <IconButton aria-label='settings'>
-                        <MoreHoriz 
-                        aria-controls='fade-menu'
-                        aria-haspopup='true'
-                        onClick={handleClick}
-                        />
-                    </IconButton>
+              <>
+                <IconButton aria-label='settings'>
+                  <MoreHoriz
+                    aria-controls='fade-menu'
+                    aria-haspopup='true'
+                    onClick={handleClick}
+                  />
+                </IconButton>
 
-                    <Menu
-                        id='fade-menu'
-                        anchorEl={anchorEl}
-                        keepMounted
-                        open={open}
-                        onClose={handleClose}
-                        TransitionComponent={Fade}>
-                        <MenuItem
-                            onClick={handleClose}
-                            onClick={handleClose}
-                            aria-label={`View file`}
-                            color='inherit'
-                            component={RouterLink}
-                            to={'/single/' + file.file_id}
-                        >
+                <Menu
+                  id='fade-menu'
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={open}
+                  onClose={handleClose}
+                  TransitionComponent={Fade}>
+                  <MenuItem
+                    onClick={handleClose}
+                    onClick={handleClose}
+                    aria-label={`View file`}
+                    color='inherit'
+                    component={RouterLink}
+                    to={'/single/' + file.file_id}
+                  >
                         View
-                        </MenuItem>
+                  </MenuItem>
 
-                        <MenuItem
-                            onClick={handleClose}
-                            onClick={handleClose}
-                            aria-label={`Modify file`}
-                            color='inherit'
-                            component={RouterLink}
-                            to={'/modify/' + file.file_id}
-                        >
+                  <MenuItem
+                    onClick={handleClose}
+                    onClick={handleClose}
+                    aria-label={`Modify file`}
+                    color='inherit'
+                    component={RouterLink}
+                    to={'/modify/' + file.file_id}
+                  >
                         Modify
-                        </MenuItem>
+                  </MenuItem>
 
-                        <MenuItem
-                            onClick={handleClose}
-                            onClick={handleClose}
-                            onClick={() => {
-                                const delOK = window.confirm('Do you really want to delete?');
-                                if (delOK) {
-                                deleteFile(file.file_id);
-                                }
-                            }}
-                            aria-label={`Delete file`}
-                            color='inherit'
-                            component={RouterLink}
-                            to='/myfiles'
-                        >
+                  <MenuItem
+                    onClick={handleClose}
+                    onClick={handleClose}
+                    onClick={() => {
+                      const delOK = window.confirm('Do you really want to delete?');
+                      if (delOK) {
+                        deleteFile(file.file_id);
+                      }
+                    }}
+                    aria-label={`Delete file`}
+                    color='inherit'
+                    component={RouterLink}
+                    to='/myfiles'
+                  >
                         Delete
-                        </MenuItem>
-                    </Menu>
+                  </MenuItem>
+                </Menu>
 
-                </>
+              </>
             }
             subheader={
               <TimeConvert time = {file.time_added}/>
@@ -196,7 +196,7 @@ const MyRow = ({file, myfiles}) => {
               }
             />
           </ButtonBase>
-          
+
         </Card>
       </ListItem>
     </>
