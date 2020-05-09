@@ -70,8 +70,9 @@ const useSingleMedia = (id) => {
 
 const useAllComments = (postId) => {
   console.log('fileId', postId);
-  const [data, setData] = useState([postId]);
+  const [data, setData] = useState([]);
   const fetchUrl = async () => {
+    console.log('fetchurl1');
     const response = await fetch(baseUrl + 'comments/file/' + postId);
     const items = await response.json();
     setData(items);
@@ -84,6 +85,32 @@ const useAllComments = (postId) => {
   console.log('return data');
   return data;
 };
+
+const comment = async (inputs, token) => {
+  const fd = new FormData();
+  fd.append('file_id', inputs.file_id);
+  fd.append('comment', inputs.comment);
+  console.log('commFD', fd);
+  const fetchOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': token,
+    },
+    body: JSON.stringify(inputs),
+  };
+
+  try {
+    const response = await fetch(baseUrl + 'comments', fetchOptions);
+    const json = await response.json();
+    console.log('json', json);
+    if (!response.ok) throw new Error(json.message + ': ' + json.error);
+  } catch (e) {
+    throw new Error(e.message);
+  }
+  console.log('commentEnd');
+};
+
 
 const getAvatarImage = async (id) => {
   console.log('ai', id);
@@ -219,31 +246,6 @@ const upload = async (inputs, token) => {
   } catch (e) {
     throw new Error(e.message);
   }
-};
-
-const comment = async (inputs, token) => {
-  const fd = new FormData();
-  fd.append('file_id', inputs.file_id);
-  fd.append('comment', inputs.comment);
-  console.log('commFD', fd);
-  const fetchOptions = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-access-token': token,
-    },
-    body: JSON.stringify(inputs),
-  };
-
-  try {
-    const response = await fetch(baseUrl + 'comments', fetchOptions);
-    const json = await response.json();
-    console.log('json', json);
-    if (!response.ok) throw new Error(json.message + ': ' + json.error);
-  } catch (e) {
-    throw new Error(e.message);
-  }
-  console.log('commentEnd');
 };
 
 const getUser = async (id, token) => {
