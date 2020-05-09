@@ -43,7 +43,7 @@ const MyTable = () => {
     <div className={classes.root}>
       {user !== null &&
         <GridList
-          cellHeight={580}
+          cellHeight={280}
           className={classes.gridList}
           cols={matches ? 3 : 1}>
           <GridListTile key="Subheader" cols={3} style={{height: 'auto'}}></GridListTile>
