@@ -6,6 +6,7 @@ import {MediaContext} from '../contexts/MediaContext';
 import {Button, Grid} from '@material-ui/core';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import useProfileForm from '../hooks/ProfileHooks';
+import AvatarForm from './AvatarForm';
 
 const ProfileForm = ({history}) => {
   const [user, setUser] = useContext(MediaContext);
@@ -28,7 +29,7 @@ const ProfileForm = ({history}) => {
     }
   };
 
-  const {inputs, setInputs, handleInputChange, handleSubmit} =
+  const {inputs, setInputs, handleInputChange, handleSubmit, handleFileChange} =
     useProfileForm(doProfile);
 
   useEffect(() => {
@@ -126,19 +127,6 @@ const ProfileForm = ({history}) => {
               </Grid>
 
               <Grid container item>
-                <TextValidator
-                  fullWidth
-                  type="file"
-                  name="Profile_picture"
-                  label="Profile picture"
-                  value={inputs.file_name}
-                  /* validators={['allowedExtensions:image/png,image/jpg,image/jpeg']} */
-                  accept='image/*'
-                  errorMessages={['images only']}
-                />
-              </Grid>
-
-              <Grid container item>
                 <Button
                   fullWidth
                   color="primary"
@@ -149,7 +137,7 @@ const ProfileForm = ({history}) => {
               </Grid>
             </Grid>
           </ValidatorForm>
-
+          <AvatarForm />
         </Grid>
       </>
       }

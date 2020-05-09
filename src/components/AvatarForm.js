@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import useUploadForm from '../hooks/UploadHooks';
-import { upload } from '../hooks/ApiHooks';
+import {withRouter} from 'react-router-dom';
+import { upload, delTag, addTag, getAvatarImage, useAllMedia, useAllAvatars } from '../hooks/ApiHooks';
 import {
   Button,
   Grid,
@@ -10,18 +11,21 @@ import {
   Typography,
 } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import BackButton from '../components/BackButton';
 
-const Upload = ({ history }) => {
-  const tag = 'haunderTest';
+const AvatarForm = ({ history }) => {
+  const tag = 'haunderAvatar_';
+  const avatarArray = useAllAvatars().reverse();
+  console.log('AVATARARRAY', avatarArray);
+
   const [loading, setLoading] = useState(false);
+
   const doUpload = async () => {
     setLoading(true);
     try {
       const uploadObject = {
-        title: inputs.title,
+        title: 'avatar',
         description: JSON.stringify({
-          desc: inputs.description,
+          desc: '',
           filters: {
             brightness: inputs.brightness,
             contrast: inputs.contrast,
@@ -35,7 +39,7 @@ const Upload = ({ history }) => {
       console.log(result);
       setTimeout(() => {
         setLoading(false);
-        history.push('/home');
+        history.push('/profile');
       }, 2000);
     } catch (e) {
       console.log(e.message);
@@ -87,13 +91,7 @@ const Upload = ({ history }) => {
 
   return (
     <>
-      <BackButton />
       <Grid container>
-        <Grid item xs={12}>
-          <Typography component='h1' variant='h2' gutterBottom>
-            Upload
-          </Typography>
-        </Grid>
         <Grid item>
           <ValidatorForm
             onSubmit={handleSubmit}
@@ -104,34 +102,9 @@ const Upload = ({ history }) => {
               <Grid container item>
                 <TextValidator
                   fullWidth
-                  label='Title'
-                  type='text'
-                  name='title'
-                  value={inputs.title}
-                  onChange={handleInputChange}
-                  validators={['required']}
-                  errorMessages={['this field is required']}
-                />
-              </Grid>
-              <Grid container item>
-                <TextValidator
-                  fullWidth
-                  label='Description'
-                  name='description'
-                  value={inputs.description}
-                  onChange={handleInputChange}
-                  validators={[
-                    "matchRegexp:^[a-öA-Ö]+(([',. -][a-öA-Ö ])?[a-öA-Ö]*)*$",
-                  ]}
-                  errorMessages={['text only']}
-                />
-              </Grid>
-              <Grid container item>
-                <TextValidator
-                  fullWidth
                   type='file'
                   name='file'
-                  accept='image/*,video/*,audio/*'
+                  accept='image/*'
                   onChange={handleFileChange}
                 />
               </Grid>
@@ -142,7 +115,7 @@ const Upload = ({ history }) => {
                   type='submit'
                   variant='contained'
                 >
-                  Upload
+                  Upload Profile Picture
                 </Button>
               </Grid>
             </Grid>
@@ -211,8 +184,8 @@ const Upload = ({ history }) => {
   );
 };
 
-Upload.propTypes = {
+AvatarForm.propTypes = {
   history: PropTypes.object,
 };
 
-export default Upload;
+export default withRouter(AvatarForm);

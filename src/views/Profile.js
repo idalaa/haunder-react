@@ -16,7 +16,7 @@ import {
   ButtonBase,
   Avatar,
 } from '@material-ui/core';
-import {getAvatarImage} from '../hooks/ApiHooks';
+import {getAvatarImage, useAllAvatars} from '../hooks/ApiHooks';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
@@ -26,6 +26,7 @@ import BackButton from '../components/BackButton';
 // import {Link as RouterLink} from 'react-router-dom';
 import {makeStyles} from '@material-ui/core/styles';
 import MyFiles from './MyFiles';
+import AvatarForm from '../components/AvatarForm';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
@@ -58,7 +59,9 @@ const Profile = () => {
   const [user] = useContext(MediaContext);
   const [avatar, setAvatar] = useState([]);
   const classes = useStyles();
-  const thumb = 'https://placekitten.com';
+  const avatarArray = useAllAvatars().reverse();
+  console.log('AVA', avatarArray[0]);
+  const ava = avatarArray[0];
   // console.log(user);
   useEffect(() => {
     (async () => {
@@ -68,7 +71,7 @@ const Profile = () => {
     })();
   }, [user]);
 
-
+   
   return (
     <>
       <BackButton pekka='home' />
@@ -76,10 +79,10 @@ const Profile = () => {
         Profile
       </Typography>
       {user !== null && (
-        console.log('MITAE', avatar),
         <Paper className={classes.paper}>
           <Grid container spacing={2}>
             {avatar.length > 0 ? (
+              console.log('MITAE', avatar),
             <Grid item>
               <ButtonBase className={classes.image}>
                 <CardMedia
@@ -94,10 +97,10 @@ const Profile = () => {
             ):(
             <Grid item>
               <ButtonBase className={classes.image}>
-                <Avatar
-                  aria-label='user picture'
-                  className={classes.avatar}
-                />
+              <Avatar
+                      aria-label='user picture'
+                      className={classes.avatar}
+                    />
               </ButtonBase>
             </Grid>
             )}
