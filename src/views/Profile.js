@@ -14,6 +14,7 @@ import {
   Paper,
   Grid,
   ButtonBase,
+  Avatar,
 } from '@material-ui/core';
 import {getAvatarImage} from '../hooks/ApiHooks';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
@@ -57,6 +58,7 @@ const Profile = () => {
   const [user] = useContext(MediaContext);
   const [avatar, setAvatar] = useState([]);
   const classes = useStyles();
+  const thumb = 'https://placekitten.com';
   // console.log(user);
   useEffect(() => {
     (async () => {
@@ -66,16 +68,18 @@ const Profile = () => {
     })();
   }, [user]);
 
-  // console.log('avatar', avatar);
+
   return (
     <>
       <BackButton pekka='home' />
       <Typography component='h1' variant='h2' gutterBottom>
-        Profile{' '}
-      </Typography>{' '}
-      {user !== null && avatar.length > 0 && (
+        Profile
+      </Typography>
+      {user !== null && (
+        console.log('MITAE', avatar),
         <Paper className={classes.paper}>
           <Grid container spacing={2}>
+            {avatar.length > 0 ? (
             <Grid item>
               <ButtonBase className={classes.image}>
                 <CardMedia
@@ -85,8 +89,18 @@ const Profile = () => {
                   alt='Avatar image'
                   title='Avatar image'
                 />
-              </ButtonBase>{' '}
-            </Grid>{' '}
+              </ButtonBase>
+            </Grid>
+            ):(
+            <Grid item>
+              <ButtonBase className={classes.image}>
+                <Avatar
+                  aria-label='user picture'
+                  className={classes.avatar}
+                />
+              </ButtonBase>
+            </Grid>
+            )}
             <Grid item xs={12} sm container>
               <Grid
                 item
@@ -99,41 +113,42 @@ const Profile = () => {
                 <ListItem>
                   <ListItemIcon>
                     <AccountBoxIcon />
-                  </ListItemIcon>{' '}
-                  <ListItemText primary={user.username} />{' '}
-                </ListItem>{' '}
+                  </ListItemIcon>
+                  <ListItemText primary={user.username} />
+                </ListItem>
                 <ListItem>
                   <ListItemIcon>
                     <EmailIcon />
-                  </ListItemIcon>{' '}
-                  <ListItemText primary={user.email} />{' '}
-                </ListItem>{' '}
+                  </ListItemIcon>
+                  <ListItemText primary={user.email} />
+                </ListItem>
                 <ListItem>
                   <ListItemIcon>
                     <PersonIcon />
-                  </ListItemIcon>{' '}
-                  <ListItemText primary={user.full_name} />{' '}
-                </ListItem>{' '}
+                  </ListItemIcon>
+                  <ListItemText primary={user.full_name} />
+                </ListItem>
                 {/* <ListItem>
-                                    <Button
-                                      color="inherit"
-                                      component={RouterLink}
-                                      to="/myfiles"
-                                    >
-                                      My files
-                                    </Button>
-                                  </ListItem> */}{' '}
+                      <Button
+                        color="inherit"
+                        component={RouterLink}
+                        to="/myfiles"
+                      >
+                        My files
+                      </Button>
+                    </ListItem> */}
                 <ListItem>
                   <ProfileForm />
-                </ListItem>{' '}
-              </Grid>{' '}
-            </Grid>{' '}
-          </Grid>{' '}
+                </ListItem>
+              </Grid>
+            </Grid>
+          </Grid>
         </Paper>
-      )}{' '}
+      )}
       <MyFiles />
     </>
   );
 };
+
 
 export default Profile;

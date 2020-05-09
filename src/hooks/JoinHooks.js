@@ -1,7 +1,9 @@
 import { useState } from 'react';
 
-const useJoinGroup = (callback) => {
-  const [join, setJoin] = useState({ file_id: null });
+const useJoinGroupForm = (callback) => {
+  const [inputs, setInputs] = useState({
+    file_id: null,
+  });
   const handleSubmit = (event) => {
     if (event) {
       event.preventDefault();
@@ -10,9 +12,9 @@ const useJoinGroup = (callback) => {
   };
   const handleInputChange = (event) => {
     event.persist();
-    setInputs((join) => {
+    setInputs((inputs) => {
       return {
-        ...join,
+        ...inputs,
         [event.target.name]: event.target.value,
       };
     });
@@ -21,9 +23,9 @@ const useJoinGroup = (callback) => {
   return {
     handleSubmit,
     handleInputChange,
-    join,
-    Setjoin,
+    inputs,
+    setInputs,
   };
 };
 
-export default useJoinGroup;
+export default useJoinGroupForm;

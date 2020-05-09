@@ -1,10 +1,10 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
-const useCommentForm = (callback) => {
+const useTagForm = (callback) => {
   console.log('useCForm');
   const [inputs, setInputs] = useState({
     file_id: null,
-    comment: '',
+    tag: '',
   });
   const handleSubmit = (event) => {
     console.log('handleSub');
@@ -23,20 +23,12 @@ const useCommentForm = (callback) => {
     });
   };
 
-  const clearForm = (fileId) =>{
-    setInputs({
-      file_id: null,
-      comment: '',
-    });
-  };
-
   return {
     handleSubmit,
     handleInputChange,
     inputs,
     setInputs,
-    clearForm,
   };
 };
 
-export default useCommentForm;
+export default useTagForm;

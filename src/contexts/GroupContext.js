@@ -1,25 +1,20 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const FavContext = React.createContext({ favourites: [] });
+const GroupContext = React.createContext();
 
-const FavProvider = ({ children }) => {
-  const [favourites, setFavourites] = useState([]);
-
-  const add = useCallback(
-    (favourite) => setFavourites((current) => [...current, favourite]),
-    [setFavourites]
-  );
-
+const GroupProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [value, setValue] = useState('home');
   return (
-    <FavContext.Provider value={{ favourites, add }}>
+    <GroupContext.Provider value={[user, setUser, value, setValue]}>
       {children}
-    </FavContext.Provider>
+    </GroupContext.Provider>
   );
 };
 
-FavProvider.propTypes = {
+GroupProvider.propTypes = {
   children: PropTypes.node,
 };
 
-export default { FavContext, FavProvider };
+export { GroupContext, GroupProvider };

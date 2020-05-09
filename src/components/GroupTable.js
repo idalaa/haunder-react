@@ -1,6 +1,7 @@
 import React from 'react'; // useContext, useEffect, useState
 import GroupRow from './GroupRow';
 import { useAllGroups } from '../hooks/ApiHooks';
+import Favourite from '../views/Favourite';
 
 // import {getAvatarImage} from '../hooks/ApiHooks';
 

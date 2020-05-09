@@ -1,6 +1,6 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import MyRow from './MyRow';
-import {useAllMedia} from '../hooks/ApiHooks';
+import { useAllMedia } from '../hooks/ApiHooks';
 import {
   GridList,
   GridListTile,
@@ -8,7 +8,7 @@ import {
   makeStyles,
   useMediaQuery,
 } from '@material-ui/core';
-import {MediaContext} from '../contexts/MediaContext';
+import { MediaContext } from '../contexts/MediaContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,20 +41,24 @@ const MyTable = () => {
 
   return (
     <div className={classes.root}>
-      {user !== null &&
+      {user !== null && (
         <GridList
           cellHeight={580}
           className={classes.gridList}
-          cols={matches ? 3 : 1}>
-          <GridListTile key="Subheader" cols={3} style={{height: 'auto'}}></GridListTile>
-          {
-            newPicArray.map((file) =>
-              <GridListTile key={file.file_id}>
-                <MyRow file={file} myfiles={true} />
-              </GridListTile>)
-          }
+          cols={matches ? 3 : 1}
+        >
+          <GridListTile
+            key='Subheader'
+            cols={3}
+            style={{ height: 'auto' }}
+          ></GridListTile>
+          {newPicArray.map((file) => (
+            <GridListTile key={file.file_id}>
+              <MyRow file={file} myfiles={true} />
+            </GridListTile>
+          ))}
         </GridList>
-      }
+      )}
     </div>
   );
 };

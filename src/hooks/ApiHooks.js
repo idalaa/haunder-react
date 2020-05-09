@@ -68,20 +68,20 @@ const useSingleMedia = (id) => {
   return data;
 };
 
-const useAllComments = (fileId) => {
-  const [data, setData] = useState([fileId]);
+const useAllComments = (postId) => {
+  console.log('fileId', postId);
+  const [data, setData] = useState([postId]);
   const fetchUrl = async () => {
-    const response = await fetch(baseUrl + 'comments/file/' + fileId);
+    const response = await fetch(baseUrl + 'comments/file/' + postId);
     const items = await response.json();
-    console.log('items', items);
     setData(items);
-    return items;
+    console.log('setData');
   };
-
   useEffect(() => {
+    console.log('fetchUrl');
     fetchUrl();
   }, []);
-
+  console.log('return data');
   return data;
 };
 
@@ -221,7 +221,11 @@ const upload = async (inputs, token) => {
   }
 };
 
-const comment = async (fileId, favId, token) => {
+const comment = async (inputs, token) => {
+  const fd = new FormData();
+  fd.append('file_id', inputs.file_id);
+  fd.append('comment', inputs.comment);
+  console.log('commFD', fd);
   const fetchOptions = {
     method: 'POST',
     headers: {
@@ -230,36 +234,50 @@ const comment = async (fileId, favId, token) => {
     },
     body: JSON.stringify(inputs),
   };
-  console.log(fetchOptions);
+
   try {
     const response = await fetch(baseUrl + 'comments', fetchOptions);
     const json = await response.json();
+    console.log('json', json);
     if (!response.ok) throw new Error(json.message + ': ' + json.error);
-    // lisää tägi mpjakk
-    // const tagJson = addTag(json.file_id, 'mpjakk', token);
-    // return {json, tagJson};
   } catch (e) {
     throw new Error(e.message);
   }
+  console.log('commentEnd');
 };
 
-const favourite = async (fileId, favId, token) => {
+const favourite = async (file_id, token) => {
   const fetchOptions = {
     method: 'POST',
-    body: JSON.stringify({
-      file_id,
-      favoirite_id,
-    }),
+
     headers: {
       'Content-Type': 'application/json',
       'x-access-token': token,
     },
+    body: JSON.stringify(file_id),
   };
   console.log(fetchOptions);
   try {
     const favResponse = await fetch(baseUrl + 'favourites', fetchOptions);
     const favJson = await favResponse.json();
     return favJson;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
+const getFavourites = async (id, token) => {
+  const fetchOptions = {
+    headers: {
+      'x-access-token': token,
+    },
+  };
+  console.log('jeeueueuryryryr', fetchOptions);
+  try {
+    const response = await fetch(baseUrl + 'favourites/' + id, fetchOptions);
+    const json = await response.json();
+    if (!response.ok) throw new Error(json.message + ': ' + json.error);
+    return json;
   } catch (e) {
     throw new Error(e.message);
   }
@@ -366,23 +384,6 @@ const getGroups = async (id) => {
   }
 };
 
-// const getGroups = async(id) => {
-//     const fetchOptions = {
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'x-access-token': localStorage.getItem('token'),
-//         },
-//     };
-//     try {
-//         const response = await fetch(baseUrl + 'favourites/' + id, fetchOptions);
-//         const json = await response.json();
-//         if (!response.ok) throw new Error(json.message + ': ' + json.error);
-//         return json;
-//     } catch (e) {
-//         throw new Error(e.message);
-//     }
-// };
-
 // fetch all groups
 const useAllGroups = (id) => {
   const [data, setData] = useState([]);
@@ -434,6 +435,38 @@ const deleteGroup = async (id) => {
   }
 };
 
+const useMyGroups = (id) => {
+  const [data, setData] = useState([]);
+  const fetchUrl = async () => {
+    const response = await fetch(baseUrl + 'tags/haunderGroup');
+    const json = await response.json();
+
+    // haetaan yksittäiset kuvat, jotta saadan thumbnailit
+    const items = await Promise.all(
+      json.map(async (item) => {
+        const response = await fetch(baseUrl + 'media/' + item.file_id);
+        const kuva = await response.json();
+
+        const response2 = await fetch(baseUrl + 'favourites/' + id);
+        const avatar = await response2.json();
+        // lisää avatar kuvaan
+        kuva.avatar = avatar;
+
+        return kuva;
+      })
+    );
+
+    console.log(items);
+    setData(items);
+  };
+
+  useEffect(() => {
+    fetchUrl();
+  }, []);
+
+  return data;
+};
+
 export {
   useAllMedia,
   useSingleMedia,
@@ -447,8 +480,10 @@ export {
   upload,
   comment,
   favourite,
+  getFavourites,
   addTag,
   getUser,
+  useMyGroups,
   deleteFile,
   modifyFile,
   createGroup,

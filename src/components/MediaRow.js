@@ -154,7 +154,7 @@ const MediaRow = ({file, myfiles}) => {
                 </IconButton>
                 <IconButton
                   aria-label="Comment"
-                  className={clsx(classes.expand, {
+                  className={clsx(classes.expand , {
                     [classes.expandOpen]: expanded,
                   })}
                   onClick={handleExpandClick}

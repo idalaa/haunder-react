@@ -34,6 +34,11 @@ import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {deleteFile} from '../hooks/ApiHooks';
 
+import MenuIcon from '@material-ui/icons/Menu';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Fade from '@material-ui/core/Fade';
+
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const useStyles = makeStyles((theme) => ({
@@ -85,14 +90,25 @@ const MyRow = ({file, myfiles}) => {
   const description = JSON.parse(file.description);
   const classes = useStyles();
   let thumb = 'https://via.placeholder.com/320x200.png?text=Audio';
-  const [expanded, setExpanded] = React.useState(false);
+  /* const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
-  };
+  }; */
   if (file.thumbnails) {
     thumb = mediaUrl + file.thumbnails.w320;
   }
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <>
@@ -101,41 +117,61 @@ const MyRow = ({file, myfiles}) => {
           <CardHeader
             action={
                 <>
-                <IconButton aria-label='settings'
-                    className={clsx(classes.expand, {
-                    [classes.expandOpen]: expanded,
-                    })}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}>
-                    <MoreHoriz />
-                </IconButton>
+                    <IconButton aria-label='settings'>
+                        <MoreHoriz 
+                        aria-controls='fade-menu'
+                        aria-haspopup='true'
+                        onClick={handleClick}
+                        />
+                    </IconButton>
 
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
-                    {myfiles &&
-                    <>
-                        <IconButton
-                        aria-label={`Modify file`}
-                        component={RouterLink}
-                        to={'/modify/' + file.file_id}
-                        className={classes.icon}
+                    <Menu
+                        id='fade-menu'
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={open}
+                        onClose={handleClose}
+                        TransitionComponent={Fade}>
+                        <MenuItem
+                            onClick={handleClose}
+                            onClick={handleClose}
+                            aria-label={`View file`}
+                            color='inherit'
+                            component={RouterLink}
+                            to={'/single/' + file.file_id}
                         >
-                        <CreateIcon fontSize="large" />
-                        </IconButton>
-                        <IconButton
-                        aria-label={`Delete file`}
-                        onClick={() => {
-                            const delOK = window.confirm('Do you reallu want to delete?');
-                            if (delOK) {
-                            deleteFile(file.file_id);
-                            }
-                        }}
-                        className={classes.icon}
+                        View
+                        </MenuItem>
+
+                        <MenuItem
+                            onClick={handleClose}
+                            onClick={handleClose}
+                            aria-label={`Modify file`}
+                            color='inherit'
+                            component={RouterLink}
+                            to={'/modify/' + file.file_id}
                         >
-                        <DeleteIcon fontSize="large" />
-                        </IconButton>
-                    </>
-                    }
-                </Collapse>
+                        Modify
+                        </MenuItem>
+
+                        <MenuItem
+                            onClick={handleClose}
+                            onClick={handleClose}
+                            onClick={() => {
+                                const delOK = window.confirm('Do you really want to delete?');
+                                if (delOK) {
+                                deleteFile(file.file_id);
+                                }
+                            }}
+                            aria-label={`Delete file`}
+                            color='inherit'
+                            component={RouterLink}
+                            to='/myfiles'
+                        >
+                        Delete
+                        </MenuItem>
+                    </Menu>
+
                 </>
             }
             subheader={

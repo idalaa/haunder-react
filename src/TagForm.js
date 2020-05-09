@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import useJoinGroup from '../hooks/CommentHooks';
+import useTagForm from '../hooks/CommentHooks';
 import { withRouter } from 'react-router-dom';
+import { addTag } from '../hooks/ApiHooks';
 import {
   Button,
-  makeStyles,
   List,
   ListItem,
   Card,
@@ -14,62 +14,32 @@ import {
 } from '@material-ui/core';
 // import {red} from '@material-ui/core/colors';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import { favourite } from '../hooks/ApiHooks';
 
-const useStyles = makeStyles((theme) => ({
-  icon: {
-    color: 'rgba(255, 255, 255, 0.54)',
-  },
-  list: {
-    height: '100%',
-    width: '100%',
-  },
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    /* backgroundColor: theme.palette.background.paper, */
-  },
-  jaa: {
-    display: 'block',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    /* backgroundColor: theme.palette.background.paper, */
-  },
-  container: {
-    display: 'grid',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-}));
-
-const JoinGroup = ({ fileId, favId, history }) => {
+const TagForm = ({ file_id, tag, history }) => {
+  console.log('tagss');
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
   const doUpload = async () => {
     setLoading(true);
     try {
       const uploadObject = {
-        file_id: fileId,
-        favourite_id: favId,
+        file_id: file_id,
+        tag: inputs.tag,
       };
-      const result = await favourite(
-        uploadObject,
-        localStorage.getItem('token')
-      );
-      console.log('fav', result);
+      const result = await addTag(uploadObject, localStorage.getItem('token'));
+      console.log('tagged', result);
       setTimeout(() => {
         setLoading(false);
-        history.push('/groups');
-      }, 1000);
+        history.push('/home');
+        console.log('fff');
+      }, 500);
     } catch (e) {
       console.log(e.message);
+      // TODO: näytä vihe
     }
   };
 
-  const { inputs, setInputs, handleInputChange, handleSubmit } = useJoinGroup(
+  const { inputs, setInputs, handleInputChange, handleSubmit } = useTagForm(
     doUpload
   );
 
@@ -79,12 +49,24 @@ const JoinGroup = ({ fileId, favId, history }) => {
   return (
     <>
       <List>
-        <Card className={classes.jaa}>
+        <Card>
           <ValidatorForm
             onSubmit={handleSubmit}
             instantValidate={false}
             noValidate
           >
+            <ListItem>
+              <TextValidator
+                fullWidth
+                label='Tag'
+                type='text'
+                name='tag'
+                value={inputs.tag}
+                onChange={handleInputChange}
+                validators={['required']}
+                errorMessages={['this field is required']}
+              />
+            </ListItem>
             <ListItem>
               <Button
                 fullWidth
@@ -92,7 +74,7 @@ const JoinGroup = ({ fileId, favId, history }) => {
                 type='submit'
                 variant='contained'
               >
-                Join Group
+                Post
               </Button>
             </ListItem>
           </ValidatorForm>
@@ -107,9 +89,10 @@ const JoinGroup = ({ fileId, favId, history }) => {
   );
 };
 
-JoinGroup.propTypes = {
+CommentForm.propTypes = {
   history: PropTypes.object,
-  fileId: PropTypes.number,
+  tag: PropTypes.string,
+  file_id: PropTypes.number,
 };
 
-export default withRouter(JoinGroup);
+export default withRouter(TagForm);
