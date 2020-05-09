@@ -143,7 +143,7 @@ const Groups = ({ history }) => {
         {/* <JoinGroup> */}
         <GroupTable />
         {/* </JoinGroup> */}
-        <MyGroups />
+        {/* <MyGroups /> */}
       </Grid>
     </>
   );
