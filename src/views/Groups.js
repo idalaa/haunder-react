@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import useGroupForm from '../hooks/GroupHooks';
-import JoinGroup from '../components/JoinGroups';
 import { createGroup } from '../hooks/ApiHooks';
 import GroupTable from '../components/GroupTable';
+import MyGroups from '../views/MyGroups';
 import { Button, Grid, Typography } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import BackButton from '../components/BackButton';
@@ -143,7 +143,7 @@ const Groups = ({ history }) => {
         {/* <JoinGroup> */}
         <GroupTable />
         {/* </JoinGroup> */}
-        {/* <MyGroups /> */}
+        <MyGroups />
       </Grid>
     </>
   );
