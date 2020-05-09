@@ -12,6 +12,7 @@ import {Link as RouterLink} from 'react-router-dom';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {deleteFile} from '../hooks/ApiHooks';
+import Moment from 'react-moment';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -88,6 +89,12 @@ const Single = ({match, myfiles}) => {
                 variant="h6"
                 gutterBottom>
                 {file.user ? file.user.username : 'login to see userdata'}
+              </Typography>
+              <Typography
+                component="h6"
+                variant="h6"
+                gutterBottom>
+                {<Moment format='DD.MM.YYYY, HH:MM'>{file.time_added}</Moment>}
               </Typography>
               <Typography
                 component="h4"
