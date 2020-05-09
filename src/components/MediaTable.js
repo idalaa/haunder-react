@@ -29,8 +29,9 @@ const useStyles = makeStyles((theme) => ({
 const MediaTable = () => {
   const classes = useStyles();
   const matches = useMediaQuery('(min-width:697px)');
+  const tag = 'haunderTest';
 
-  const picArray = (useAllMedia()).reverse();
+  const picArray = useAllMedia(tag);
 
   return (
     <div className={classes.root}>

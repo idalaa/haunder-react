@@ -2,11 +2,11 @@ import {useState, useEffect} from 'react';
 
 const baseUrl = 'http://media.mw.metropolia.fi/wbma/';
 
-const useAllMedia = (id) => {
+const useAllMedia = (tag) => {
   const [data, setData] = useState([]);
- 
+
   const fetchUrl = async () => {
-    const response = await fetch(baseUrl + 'tags/haunderTest');
+    const response = await fetch(baseUrl + 'tags/' + tag);
     const json = await response.json();
 
     // haetaan yksittäiset kuvat, jotta saadan thumbnailit
@@ -16,6 +16,7 @@ const useAllMedia = (id) => {
           const kuva = await response.json();
 
           // hae avatar kuva.user_id:n avulla
+          // eslint-disable-next-line
           const response2 = await fetch(baseUrl + 'tags/haunderAvatar_' + kuva.user_id);
           const avatar = await response2.json();
           // lisää avatar kuvaan
@@ -88,7 +89,7 @@ const useAllComments = (fileId) => {
 
 const getAvatarImage = async (id) => {
   console.log('ai', id);
-  const response = await fetch(baseUrl + 'tags/haunderAvatar_' + id);
+  const response = await fetch(baseUrl + 'tags/Avatar_' + id);
   return await response.json();
 };
 
@@ -181,7 +182,7 @@ const checkUserAvailable = async (name) => {
 };
 
 const checkToken = async (token) => {
-  console.log('HALOOOO', token);
+  // console.log('HALOOOO', token);
   const fetchOptions = {
     headers: {
       'x-access-token': token,
@@ -277,7 +278,7 @@ const upload = async (inputs, token, tag) => {
     const json = await response.json();
     if (!response.ok) throw new Error(json.message + ': ' + json.error);
     // lisää tägi mpjakk
-    console.log("jOOOO", tag);
+    console.log('jOOOO', tag);
     const tagJson = addTag(json.file_id, tag, token);
     return {json, tagJson};
   } catch (e) {

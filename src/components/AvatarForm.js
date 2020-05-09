@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import PropTypes from 'prop-types';
 import useUploadForm from '../hooks/UploadHooks';
 import {withRouter} from 'react-router-dom';
-import { upload, delTag, addTag, getAvatarImage, useAllMedia, useAllAvatars } from '../hooks/ApiHooks';
+import {upload, delTag, addTag, getAvatarImage, useAllMedia, useAllAvatars} from '../hooks/ApiHooks';
 import {
   Button,
   Grid,
@@ -10,12 +10,14 @@ import {
   Slider,
   Typography,
 } from '@material-ui/core';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import {MediaContext} from '../contexts/MediaContext';
 
-const AvatarForm = ({ history }) => {
-  const tag = 'haunderAvatar_';
-  const avatarArray = useAllAvatars().reverse();
-  console.log('AVATARARRAY', avatarArray);
+const AvatarForm = ({history}) => {
+  const [user] = useContext(MediaContext);
+  const tag = 'Avatar_' + user.user_id;
+  // const avatarArray = useAllAvatars().reverse();
+  // console.log('AVATARARRAY', avatarArray);
 
   const [loading, setLoading] = useState(false);
 
@@ -35,8 +37,9 @@ const AvatarForm = ({ history }) => {
         }),
         file: inputs.file,
       };
-      const result = await upload(uploadObject, localStorage.getItem('token'), tag);
-      console.log(result);
+      const result = await upload(uploadObject,
+          localStorage.getItem('token'), tag);
+      console.log('result', result, 'tag', tag);
       setTimeout(() => {
         setLoading(false);
         history.push('/profile');
@@ -50,7 +53,7 @@ const AvatarForm = ({ history }) => {
   const {
     inputs,
     setInputs,
-    handleInputChange,
+    // handleInputChange,
     handleSubmit,
     handleFileChange,
     handleSliderChange,
@@ -61,17 +64,17 @@ const AvatarForm = ({ history }) => {
     const reader = new FileReader();
 
     reader.addEventListener(
-      'load',
-      () => {
+        'load',
+        () => {
         // convert image file to base64 string
-        setInputs((inputs) => {
-          return {
-            ...inputs,
-            dataUrl: reader.result,
-          };
-        });
-      },
-      false
+          setInputs((inputs) => {
+            return {
+              ...inputs,
+              dataUrl: reader.result,
+            };
+          });
+        },
+        false,
     );
 
     if (inputs.file !== null) {

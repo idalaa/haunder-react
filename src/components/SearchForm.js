@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import PropTypes from 'prop-types';
 import MediaRow from './MediaRow';
 
 const people = [
@@ -59,10 +58,6 @@ const SearchForm = (data) => {
       </ul>
     </div>
   );
-};
-
-SearchForm.propTypes = {
-
 };
 
 export default SearchForm;
