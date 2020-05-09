@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link as RouterLink} from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import {
   IconButton,
   Card,
@@ -21,9 +21,9 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 // import DeleteIcon from '@material-ui/icons/Delete';
 // import {deleteFile} from '../hooks/ApiHooks';
 import clsx from 'clsx';
-import {MoreHoriz} from '@material-ui/icons';
+import { MoreHoriz } from '@material-ui/icons';
 import Collapse from '@material-ui/core/Collapse';
-import {red} from '@material-ui/core/colors';
+import { red } from '@material-ui/core/colors';
 
 import CommentTable from './CommentTable';
 import CommentForm from '../views/CommentForm';
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MediaRow = ({file, myfiles}) => {
+const MediaRow = ({ file, myfiles }) => {
   const description = JSON.parse(file.description);
   const classes = useStyles();
   let thumb = 'https://via.placeholder.com/320x200.png?text=Audio';
@@ -95,66 +95,51 @@ const MediaRow = ({file, myfiles}) => {
         <Card className={classes.jaa}>
           <CardHeader
             avatar={
-                  file.avatar.length > 0 ? (
-                    <Avatar
-                      aria-label='user picture'
-                      className={classes.avatar}
-                      src={mediaUrl + file.avatar[0].filename}
-                      alt='Avatar image'
-                      title='Avatar image'
-                    />
-                  ) : (
-                    <Avatar
-                      aria-label='user picture'
-                      className={classes.avatar}
-                    />
-                  )
+              file.avatar.length > 0 ? (
+                <Avatar
+                  aria-label='user picture'
+                  className={classes.avatar}
+                  src={mediaUrl + file.avatar[0].filename}
+                  alt='Avatar image'
+                  title='Avatar image'
+                />
+              ) : (
+                <Avatar aria-label='user picture' className={classes.avatar} />
+              )
             }
             action={
               <IconButton aria-label='settings'>
                 <MoreHoriz />
               </IconButton>
             }
-            title={
-                  file.user ? file.user.username : 'log in to see user data'
-            }
-            subheader={
-              <TimeConvert time = {file.time_added}/>
-            }
+            title={file.user ? file.user.username : 'log in to see user data'}
+            subheader={<TimeConvert time={file.time_added} />}
           />
-          <ButtonBase component={RouterLink}
-            to={'/single/' + file.file_id}>
+          <ButtonBase component={RouterLink} to={'/single/' + file.file_id}>
             <img
               src={thumb}
               alt={file.title}
-
-              style={
-                {
-                  filter: `
+              style={{
+                filter: `
                  brightness(${description.filters.brightness}%)
                  contrast(${description.filters.contrast}%) 
                  saturate(${description.filters.saturation}%)
                  sepia(${description.filters.sepia}%)
                  `,
-                }
-              }
+              }}
             />
           </ButtonBase>
           <List className={classes.list}>
-            <ListItem>
-              {file.title}
-            </ListItem>
-            <ListItem>
-              {myfiles ? '' : description.desc}
-            </ListItem>
+            <ListItem>{file.title}</ListItem>
+            <ListItem>{myfiles ? '' : description.desc}</ListItem>
             <ListItem>
               <CardActions disableSpacing>
-                <IconButton aria-label="Add to favorites">
+                <IconButton aria-label='Add to favorites'>
                   <FavoriteIcon />
                 </IconButton>
                 <IconButton
-                  aria-label="Comment"
-                  className={clsx(classes.expand , {
+                  aria-label='Comment'
+                  className={clsx(classes.expand, {
                     [classes.expandOpen]: expanded,
                   })}
                   onClick={handleExpandClick}
@@ -175,14 +160,13 @@ const MediaRow = ({file, myfiles}) => {
               </CardActions>
             </ListItem>
             <ListItem>
-              <Collapse in={expanded} timeout="auto" unmountOnExit>
+              <Collapse in={expanded} timeout='auto' unmountOnExit>
                 <CardContent>
                   <Typography paragraph>COMMENTS</Typography>
-                  <CommentTable file = {file.file_id}/>
-                  <CommentForm fileId = {file.file_id}/>
+                  <CommentTable file={file.file_id} />
+                  <CommentForm fileId={file.file_id} />
                 </CardContent>
               </Collapse>
-
             </ListItem>
           </List>
         </Card>
