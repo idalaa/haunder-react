@@ -49,13 +49,8 @@ const Favourite = ({ file_id, history }) => {
             noValidate
           >
             <Grid container item>
-              <Button
-                fullWidth
-                color='primary'
-                type='submit'
-                variant='contained'
-              >
-                Join Group
+              <Button color='primary' type='submit' variant='contained'>
+                Join
               </Button>
             </Grid>
           </ValidatorForm>
