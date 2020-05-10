@@ -3,7 +3,7 @@ import SearchForm from '../components/SearchForm';
 import {useAllMedia} from '../hooks/ApiHooks';
 
 const Search = () => {
-  const dataArray = useAllMedia();
+  const dataArray = useAllMedia('haunderTest');
   return (
     <div className="Search">
       <SearchForm data = {dataArray}/>

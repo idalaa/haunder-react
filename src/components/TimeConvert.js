@@ -16,7 +16,7 @@ const TimeConvert = (time) => {
     const date1 =new Date();
     //console.log('1', date1);
     const date2 = new Date(time.time);
-    console.log('2', date2);
+    // console.log('2', date2);
 
     return Math.abs(date1 - date2) / /* 3.6e6 */ 3600000;
   };

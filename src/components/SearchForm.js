@@ -1,33 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import MediaRow from './MediaRow';
 
-const people = [
-  {
-    name: 'James',
-    age: 31,
-  },
-  {
-    name: 'John',
-    age: 45,
-  },
-  {
-    name: 'Paul',
-    age: 65,
-  },
-  {
-    name: 'Ringo',
-    age: 49,
-  },
-  {
-    name: 'George',
-    age: 34,
-  },
-];
-
 const SearchForm = (data) => {
-//   const dataArray = useAllMedia();
   console.log('dataAeeay', data.data);
-  console.log('peep', people);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const handleChange = (event) => {

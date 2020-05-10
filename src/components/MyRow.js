@@ -134,7 +134,6 @@ const MyRow = ({file, myfiles}) => {
                   TransitionComponent={Fade}>
                   <MenuItem
                     onClick={handleClose}
-                    onClick={handleClose}
                     aria-label={`View file`}
                     color='inherit'
                     component={RouterLink}
@@ -145,7 +144,6 @@ const MyRow = ({file, myfiles}) => {
 
                   <MenuItem
                     onClick={handleClose}
-                    onClick={handleClose}
                     aria-label={`Modify file`}
                     color='inherit'
                     component={RouterLink}
@@ -155,8 +153,7 @@ const MyRow = ({file, myfiles}) => {
                   </MenuItem>
 
                   <MenuItem
-                    onClick={handleClose}
-                    onClick={handleClose}
+                    // onClick={handleClose}
                     onClick={() => {
                       const delOK = window.confirm('Do you really want to delete?');
                       if (delOK) {

@@ -1,16 +1,12 @@
-import React from // useContext, useEffect, useState
-  'react';
+import React from 'react';
 import MediaRow from './MediaRow';
 import {useAllMedia} from '../hooks/ApiHooks';
 
 import {
   makeStyles,
-  useMediaQuery,
   CardMedia,
   List,
 } from '@material-ui/core';
-
-// const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,17 +24,15 @@ const useStyles = makeStyles((theme) => ({
 
 const MediaTable = () => {
   const classes = useStyles();
-  const matches = useMediaQuery('(min-width:697px)');
-  const tag = 'haunderTest';
-
-  const picArray = useAllMedia(tag);
+  // const matches = useMediaQuery('(min-width:697px)');
+  const picArray = useAllMedia().reverse();
 
   return (
     <div className={classes.root}>
       <List
         cellheight={580}
         className={classes.gridList}
-        cols={matches ? 1 : 1}>
+        cols={1}>
         {
           picArray.map((file) =>
 

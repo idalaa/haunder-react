@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {useAllComments} from '../hooks/ApiHooks';
 import {
   makeStyles,
   List,
@@ -18,7 +17,8 @@ import {
 } from '@material-ui/core';
 import {MoreHoriz} from '@material-ui/icons';
 import {red} from '@material-ui/core/colors';
-
+import TimeConvert from './TimeConvert';
+const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 const useStyles = makeStyles((theme) => ({
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
@@ -71,10 +71,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CommentRow = ({file, myfiles}) => {
+const CommentRow = ({file}) => {
   console.log('commentRow');
   const classes = useStyles();
-  // const comments = useAllComments(file.file_id);
+  console.log('filee', file);
   // console.log('comments', comments);
   // const commentArray = useAllComments(file.file);
   return (
@@ -83,21 +83,25 @@ const CommentRow = ({file, myfiles}) => {
         <Card className={classes.jaa}>
           <CardHeader
             avatar={
-              <Avatar
-                aria-label='user picture'
-                className={classes.avatar}
-                /* image={commentUrl + avatar[0].filename}
-                      alt="Avatar image"
-                      title="Avatar image" */
-              />
+  file.avatar.length > 0 ? (
+    <Avatar
+      aria-label='user picture'
+      className={classes.avatar}
+      src={mediaUrl + file.avatar[0].filename}
+      alt='Avatar image'
+      title='Avatar image'
+    />
+  ) : (
+    <Avatar aria-label='user picture' className={classes.avatar} />
+  )
             }
             action={
               <IconButton aria-label='settings'>
                 <MoreHoriz />
               </IconButton>
             }
-            title={file.user_id}
-            subheader='April 23, 2020'
+            title={file.user ? file.user.username : 'log in to see user data'}
+            subheader={<TimeConvert time={file.time_added} />}
           />
           <ListItem key={file.comment_id}>{file.comment}</ListItem>
           <ListItem>{/* {myfiles ? '' : description.desc} */}</ListItem>
@@ -110,7 +114,7 @@ const CommentRow = ({file, myfiles}) => {
 
 CommentRow.propTypes = {
   file: PropTypes.any,
-  myfiles: PropTypes.bool,
+  users: PropTypes.object,
 };
 
 export default CommentRow;

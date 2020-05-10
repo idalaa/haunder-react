@@ -1,42 +1,40 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 
 const baseUrl = 'http://media.mw.metropolia.fi/wbma/';
 
-const useAllMedia = (tag) => {
+const useAllMedia = () => {
   const [data, setData] = useState([]);
 
   const fetchUrl = async () => {
-    const response = await fetch(baseUrl + 'tags/' + tag);
+    const response = await fetch(baseUrl + 'tags/haunderTest');
     const json = await response.json();
 
     // haetaan yksittäiset kuvat, jotta saadan thumbnailit
     const items = await Promise.all(
-      json.map(async (item) => {
-        const response = await fetch(baseUrl + 'media/' + item.file_id);
-        const kuva = await response.json();
+        json.map(async (item) => {
+          const response = await fetch(baseUrl + 'media/' + item.file_id);
+          const kuva = await response.json();
 
-        // hae avatar kuva.user_id:n avulla
-        // eslint-disable-next-line
+          // hae avatar kuva.user_id:n avulla
+          // eslint-disable-next-line
         const response2 = await fetch(
-          baseUrl + 'tags/haunderAvatar_' + kuva.user_id
-        );
-        const avatar = await response2.json();
-        // lisää avatar kuvaan
-        kuva.avatar = avatar;
-
-        // jos on token niin näkee muiden nimet
-        if (localStorage.getItem('token') !== null) {
-          const userResponse = await getUser(
-            kuva.user_id,
-            localStorage.getItem('token')
+              baseUrl + 'tags/Havatar_' + kuva.user_id,
           );
-          kuva.user = userResponse;
-        }
+          const avatar = await response2.json();
+          // lisää avatar kuvaan
+          kuva.avatar = avatar;
 
-        return kuva;
-      })
+          // jos on token niin näkee muiden nimet
+          if (localStorage.getItem('token') !== null) {
+            const userResponse = await getUser(
+                kuva.user_id,
+                localStorage.getItem('token'),
+            );
+            kuva.user = userResponse;
+          }
+          return kuva;
+        }),
     );
-
     console.log(items);
     setData(items);
   };
@@ -54,10 +52,11 @@ const useSingleMedia = (id) => {
   const fetchUrl = async (fileid) => {
     const response = await fetch(baseUrl + 'media/' + id);
     const item = await response.json();
+
     if (localStorage.getItem('token') !== null) {
       const userResponse = await getUser(
-        item.user_id,
-        localStorage.getItem('token')
+          item.user_id,
+          localStorage.getItem('token'),
       );
       item.user = userResponse;
     }
@@ -73,13 +72,42 @@ const useSingleMedia = (id) => {
 };
 
 const useAllComments = (fileId) => {
-  const [data, setData] = useState([fileId]);
+  const [data, setData] = useState([]);
+
   const fetchUrl = async () => {
     const response = await fetch(baseUrl + 'comments/file/' + fileId);
-    const items = await response.json();
-    console.log('items', items);
+    const json = await response.json();
+
+    // haetaan yksittäiset kuvat, jotta saadan thumbnailit
+    const items = await Promise.all(
+        json.map(async (item) => {
+          console.log('iTENM', item);
+          // const response = await fetch(baseUrl + 'comments/file/' + fileId);
+          // const kuva = await response.json();
+
+          // hae avatar kuva.user_id:n avulla
+          // eslint-disable-next-line
+          const response2 = await fetch(
+              baseUrl + 'tags/Havatar_' + item.user_id,
+          );
+          const avatar = await response2.json();
+          console.log('avat', avatar);
+          // lisää avatar kuvaan
+          item.avatar = avatar;
+
+          // jos on token niin näkee muiden nimet
+          if (localStorage.getItem('token') !== null) {
+            const userResponse = await getUser(
+                item.user_id,
+                localStorage.getItem('token'),
+            );
+            item.user = userResponse;
+          }
+          return item;
+        }),
+    );
+    console.log(items);
     setData(items);
-    return items;
   };
 
   useEffect(() => {
@@ -88,6 +116,22 @@ const useAllComments = (fileId) => {
 
   return data;
 };
+//     if (localStorage.getItem('token') !== null) {
+//       const users = Promise.all(json.map(async (item) => {
+//         const userResponse = await getUser(item.user_id, localStorage.getItem('token'));
+//         users.user = await userResponse;
+//         console.log('usres', users);
+//       },
+//       ));
+//     }
+//     setData(json);
+//   };
+//   useEffect(() => {
+//     fetchUrl();
+//     console.log('fetchUrl');
+//   }, []);
+//   return data;
+// };
 
 const getAvatarImage = async (id) => {
   console.log('ai', id);
@@ -102,27 +146,27 @@ const useAllAvatars = (id) => {
     const json = await response.json();
     // haetaan yksittäiset kuvat, jotta saadan thumbnailit
     const items = await Promise.all(
-      json.map(async (item) => {
-        const response = await fetch(baseUrl + 'media/' + item.file_id);
-        const kuva = await response.json();
+        json.map(async (item) => {
+          const response = await fetch(baseUrl + 'media/' + item.file_id);
+          const kuva = await response.json();
 
-        // hae avatar kuva.user_id:n avulla
-        const response2 = await fetch(baseUrl + 'tags/Havatar_' + kuva.user_id);
-        const avatar = await response2.json();
-        // lisää avatar kuvaan
-        kuva.avatar = avatar;
+          // hae avatar kuva.user_id:n avulla
+          const response2 = await fetch(baseUrl + 'tags/Havatar_' + kuva.user_id);
+          const avatar = await response2.json();
+          // lisää avatar kuvaan
+          kuva.avatar = avatar;
 
-        // jos on token niin näkee muiden nimet
-        if (localStorage.getItem('token') !== null) {
-          const userResponse = await getUser(
-            kuva.user_id,
-            localStorage.getItem('token')
-          );
-          kuva.user = userResponse;
-        }
+          // jos on token niin näkee muiden nimet
+          if (localStorage.getItem('token') !== null) {
+            const userResponse = await getUser(
+                kuva.user_id,
+                localStorage.getItem('token'),
+            );
+            kuva.user = userResponse;
+          }
 
-        return kuva;
-      })
+          return kuva;
+        }),
     );
 
     console.log(items);
@@ -282,7 +326,7 @@ const upload = async (inputs, token, tag) => {
     // lisää tägi mpjakk
     console.log('jOOOO', tag);
     const tagJson = addTag(json.file_id, tag, token);
-    return { json, tagJson };
+    return {json, tagJson};
   } catch (e) {
     throw new Error(e.message);
   }
@@ -306,9 +350,6 @@ const comment = async (inputs, token) => {
     const response = await fetch(baseUrl + 'comments', fetchOptions);
     const json = await response.json();
     if (!response.ok) throw new Error(json.message + ': ' + json.error);
-    // lisää tägi mpjakk
-    // const tagJson = addTag(json.file_id, 'mpjakk', token);
-    // return {json, tagJson};
   } catch (e) {
     throw new Error(e.message);
   }
@@ -361,9 +402,9 @@ const getUser = async (id, token) => {
     const response = await fetch(baseUrl + 'users/' + id, fetchOptions);
     const json = await response.json();
     if (!response.ok) throw new Error(json.message + ': ' + json.error);
-    return json;
+    return await json;
   } catch (e) {
-    throw new Error(e.message);
+    // throw new Error(e.message);
   }
 };
 
@@ -426,7 +467,7 @@ const createGroup = async (inputs, token) => {
     if (!response.ok) throw new Error(json.message + ': ' + json.error);
     // add tag haunderGroup
     const tagJson = addTag(json.file_id, 'haunderGroup', token);
-    return { json, tagJson };
+    return {json, tagJson};
   } catch (e) {
     throw new Error(e.message);
   }
@@ -462,14 +503,13 @@ const useAllGroups = (id) => {
 
     // fetch individual groups
     const items = await Promise.all(
-      json.map(async (item) => {
-        const response = await fetch(baseUrl + 'media/' + item.file_id);
-        const kuva = await response.json();
+        json.map(async (item) => {
+          const response = await fetch(baseUrl + 'media/' + item.file_id);
+          const kuva = await response.json();
 
-        return kuva;
-      })
+          return kuva;
+        }),
     );
-
     console.log(items);
     setData(items);
   };
@@ -492,8 +532,8 @@ const deleteGroup = async (id) => {
   };
   try {
     const response = await fetch(
-      baseUrl + 'favourites/file/' + id,
-      fetchOptions
+        baseUrl + 'favourites/file/' + id,
+        fetchOptions,
     );
     const json = await response.json();
     if (!response.ok) throw new Error(json.message + ': ' + json.error);
@@ -511,17 +551,17 @@ const useMyGroups = (id) => {
 
     // haetaan yksittäiset kuvat, jotta saadan thumbnailit
     const items = await Promise.all(
-      json.map(async (item) => {
-        const response = await fetch(baseUrl + 'media/' + item.file_id);
-        const kuva = await response.json();
+        json.map(async (item) => {
+          const response = await fetch(baseUrl + 'media/' + item.file_id);
+          const kuva = await response.json();
 
-        const response2 = await fetch(baseUrl + 'favourites/' + id);
-        const avatar = await response2.json();
-        // lisää avatar kuvaan
-        kuva.avatar = avatar;
+          const response2 = await fetch(baseUrl + 'favourites/' + id);
+          const avatar = await response2.json();
+          // lisää avatar kuvaan
+          kuva.avatar = avatar;
 
-        return kuva;
-      })
+          return kuva;
+        }),
     );
 
     console.log(items);

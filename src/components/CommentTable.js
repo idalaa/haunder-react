@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CommentTable = (file) => {
-  console.log('tableFile', file);
   const classes = useStyles();
   console.log('pre cA');
   const commentArray = useAllComments(file.file);
@@ -47,15 +46,12 @@ const CommentTable = (file) => {
         cellheight={580}
         className={classes.gridList}
         cols={1}>
-
         {
           commentArray.map((file) =>
             <CardMedia key={file.comment_id} className={classes.container}>
               <CommentRow className={classes.media} file={file} />
             </CardMedia>)
-
         }
-
       </List>
     </div>
   );

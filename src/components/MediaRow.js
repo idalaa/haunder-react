@@ -78,6 +78,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MediaRow = ({file, myfiles}) => {
+  console.log('fiiil', file);
   const description = JSON.parse(file.description);
   const classes = useStyles();
   let thumb = 'https://via.placeholder.com/320x200.png?text=Audio';
