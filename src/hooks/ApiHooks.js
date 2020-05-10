@@ -81,9 +81,6 @@ const useAllComments = (fileId) => {
     // haetaan yksittäiset kuvat, jotta saadan thumbnailit
     const items = await Promise.all(
         json.map(async (item) => {
-          console.log('iTENM', item);
-          // const response = await fetch(baseUrl + 'comments/file/' + fileId);
-          // const kuva = await response.json();
 
           // hae avatar kuva.user_id:n avulla
           // eslint-disable-next-line
@@ -91,7 +88,6 @@ const useAllComments = (fileId) => {
               baseUrl + 'tags/Havatar_' + item.user_id,
           );
           const avatar = await response2.json();
-          console.log('avat', avatar);
           // lisää avatar kuvaan
           item.avatar = avatar;
 
@@ -106,7 +102,6 @@ const useAllComments = (fileId) => {
           return item;
         }),
     );
-    console.log(items);
     setData(items);
   };
 
