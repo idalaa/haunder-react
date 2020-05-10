@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import MyGroupRow from '../components/GroupRow';
+import MyGroupRow from './MyGroupRow';
 import { useMyGroups } from '../hooks/ApiHooks';
 import {
-  List,
+  GridList,
   GridListTile,
-  //ListSubheader,
+  ListSubheader,
   makeStyles,
   useMediaQuery,
 } from '@material-ui/core';
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
+    paddingBottom: '40px',
   },
   gridList: {
     width: '100%',
@@ -41,19 +41,22 @@ const MyGroupTable = () => {
 
   return (
     <div className={classes.root}>
-      {user !== null && (
-        <List
-          cellHeight={280}
-          className={classes.gridList}
-          cols={matches ? 3 : 1}
-        >
-          {newPicArray.map((file) => (
-            <GridListTile key={file.file_id}>
-              <MyGroupRow file={file} myfiles={true} />
-            </GridListTile>
-          ))}
-        </List>
-      )}
+      <GridList
+        cellHeight={180}
+        className={classes.gridList}
+        cols={matches ? 3 : 2}
+      >
+        <GridListTile
+          key='Subheader'
+          cols={3}
+          style={{ height: 'auto' }}
+        ></GridListTile>
+        {picArray.map((file) => (
+          <GridListTile key={file.file_id}>
+            <MyGroupRow file={file} />
+          </GridListTile>
+        ))}
+      </GridList>
     </div>
   );
 };

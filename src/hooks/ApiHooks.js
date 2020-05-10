@@ -515,6 +515,15 @@ const useMyGroups = (tag) => {
         const response = await fetch(baseUrl + 'media/' + item.file_id);
         const kuva = await response.json();
 
+        // hae avatar kuva.user_id:n avulla
+        // eslint-disable-next-line
+        const response2 = await fetch(
+          baseUrl + 'tags/haunderAvatar_' + kuva.user_id
+        );
+        const avatar = await response2.json();
+        // lisää avatar kuvaan
+        kuva.avatar = avatar;
+
         // hae omat ryhmät
         if (tag !== null) {
           const groupResponse = await getGroups(

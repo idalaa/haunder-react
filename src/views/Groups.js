@@ -1,154 +1,80 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import useGroupForm from '../hooks/GroupHooks';
-import { createGroup } from '../hooks/ApiHooks';
-import GroupTable from '../components/GroupTable';
-import MyGroupTable from '../components/MyGroupTable';
-import { Button, Grid, Typography } from '@material-ui/core';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import React, { useContext, useEffect, useState } from 'react';
+import { MediaContext } from '../contexts/MediaContext';
+import {
+  Typography,
+  ListItem,
+  Grid,
+  ButtonBase,
+  Avatar,
+} from '@material-ui/core';
+import { getAvatarImage } from '../hooks/ApiHooks';
+import CreateGroup from './CreateGroup';
 import BackButton from '../components/BackButton';
+// import {Link as RouterLink} from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import MyGroups from './MyGroups';
+// import AvatarForm from '../components/AvatarForm';
 
-const Groups = ({ history }) => {
-  const [loading, setLoading] = useState(false); // eslint-disable-line no-unused-vars
-  const doGroup = async () => {
-    setLoading(true);
-    try {
-      const uploadObject = {
-        title: inputs.title,
-        description: JSON.stringify({
-          desc: inputs.description,
-        }),
-        file: inputs.file,
-      };
-      const result = await createGroup(
-        uploadObject,
-        localStorage.getItem('token')
-      );
-      console.log(result);
-      setTimeout(() => {
-        setLoading(false);
-        history.push('/home');
-      }, 2000);
-    } catch (e) {
-      console.log(e.message);
-      // TODO: näytä vihe
-    }
-  };
+const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
-  const {
-    inputs,
-    setInputs,
-    handleInputChange,
-    handleSubmit,
-    handleFileChange,
-  } = useGroupForm(doGroup);
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+
+  image: {
+    width: 125,
+    height: 176,
+  },
+  img: {
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '100%',
+  },
+  text: {
+    /* paddingLeft: '20%', */
+  },
+}));
+
+const Groups = () => {
+  const [user] = useContext(MediaContext);
+  const [avatar, setAvatar] = useState([]);
+  const classes = useStyles();
 
   useEffect(() => {
-    // failriideri tänne
-    const reader = new FileReader();
-
-    reader.addEventListener(
-      'load',
-      () => {
-        // convert image file to base64 string
-        setInputs((inputs) => {
-          return {
-            ...inputs,
-            dataUrl: reader.result,
-          };
-        });
-      },
-      false
-    );
-
-    if (inputs.file !== null) {
-      if (inputs.file.type.includes('image')) {
-        reader.readAsDataURL(inputs.file);
-      } else {
-        setInputs((inputs) => {
-          return {
-            ...inputs,
-            dataUrl: 'logo192.png',
-          };
-        });
+    (async () => {
+      if (user !== null) {
+        setAvatar(await getAvatarImage(user.user_id));
       }
-    }
-  }, [inputs.file, setInputs]);
-  console.log('inputs', inputs);
+    })();
+  }, [user]);
 
   return (
     <>
-      <BackButton />
-      <Grid container>
-        <Grid item xs={12}>
-          <Typography component='h1' variant='h2' gutterBottom>
-            Groups
-          </Typography>
-        </Grid>
-        <Grid item>
-          <ValidatorForm
-            onSubmit={handleSubmit}
-            instantValidate={false}
-            noValidate
-          >
-            <Grid container>
-              <Grid container item>
-                <TextValidator
-                  fullWidth
-                  label='Group name'
-                  type='text'
-                  name='title'
-                  value={inputs.title}
-                  onChange={handleInputChange}
-                  validators={['required']}
-                  errorMessages={['this field is required']}
-                />
-              </Grid>
-              <Grid container item>
-                <TextValidator
-                  fullWidth
-                  label='Description'
-                  name='description'
-                  value={inputs.description}
-                  onChange={handleInputChange}
-                  validators={['minStringLength:5', 'required']}
-                  errorMessages={[
-                    'minimum length 5 characters',
-                    'this field is required',
-                  ]}
-                />
-              </Grid>
-              <Grid container item>
-                <TextValidator
-                  fullWidth
-                  type='file'
-                  name='file'
-                  accept='image/*,video/*,audio/*'
-                  onChange={handleFileChange}
-                />
-              </Grid>
-              <Grid container item>
-                <Button
-                  fullWidth
-                  color='primary'
-                  type='submit'
-                  variant='contained'
-                >
-                  Create Group
-                </Button>
-              </Grid>
+      <BackButton pekka='home' />
+      <MyGroups />
+      {user !== null && (
+        <>
+          <Grid container spacing={2}></Grid>
+          <Grid item xs={12} sm container>
+            <Grid
+              item
+              xs
+              container
+              direction='column'
+              spacing={2}
+              className={classes.text}
+            >
+              <ListItem>
+                <CreateGroup />
+              </ListItem>
             </Grid>
-          </ValidatorForm>
-        </Grid>
-        {/* <GroupTable /> */}
-        <MyGroupTable />
-      </Grid>
+          </Grid>
+        </>
+      )}
     </>
   );
-};
-
-Groups.propTypes = {
-  history: PropTypes.object,
 };
 
 export default Groups;
