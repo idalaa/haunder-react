@@ -474,15 +474,15 @@ const createGroup = async (inputs, token) => {
 };
 
 // get groups
-const getGroups = async (id) => {
+const getGroups = async () => {
   const fetchOptions = {
-    body: JSON.stringify(id),
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       'x-access-token': localStorage.getItem('token'),
     },
   };
+  console.log('alalalaalal', fetchOptions);
   try {
     const response = await fetch(baseUrl + 'favourites', fetchOptions);
     const json = await response.json();
@@ -510,7 +510,8 @@ const useAllGroups = (id) => {
           return kuva;
         }),
     );
-    console.log(items);
+
+    console.log('ALLAHU', items);
     setData(items);
   };
 
@@ -543,10 +544,10 @@ const deleteGroup = async (id) => {
   }
 };
 
-const useMyGroups = (id) => {
+const useMyGroups = (tag) => {
   const [data, setData] = useState([]);
   const fetchUrl = async () => {
-    const response = await fetch(baseUrl + 'tags/haunderGroup');
+    const response = await fetch(baseUrl + 'tags/' + tag);
     const json = await response.json();
 
     // haetaan yksittäiset kuvat, jotta saadan thumbnailit
@@ -555,16 +556,20 @@ const useMyGroups = (id) => {
           const response = await fetch(baseUrl + 'media/' + item.file_id);
           const kuva = await response.json();
 
-          const response2 = await fetch(baseUrl + 'favourites/' + id);
-          const avatar = await response2.json();
-          // lisää avatar kuvaan
-          kuva.avatar = avatar;
+          // hae omat ryhmät
+          if (tag !== null) {
+            const groupResponse = await getGroups(
+                kuva.file_id,
+                localStorage.getItem('token'),
+            );
+            kuva.group = groupResponse;
+            console.log('Group response', groupResponse);
+          }
 
           return kuva;
         }),
     );
-
-    console.log(items);
+    console.log('items', items);
     setData(items);
   };
 

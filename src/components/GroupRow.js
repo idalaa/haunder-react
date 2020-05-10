@@ -49,6 +49,7 @@ const GroupRow = ({ file, myfiles }) => {
         <ListItem>{myfiles ? '' : description.desc}</ListItem>
         <ListItem>
           <Favourite file_id={file.file_id} />
+
           <ListItem>
             <Collapse in={expanded} timeout='auto' unmountOnExit>
               <CardContent>
