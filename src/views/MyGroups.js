@@ -7,7 +7,7 @@ const MyGroups = () => {
   return (
     <>
       <Typography component='h1' variant='h2' gutterBottom>
-        My groups
+        Find groups
       </Typography>
       <MyGroupTable />
     </>
