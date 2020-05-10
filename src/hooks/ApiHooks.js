@@ -49,9 +49,17 @@ const useAllMedia = () => {
 const useSingleMedia = (id) => {
   console.log('usesingle', id);
   const [data, setData] = useState(null);
-  const fetchUrl = async (fileid) => {
+
+  const fetchUrl = async () => {
     const response = await fetch(baseUrl + 'media/' + id);
     const item = await response.json();
+
+    const response2 = await fetch(
+      baseUrl + 'tags/Havatar_' + item.user_id,
+      console.log('tags/Havatar', baseUrl + 'tags/Havatar_' + item.user_id),
+    );
+    const avatar = await response2.json(); 
+    item.avatar = avatar;
 
     if (localStorage.getItem('token') !== null) {
       const userResponse = await getUser(
@@ -60,7 +68,7 @@ const useSingleMedia = (id) => {
       );
       item.user = userResponse;
     }
-    console.log('itemi', item);
+    console.log('ITEMI', item);
     setData(item);
   };
 
@@ -81,7 +89,7 @@ const useAllComments = (fileId) => {
     // haetaan yksittäiset kuvat, jotta saadan thumbnailit
     const items = await Promise.all(
         json.map(async (item) => {
-          console.log('iTENM', item);
+          //console.log('iTENM', item);
           // const response = await fetch(baseUrl + 'comments/file/' + fileId);
           // const kuva = await response.json();
 

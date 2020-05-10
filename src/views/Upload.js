@@ -11,8 +11,16 @@ import {
 } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import BackButton from '../components/BackButton';
+import {makeStyles} from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  text: {
+    paddingBottom: '20px',
+  },
+}));
 
 const Upload = ({ history }) => {
+  const classes = useStyles();
   const tag = 'haunderTest';
   const [loading, setLoading] = useState(false);
   const doUpload = async () => {
@@ -88,20 +96,20 @@ const Upload = ({ history }) => {
   return (
     <>
       <BackButton />
-      <Grid container>
+      <Grid container >
         <Grid item xs={12}>
           <Typography component='h1' variant='h2' gutterBottom>
             Upload
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid item >
           <ValidatorForm
             onSubmit={handleSubmit}
             instantValidate={false}
             noValidate
           >
-            <Grid container>
-              <Grid container item>
+            <Grid container >
+              <Grid container item  className={classes.text}>
                 <TextValidator
                   fullWidth
                   label='Title'
@@ -113,7 +121,7 @@ const Upload = ({ history }) => {
                   errorMessages={['this field is required']}
                 />
               </Grid>
-              <Grid container item>
+              <Grid container item  className={classes.text}>
                 <TextValidator
                   fullWidth
                   label='Description'
@@ -126,7 +134,7 @@ const Upload = ({ history }) => {
                   errorMessages={['text only']}
                 />
               </Grid>
-              <Grid container item>
+              <Grid container item  className={classes.text}>
                 <TextValidator
                   fullWidth
                   type='file'

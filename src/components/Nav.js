@@ -45,9 +45,8 @@ const useStyles = makeStyles((theme) => ({
     /* paddingLeft: '43%', */
   },
   logo: {
-    width: '5%',
-    height: '5%',
-    /* paddingRight: '10px', */
+    minWidth: '10px',
+    maxWidth: '168px',
   },
 }));
 
@@ -133,6 +132,7 @@ const Nav = ({history}) => {
           className={classes.root}
         >
           <BottomNavigationAction
+          className={classes.logo}
             label='Home'
             value='home'
             icon={<HomeIcon />}
@@ -140,6 +140,7 @@ const Nav = ({history}) => {
             to='/home'
           />
           <BottomNavigationAction
+          className={classes.logo}
             label='Search'
             value='search'
             icon={<SearchIcon />}
@@ -147,6 +148,7 @@ const Nav = ({history}) => {
             to='/search'
           />
           <BottomNavigationAction
+          className={classes.logo}
             label='Upload'
             value='upload'
             icon={<AddCircleOutlineIcon />}
@@ -154,6 +156,7 @@ const Nav = ({history}) => {
             to='/upload'
           />
           <BottomNavigationAction
+          className={classes.logo}
             label='Favorites'
             value='favorites'
             icon={<FavoriteIcon />}
@@ -161,6 +164,7 @@ const Nav = ({history}) => {
             to='/'
           />
           <BottomNavigationAction
+          className={classes.logo}
             label='Profile'
             value='profile'
             icon={<AccountBoxIcon />}

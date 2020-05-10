@@ -137,7 +137,7 @@ const MyRow = ({file, myfiles}) => {
                     aria-label={`View file`}
                     color='inherit'
                     component={RouterLink}
-                    to={'/single/' + file.file_id}
+                    to={'/mysingle/' + file.file_id}
                   >
                         View
                   </MenuItem>
@@ -176,7 +176,7 @@ const MyRow = ({file, myfiles}) => {
             }
           />
           <ButtonBase component={RouterLink}
-            to={'/single/' + file.file_id}>
+            to={'/mysingle/' + file.file_id}>
             <img
               src={thumb}
               alt={file.title}

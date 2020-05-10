@@ -11,8 +11,16 @@ import { Button, Grid } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import useProfileForm from '../hooks/ProfileHooks';
 import AvatarForm from './AvatarForm';
+import {makeStyles} from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  text: {
+    paddingBottom: '20px',
+  },
+}));
 
 const ProfileForm = ({ history }) => {
+  const classes = useStyles();
   const [user, setUser] = useContext(MediaContext);
   const [toggle, setToggle] = useState(false);
   // funktio jolla setToggle true/false
@@ -82,6 +90,7 @@ const ProfileForm = ({ history }) => {
               <Grid container>
                 <Grid container item>
                   <TextValidator
+                  className={classes.text}
                     fullWidth
                     type='text'
                     name='username'
@@ -103,6 +112,7 @@ const ProfileForm = ({ history }) => {
 
                 <Grid container item>
                   <TextValidator
+                  className={classes.text}
                     fullWidth
                     type='email'
                     name='email'
@@ -119,6 +129,7 @@ const ProfileForm = ({ history }) => {
 
                 <Grid container item>
                   <TextValidator
+                  className={classes.text}
                     fullWidth
                     type='text'
                     name='full_name'

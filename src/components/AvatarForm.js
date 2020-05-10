@@ -12,8 +12,17 @@ import {
 } from '@material-ui/core';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import {MediaContext} from '../contexts/MediaContext';
+import {makeStyles} from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  text: {
+    paddingBottom: '20px',
+    paddingTop: '20px',
+  },
+}));
 
 const AvatarForm = ({history}) => {
+  const classes = useStyles();
   const [user] = useContext(MediaContext);
   const tag = 'Havatar_' + user.user_id;
   const deleteOldAvatar = async () => {
@@ -111,6 +120,7 @@ const AvatarForm = ({history}) => {
             <Grid container>
               <Grid container item>
                 <TextValidator
+                className={classes.text}
                   fullWidth
                   type='file'
                   name='file'

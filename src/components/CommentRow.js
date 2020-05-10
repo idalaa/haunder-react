@@ -83,17 +83,17 @@ const CommentRow = ({file}) => {
         <Card className={classes.jaa}>
           <CardHeader
             avatar={
-  file.avatar.length > 0 ? (
-    <Avatar
-      aria-label='user picture'
-      className={classes.avatar}
-      src={mediaUrl + file.avatar[0].filename}
-      alt='Avatar image'
-      title='Avatar image'
-    />
-  ) : (
-    <Avatar aria-label='user picture' className={classes.avatar} />
-  )
+              file.avatar.length > 0 ? (  
+                <Avatar
+                  aria-label='user picture'
+                  className={classes.avatar}
+                  src={mediaUrl + file.avatar[0].filename}
+                  alt='Avatar image'
+                  title='Avatar image'
+                />
+              ) : (
+                <Avatar aria-label='user picture' className={classes.avatar} />
+              )
             }
             action={
               <IconButton aria-label='settings'>
