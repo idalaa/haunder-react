@@ -1,28 +1,7 @@
 import React from 'react'; // useContext, useEffect, useState
 import GroupRow from './GroupRow';
 import { useAllGroups } from '../hooks/ApiHooks';
-import Favourite from '../views/Favourite';
-
-// import {getAvatarImage} from '../hooks/ApiHooks';
-
-import {
-  GridList,
-  GridListTile,
-  GridListTileBar,
-  // ListSubheader,
-  // CardContent,
-  // Typography,
-  // CardActions,
-  // IconButton,
-  // Avatar,
-  makeStyles,
-  useMediaQuery,
-  Card,
-  CardHeader,
-  CardMedia,
-  List,
-  ListItem,
-} from '@material-ui/core';
+import { makeStyles, useMediaQuery, CardMedia, List } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,7 +20,9 @@ const useStyles = makeStyles((theme) => ({
 const GroupTable = () => {
   const classes = useStyles();
   const matches = useMediaQuery('(min-width:697px)');
-  const picArray = useAllGroups();
+  const tag = 'haunderGroup';
+
+  const picArray = useAllGroups(tag);
 
   return (
     <div className={classes.root}>
