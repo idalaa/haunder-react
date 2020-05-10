@@ -74,7 +74,6 @@ const useStyles = makeStyles((theme) => ({
 const CommentRow = ({file}) => {
   console.log('commentRow');
   const classes = useStyles();
-  console.log('filee', file);
   // console.log('comments', comments);
   // const commentArray = useAllComments(file.file);
   return (
