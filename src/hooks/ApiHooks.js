@@ -505,6 +505,7 @@ const deleteGroup = async (id) => {
 
 const useMyGroups = (tag) => {
   const [data, setData] = useState([]);
+
   const fetchUrl = async () => {
     const response = await fetch(baseUrl + 'tags/' + tag);
     const json = await response.json();
@@ -513,25 +514,18 @@ const useMyGroups = (tag) => {
     const items = await Promise.all(
       json.map(async (item) => {
         const response = await fetch(baseUrl + 'media/' + item.file_id);
-        console.log('ghghghgh', item);
-        const avatar = await response.json();
-
-        // hae avatar kuva.user_id:n avulla
-        // eslint-disable-next-line
-        // lisää avatar kuvaan
-        item.avatar = avatar;
+        const group = await response.json();
 
         // hae omat ryhmät
         if (tag !== null) {
-          console.log('TAG', tag);
           const groupResponse = await getGroups(
-            item.user_id,
+            group.user_id,
             localStorage.getItem('token')
           );
-          item.user = groupResponse;
+          group.user = groupResponse;
           console.log('favs', groupResponse);
         }
-        return item;
+        return group;
       })
     );
     console.log('items', items);
