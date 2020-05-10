@@ -513,28 +513,25 @@ const useMyGroups = (tag) => {
     const items = await Promise.all(
       json.map(async (item) => {
         const response = await fetch(baseUrl + 'media/' + item.file_id);
-        const kuva = await response.json();
+        console.log('ghghghgh', item);
+        const avatar = await response.json();
 
         // hae avatar kuva.user_id:n avulla
         // eslint-disable-next-line
-        const response2 = await fetch(
-          baseUrl + 'tags/haunderAvatar_' + kuva.user_id
-        );
-        const avatar = await response2.json();
         // lisää avatar kuvaan
-        kuva.avatar = avatar;
+        item.avatar = avatar;
 
         // hae omat ryhmät
         if (tag !== null) {
+          console.log('TAG', tag);
           const groupResponse = await getGroups(
-            kuva.file_id,
+            item.user_id,
             localStorage.getItem('token')
           );
-          kuva.group = groupResponse;
-          console.log('Group response', groupResponse);
+          item.user = groupResponse;
+          console.log('favs', groupResponse);
         }
-
-        return kuva;
+        return item;
       })
     );
     console.log('items', items);
