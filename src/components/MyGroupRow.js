@@ -4,15 +4,34 @@ import { Link as RouterLink } from 'react-router-dom';
 import {
   IconButton,
   Card,
+  CardHeader,
+  Button,
+  GridListTileBar,
+  Avatar,
   makeStyles,
   CardActions,
   List,
   ListItem,
+  CardContent,
   Typography,
+  ButtonBase,
 } from '@material-ui/core';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+
 import clsx from 'clsx';
+import { MoreHoriz } from '@material-ui/icons';
+import Collapse from '@material-ui/core/Collapse';
 import { red } from '@material-ui/core/colors';
+import CommentForm from '../views/CommentForm';
+import PageviewIcon from '@material-ui/icons/Pageview';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { deleteFile } from '../hooks/ApiHooks';
+import CreateIcon from '@material-ui/icons/Create';
+import TimeConvert from './TimeConvert';
+import MenuIcon from '@material-ui/icons/Menu';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Fade from '@material-ui/core/Fade';
+import Favourite from '../views/Favourite';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
@@ -31,9 +50,6 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '100%',
   },
-  icon: {
-    color: 'rgba(255, 0, 0, 0.54)',
-  },
   avatar: {
     backgroundColor: red[500],
   },
@@ -46,16 +62,17 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '100%',
     borderRadius: 6,
+    // marginLeft: '33%',
   },
   expand: {
     transform: 'rotate(0deg)',
-
+    /* marginLeft: 'auto', */
     transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.shortest,
     }),
   },
   expandOpen: {
-    transform: 'rotate(360deg)',
+    transform: 'rotate(0deg)',
   },
 }));
 
@@ -63,35 +80,36 @@ const MyGroupRow = ({ file, myfiles }) => {
   const description = JSON.parse(file.description);
   const classes = useStyles();
   let thumb = 'https://via.placeholder.com/320x200.png?text=Audio';
-  const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
   if (file.thumbnails) {
     thumb = mediaUrl + file.thumbnails.w320;
   }
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <>
-      <ListItem key={file.file_id} className={classes.jaa}>
-        <Card className={classes.jaa}>
-          <List className={classes.list}>
-            <ListItem>{file.title}</ListItem>
-            <ListItem>{myfiles ? '' : description.desc}</ListItem>
-            <ListItem>
-              <CardActions disableSpacing>
-                <IconButton aria-label='Add to favorites'>
-                  <FavoriteIcon />
-                </IconButton>
-              </CardActions>
-            </ListItem>
-            <ListItem>
-              <Collapse in={expanded} timeout='auto' unmountOnExit></Collapse>
-            </ListItem>
-          </List>
-        </Card>
-      </ListItem>
+      <img src={thumb} alt={file.title} />
+      <GridListTileBar
+        title={file.title}
+        subtitle={myfiles ? '' : description.desc}
+        actionIcon={
+          <>
+            <Button className={classes.icon}>
+              <Favourite file_id={file.file_id} />
+            </Button>
+          </>
+        }
+      />
     </>
   );
 };
