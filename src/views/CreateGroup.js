@@ -2,10 +2,20 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import useGroupForm from '../hooks/GroupHooks';
 import { createGroup } from '../hooks/ApiHooks';
-import { Button, Grid, Typography, Paper } from '@material-ui/core';
+import { makeStyles, Button, Grid, Typography, Paper } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
+const useStyles = makeStyles((theme) => ({
+  card: {
+    padding: '30px 20px 20px 20px',
+  },
+  button: {
+    margin: '20px 0 0 0',
+  },
+}));
+
 const CreateGroup = ({ history }) => {
+  const classes = useStyles();
   const [loading, setLoading] = useState(false); // eslint-disable-line no-unused-vars
 
   const doGroup = async () => {
@@ -130,6 +140,7 @@ const CreateGroup = ({ history }) => {
               <Grid container item>
                 <Button
                   fullWidth
+                  className={classes.button}
                   color='primary'
                   type='submit'
                   variant='contained'

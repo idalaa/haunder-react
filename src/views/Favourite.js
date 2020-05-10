@@ -54,11 +54,7 @@ const Favourite = ({ file_id, history }) => {
               </Button>
             </Grid>
           </ValidatorForm>
-          {loading && (
-            <Grid item>
-              <CircularProgress />
-            </Grid>
-          )}
+          {loading && <Grid item></Grid>}
         </Grid>
       </Grid>
     </>
