@@ -14,6 +14,7 @@ import MyFiles from './views/MyFiles';
 import Modify from './views/Modify';
 import Groups from './views/Groups';
 import Search from './views/Search';
+import MySingle from './views/MySingle';
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
               <Route path='/modify/:id' component={Modify} />
               <Route path='/groups' component={Groups} />
               <Route path='/search' component={Search} />
+              <Route path='/mysingle/:id' component={MySingle} />
             </Switch>
           </main>
         </Container>

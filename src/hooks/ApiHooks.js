@@ -49,9 +49,17 @@ const useAllMedia = () => {
 const useSingleMedia = (id) => {
   console.log('usesingle', id);
   const [data, setData] = useState(null);
-  const fetchUrl = async (fileid) => {
+
+  const fetchUrl = async () => {
     const response = await fetch(baseUrl + 'media/' + id);
     const item = await response.json();
+
+    const response2 = await fetch(
+      baseUrl + 'tags/Havatar_' + item.user_id,
+      console.log('tags/Havatar', baseUrl + 'tags/Havatar_' + item.user_id),
+    );
+    const avatar = await response2.json(); 
+    item.avatar = avatar;
 
     if (localStorage.getItem('token') !== null) {
       const userResponse = await getUser(
@@ -60,7 +68,7 @@ const useSingleMedia = (id) => {
       );
       item.user = userResponse;
     }
-    console.log('itemi', item);
+    console.log('ITEMI', item);
     setData(item);
   };
 
@@ -81,6 +89,9 @@ const useAllComments = (fileId) => {
     // haetaan yksittäiset kuvat, jotta saadan thumbnailit
     const items = await Promise.all(
         json.map(async (item) => {
+          //console.log('iTENM', item);
+          // const response = await fetch(baseUrl + 'comments/file/' + fileId);
+          // const kuva = await response.json();
 
           // hae avatar kuva.user_id:n avulla
           // eslint-disable-next-line
@@ -88,6 +99,7 @@ const useAllComments = (fileId) => {
               baseUrl + 'tags/Havatar_' + item.user_id,
           );
           const avatar = await response2.json();
+          console.log('avat', avatar);
           // lisää avatar kuvaan
           item.avatar = avatar;
 
@@ -102,6 +114,7 @@ const useAllComments = (fileId) => {
           return item;
         }),
     );
+    console.log(items);
     setData(items);
   };
 
@@ -541,28 +554,28 @@ const deleteGroup = async (id) => {
 
 const useMyGroups = (tag) => {
   const [data, setData] = useState([]);
-
   const fetchUrl = async () => {
     const response = await fetch(baseUrl + 'tags/' + tag);
     const json = await response.json();
 
     // haetaan yksittäiset kuvat, jotta saadan thumbnailit
     const items = await Promise.all(
-      json.map(async (item) => {
-        const response = await fetch(baseUrl + 'media/' + item.file_id);
-        const group = await response.json();
+        json.map(async (item) => {
+          const response = await fetch(baseUrl + 'media/' + item.file_id);
+          const kuva = await response.json();
 
-        // hae omat ryhmät
-        if (tag !== null) {
-          const groupResponse = await getGroups(
-            group.user_id,
-            localStorage.getItem('token')
-          );
-          group.user = groupResponse;
-          console.log('favs', groupResponse);
-        }
-        return group;
-      })
+          // hae omat ryhmät
+          if (tag !== null) {
+            const groupResponse = await getGroups(
+                kuva.file_id,
+                localStorage.getItem('token'),
+            );
+            kuva.group = groupResponse;
+            console.log('Group response', groupResponse);
+          }
+
+          return kuva;
+        }),
     );
     console.log('items', items);
     setData(items);

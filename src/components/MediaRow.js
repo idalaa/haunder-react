@@ -33,6 +33,13 @@ import TimeConvert from './TimeConvert';
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    /* backgroundColor: theme.palette.background.paper, */
+  },
   list: {
     height: '100%',
     width: '100%',
@@ -42,15 +49,10 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    /* backgroundColor: theme.palette.background.paper, */
   },
-  gridList: {
-    width: '100%',
-    height: '100%',
-  },
-  icon: {
+  /* icon: {
     color: 'rgba(255, 0, 0, 0.54)',
-  },
+  }, */
   avatar: {
     backgroundColor: red[500],
   },
@@ -62,8 +64,6 @@ const useStyles = makeStyles((theme) => ({
   media: {
     width: '100%',
     height: '100%',
-    borderRadius: 6,
-    // marginLeft: '33%',
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -89,9 +89,9 @@ const MediaRow = ({file, myfiles}) => {
   if (file.thumbnails) {
     thumb = mediaUrl + file.thumbnails.w320;
   }
-
+  console.log('avatar lenght ', file.avatar);
   return (
-    <>
+    <div className={classes.root}>
       <ListItem key={file.file_id} className={classes.jaa}>
         <Card className={classes.jaa}>
           <CardHeader
@@ -116,7 +116,8 @@ const MediaRow = ({file, myfiles}) => {
             title={file.user ? file.user.username : 'log in to see user data'}
             subheader={<TimeConvert time={file.time_added} />}
           />
-          <ButtonBase component={RouterLink} to={'/single/' + file.file_id}>
+          <div className={classes.container}>
+          <ButtonBase component={RouterLink} to={'/single/' + file.file_id} className={classes.media}>
             <img
               src={thumb}
               alt={file.title}
@@ -130,6 +131,7 @@ const MediaRow = ({file, myfiles}) => {
               }}
             />
           </ButtonBase>
+          </div>
           <List className={classes.list}>
             <ListItem>{file.title}</ListItem>
             <ListItem>{myfiles ? '' : description.desc}</ListItem>
@@ -148,16 +150,6 @@ const MediaRow = ({file, myfiles}) => {
                 >
                   <ChatBubbleIcon />
                 </IconButton>
-                {/*  <IconButton
-                    className={clsx(classes.expand, {
-                      [classes.expandOpen]: expanded,
-                    })}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                  >
-                    <ExpandMoreIcon />
-                  </IconButton> */}
               </CardActions>
             </ListItem>
             <ListItem>
@@ -172,7 +164,7 @@ const MediaRow = ({file, myfiles}) => {
           </List>
         </Card>
       </ListItem>
-    </>
+    </div>
   );
 };
 
