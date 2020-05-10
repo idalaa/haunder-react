@@ -541,28 +541,28 @@ const deleteGroup = async (id) => {
 
 const useMyGroups = (tag) => {
   const [data, setData] = useState([]);
+
   const fetchUrl = async () => {
     const response = await fetch(baseUrl + 'tags/' + tag);
     const json = await response.json();
 
     // haetaan yksittäiset kuvat, jotta saadan thumbnailit
     const items = await Promise.all(
-        json.map(async (item) => {
-          const response = await fetch(baseUrl + 'media/' + item.file_id);
-          const kuva = await response.json();
+      json.map(async (item) => {
+        const response = await fetch(baseUrl + 'media/' + item.file_id);
+        const group = await response.json();
 
-          // hae omat ryhmät
-          if (tag !== null) {
-            const groupResponse = await getGroups(
-                kuva.file_id,
-                localStorage.getItem('token'),
-            );
-            kuva.group = groupResponse;
-            console.log('Group response', groupResponse);
-          }
-
-          return kuva;
-        }),
+        // hae omat ryhmät
+        if (tag !== null) {
+          const groupResponse = await getGroups(
+            group.user_id,
+            localStorage.getItem('token')
+          );
+          group.user = groupResponse;
+          console.log('favs', groupResponse);
+        }
+        return group;
+      })
     );
     console.log('items', items);
     setData(items);
