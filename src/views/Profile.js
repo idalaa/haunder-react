@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     /* maxWidth: 500, */
   },
   image: {
-    width: 125,
+    width: 200,
     height: 176,
   },
   img: {
@@ -128,15 +128,6 @@ const Profile = () => {
                   </ListItemIcon>
                   <ListItemText primary={user.full_name} />
                 </ListItem>
-                {/* <ListItem>
-                      <Button
-                        color="inherit"
-                        component={RouterLink}
-                        to="/myfiles"
-                      >
-                        My files
-                      </Button>
-                    </ListItem> */}
                 <ListItem>
                   <ProfileForm />
                 </ListItem>

@@ -18,31 +18,13 @@ import {
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 const useStyles = makeStyles((theme) => ({
-  icon: {
-    color: 'rgba(255, 255, 255, 0.54)',
-  },
-  list: {
-    height: '100%',
-    width: '100%',
-  },
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    /* backgroundColor: theme.palette.background.paper, */
-  },
   jaa: {
     display: 'block',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
+    width: 'inherit',
     /* backgroundColor: theme.palette.background.paper, */
-  },
-  container: {
-    display: 'grid',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 }));
 

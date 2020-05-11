@@ -76,6 +76,9 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: 'rotate(360deg)',
   },
+  w: {
+    display: 'block',
+  },
 }));
 
 const MediaRow = ({file, myfiles}) => {
@@ -154,8 +157,8 @@ const MediaRow = ({file, myfiles}) => {
                 </IconButton>
               </CardActions>
             </ListItem>
-            <ListItem>
-              <Collapse in={expanded} timeout='auto' unmountOnExit>
+            <ListItem className={classes.w}>
+              <Collapse in={expanded} timeout='auto' unmountOnExit >
                 <CardContent>
                   <Typography paragraph>COMMENTS</Typography>
                   <CommentTable file={file.file_id} />
