@@ -114,10 +114,6 @@ const Modify = ({history, match}) => {
                   name="description"
                   value={inputs.description}
                   onChange={handleInputChange}
-                  validators={
-                    ['matchRegexp:^[a-öA-Ö]+(([\',. -][a-öA-Ö ])?[a-öA-Ö]*)*$']
-                  }
-                  errorMessages={['text only']}
                 />
               </Grid>
               <Grid container item>
