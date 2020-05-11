@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '600px',
     width: '100%',
     height: '100%',
-    
+
   },
 }));
 

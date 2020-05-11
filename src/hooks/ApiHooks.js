@@ -81,13 +81,10 @@ const useSingleMedia = (id) => {
 };
 
 const getAllComments = async (fileId) => {
-  // const [data, setData] = useState([]);
 
-  // const fetchUrl = async () => {
   const response = await fetch(baseUrl + 'comments/file/' + fileId);
   const json = await response.json();
 
-  // haetaan yksittäiset kuvat, jotta saadan thumbnailit
   const items = await Promise.all(
       json.map(async (item) => {
         // hae avatar kuva.user_id:n avulla
@@ -111,32 +108,8 @@ const getAllComments = async (fileId) => {
         return item;
       }),
   );
-  console.log(items);
-  // setData(items);
-  // };
-
-  // useEffect(() => {
-  //   fetchUrl();
-  // }, []);
-
   return items;
 };
-//     if (localStorage.getItem('token') !== null) {
-//       const users = Promise.all(json.map(async (item) => {
-//         const userResponse = await getUser(item.user_id, localStorage.getItem('token'));
-//         users.user = await userResponse;
-//         console.log('usres', users);
-//       },
-//       ));
-//     }
-//     setData(json);
-//   };
-//   useEffect(() => {
-//     fetchUrl();
-//     console.log('fetchUrl');
-//   }, []);
-//   return data;
-// };
 
 const getAvatarImage = async (id) => {
   console.log('ai', id);
@@ -169,19 +142,15 @@ const useAllAvatars = (id) => {
             );
             kuva.user = userResponse;
           }
-
           return kuva;
         }),
     );
-
     console.log(items);
     setData(items);
   };
-
   useEffect(() => {
     fetchUrl();
   }, []);
-
   return data;
 };
 
