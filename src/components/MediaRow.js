@@ -35,22 +35,22 @@ const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    /* display: 'flex', */
+   /*  flexWrap: 'wrap',
     justifyContent: 'space-around',
-    overflow: 'hidden',
+    overflow: 'hidden', */
     /* backgroundColor: theme.palette.background.paper, */
   },
   list: {
     height: '100%',
     width: '100%',
   },
-  jaa: {
+  /* jaa: {
     display: 'block',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-  },
+  }, */
   /* icon: {
     color: 'rgba(255, 0, 0, 0.54)',
   }, */
@@ -59,8 +59,9 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     display: 'grid',
-    justifyContent: 'center',
+    /* justifyContent: 'center', */
     alignItems: 'center',
+    width: '100%',
   },
   media: {
     width: '100%',
@@ -91,7 +92,7 @@ const MediaRow = ({file, myfiles}) => {
     setExpanded(!expanded);
   };
   if (file.thumbnails) {
-    thumb = mediaUrl + file.thumbnails.w320;
+    thumb = mediaUrl + file.thumbnails.w640;
   }
   console.log('avatar lenght ', file.avatar);
   return (
@@ -127,6 +128,8 @@ const MediaRow = ({file, myfiles}) => {
                 src={thumb}
                 alt={file.title}
                 style={{
+                  height: '100%',
+                  width: '100%',
                   filter: `
                  brightness(${description.filters.brightness}%)
                  contrast(${description.filters.contrast}%) 
