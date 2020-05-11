@@ -38,7 +38,7 @@ const MediaTable = () => {
           picArray.map((file) =>
 
             <CardMedia key={file.file_id} className={classes.container}>
-              <MediaRow className={classes.media} file={file} />
+              <MediaRow className={classes.media} file={file} size={'w640'}/>
             </CardMedia>)
         }
       </List>

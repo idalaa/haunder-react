@@ -36,7 +36,7 @@ const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 const useStyles = makeStyles((theme) => ({
   root: {
     /* display: 'flex', */
-   /*  flexWrap: 'wrap',
+    /*  flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden', */
     /* backgroundColor: theme.palette.background.paper, */
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MediaRow = ({file, myfiles}) => {
+const MediaRow = ({file, myfiles, size}) => {
   const description = JSON.parse(file.description);
   const classes = useStyles();
   let thumb = logo;
@@ -92,7 +92,7 @@ const MediaRow = ({file, myfiles}) => {
     setExpanded(!expanded);
   };
   if (file.thumbnails) {
-    thumb = mediaUrl + file.thumbnails.w640;
+    thumb = mediaUrl + file.thumbnails[size];
   }
   console.log('avatar lenght ', file.avatar);
   return (
@@ -179,6 +179,7 @@ const MediaRow = ({file, myfiles}) => {
 MediaRow.propTypes = {
   file: PropTypes.any,
   myfiles: PropTypes.bool,
+  size: PropTypes.number,
 };
 
 export default MediaRow;
