@@ -18,13 +18,35 @@ import {
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 const useStyles = makeStyles((theme) => ({
+  icon: {
+    color: 'rgba(255, 255, 255, 0.54)',
+  },
+  list: {
+    height: '100%',
+    width: '100%',
+  },
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    /* backgroundColor: theme.palette.background.paper, */
+  },
   jaa: {
     display: 'block',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    width: 'inherit',
-    /* backgroundColor: theme.palette.background.paper, */
+    backgroundColor: 'rgb(236, 236, 236)',
+    width: '100%', 
+  },
+  container: {
+    display: 'grid',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  form: {
+
   },
 }));
 
@@ -81,7 +103,7 @@ const CommentForm = ({fileId, history}) => {
             instantValidate={false}
             noValidate
           >
-            <ListItem>
+            <Card className={classes.form}>
 
               <TextValidator
                 fullWidth
@@ -97,7 +119,7 @@ const CommentForm = ({fileId, history}) => {
                   'this field is required',
                 ]}
               />
-            </ListItem>
+            </Card>
             <ListItem>
               <Button
                 fullWidth

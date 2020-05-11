@@ -19,31 +19,6 @@ import {red} from '@material-ui/core/colors';
 import TimeConvert from './TimeConvert';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     display: 'flex',
-//     flexWrap: 'wrap',
-//     justifyContent: 'space-around',
-//     overflow: 'hidden',
-//   },
-//   jaa: {
-//     display: 'inline-flex',
-//     flexWrap: 'wrap',
-//     justifyContent: 'space-around',
-//     overflow: 'hidden',
-//     backgroundColor: 'rgb(236, 236, 236)',
-//   },
-//   avatar: {
-//     backgroundColor: red[500],
-//   },
-//   container: {
-//     display: 'grid',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     radius: 40,
-//   },
-// }));
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'rgb(236, 236, 236)',
   },
   griditem: {
-padding: '0 16px',
+    padding: '0 16px',
   },
 }));
 const CommentRow = ({file}) => {
