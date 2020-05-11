@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link as RouterLink} from 'react-router-dom';
+import logo from '../img/audio-logo.jpg';
 import {
   IconButton,
   Card,
@@ -80,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
 const MediaRow = ({file, myfiles}) => {
   const description = JSON.parse(file.description);
   const classes = useStyles();
-  let thumb = 'https://via.placeholder.com/320x200.png?text=Audio';
+  let thumb = logo;
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -116,24 +117,25 @@ const MediaRow = ({file, myfiles}) => {
             title={file.user ? file.user.username : 'log in to see user data'}
             subheader={<TimeConvert time={file.time_added} />}
           />
+          <ListItem><Typography component='h4' variant='h5'>{file.title}</Typography></ListItem>
           <div className={classes.container}>
-          <ButtonBase component={RouterLink} to={'/single/' + file.file_id} className={classes.media}>
-            <img
-              src={thumb}
-              alt={file.title}
-              style={{
-                filter: `
+            <ButtonBase component={RouterLink} to={'/single/' + file.file_id} className={classes.media}>
+              <img
+                src={thumb}
+                alt={file.title}
+                style={{
+                  filter: `
                  brightness(${description.filters.brightness}%)
                  contrast(${description.filters.contrast}%) 
                  saturate(${description.filters.saturation}%)
                  sepia(${description.filters.sepia}%)
                  `,
-              }}
-            />
-          </ButtonBase>
+                }}
+              />
+            </ButtonBase>
           </div>
           <List className={classes.list}>
-            <ListItem>{file.title}</ListItem>
+
             <ListItem>{myfiles ? '' : description.desc}</ListItem>
             <ListItem>
               <CardActions disableSpacing>

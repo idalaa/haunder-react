@@ -12,6 +12,7 @@ import {
   CardHeader,
   CircularProgress,
   Typography,
+  TextField,
 } from '@material-ui/core';
 // import {red} from '@material-ui/core/colors';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
@@ -99,6 +100,7 @@ const CommentForm = ({fileId, history}) => {
             noValidate
           >
             <ListItem>
+
               <TextValidator
                 fullWidth
                 label="Comment"

@@ -27,7 +27,7 @@ const Single = ({match, myfiles}) => {
   const classes = useStyles();
   console.log('match', match.params.id);
   const file = useSingleMedia(match.params.id);
-  console.log('file', file);  
+  console.log('file', file);
   let description = undefined;
   if (file !== null) {
     description = (JSON.parse(file.description));
@@ -45,11 +45,11 @@ const Single = ({match, myfiles}) => {
               }
             </Paper>
             <CardContent>
-            <CardHeader
-              avatar={
+              <CardHeader
+                avatar={
                   <Avatar
-                  avatar={
-                    file.avatar.length > 0 ? (  
+                    avatar={
+                    file.avatar.length > 0 ? (
                       <Avatar
                         aria-label='user picture'
                         className={classes.avatar}
@@ -60,14 +60,14 @@ const Single = ({match, myfiles}) => {
                     ) : (
                       <Avatar aria-label='user picture' className={classes.avatar} />
                     )
-                  }
+                    }
                   />
-               
-                   
-                  }
-                  title={file.user ? file.user.username : 'login to see userdata'}
-                  subheader={<Moment format='DD.MM.YYYY, HH:MM'>{file.time_added}</Moment>}
-                />
+
+
+                }
+                title={file.user ? file.user.username : 'login to see userdata'}
+                subheader={<Moment format='DD.MM.YYYY, HH:MM'>{file.time_added}</Moment>}
+              />
               {/* <Typography
                 component="h6"
                 variant="h6"

@@ -13,12 +13,12 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
+    justifyContent: 'left',
     overflow: 'hidden',
     /* backgroundColor: theme.palette.background.paper, */
   },
   gridList: {
-    width: '100%',
+    // width: '100%',
     height: '100%',
   },
   icon: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     display: 'grid',
-    justifyContent: 'center',
+
     alignItems: 'center',
   },
 }));
