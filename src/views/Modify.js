@@ -7,14 +7,25 @@ import {
   CircularProgress,
   Slider,
   Typography,
+  Card,
+  makeStyles,
 } from '@material-ui/core';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import BackButton from '../components/BackButton';
 import useModifyForm from '../hooks/ModifyHooks';
+// import classes from '*.module.css';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
+const useStyles = makeStyles((theme) => ({
+  card: {
+    backgroundColor: '#fff',
+    padding: '30px 20px 20px 20px',
+  },
+}));
+
 const Modify = ({history, match}) => {
+  const classes = useStyles();
   const [loading, setLoading] = useState(false);
   const file = useSingleMedia(match.params.id);
 
@@ -77,63 +88,64 @@ const Modify = ({history, match}) => {
   return (
     <>
       <BackButton />
-      <Grid container>
-        <Grid item xs={12}>
-          <Typography
-            component="h1"
-            variant="h2"
-            gutterBottom>Modify</Typography>
-        </Grid>
-        <Grid item>
-          <ValidatorForm
-            onSubmit={handleSubmit}
-            instantValidate={false}
-            noValidate
-          >
-            <Grid container>
-              <Grid container item>
-                <TextValidator
-                  fullWidth
-                  label="Title"
-                  type="text"
-                  name="title"
-                  value={inputs.title}
-                  onChange={handleInputChange}
-                  validators={[
-                    'required',
-                  ]}
-                  errorMessages={[
-                    'this field is required',
-                  ]}
-                />
-              </Grid>
-              <Grid container item>
-                <TextValidator
-                  fullWidth
-                  label="Description"
-                  name="description"
-                  value={inputs.description}
-                  onChange={handleInputChange}
-                />
-              </Grid>
-              <Grid container item>
-                <Button
-                  fullWidth
-                  color="primary"
-                  type="submit"
-                  variant="contained"
-                >
+      <Card className={classes.card}>
+        <Grid container>
+          <Grid item xs={12}>
+            <Typography
+              component="h1"
+              variant="h4"
+              gutterBottom>Modify</Typography>
+          </Grid>
+          <Grid item>
+            <ValidatorForm
+              onSubmit={handleSubmit}
+              instantValidate={false}
+              noValidate
+            >
+              <Grid container>
+                <Grid container item>
+                  <TextValidator
+                    fullWidth
+                    label="Title"
+                    type="text"
+                    name="title"
+                    value={inputs.title}
+                    onChange={handleInputChange}
+                    validators={[
+                      'required',
+                    ]}
+                    errorMessages={[
+                      'this field is required',
+                    ]}
+                  />
+                </Grid>
+                <Grid container item>
+                  <TextValidator
+                    fullWidth
+                    label="Description"
+                    name="description"
+                    value={inputs.description}
+                    onChange={handleInputChange}
+                  />
+                </Grid>
+                <Grid container item>
+                  <Button
+                    fullWidth
+                    color="primary"
+                    type="submit"
+                    variant="contained"
+                  >
                   Save
-                </Button>
+                  </Button>
+                </Grid>
               </Grid>
-            </Grid>
-          </ValidatorForm>
-          {loading &&
+            </ValidatorForm>
+            {loading &&
             <Grid item>
               <CircularProgress />
             </Grid>
-          }
-          {inputs.filename.length > 0 &&
+            }
+            {inputs.filename.length > 0 &&
             <Grid item>
               <img
                 style={
@@ -186,9 +198,10 @@ const Modify = ({history, match}) => {
                 onChange={handleSliderChange}
               />
             </Grid>
-          }
+            }
+          </Grid>
         </Grid>
-      </Grid>
+      </Card>
     </>
   );
 };
