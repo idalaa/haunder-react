@@ -6,7 +6,7 @@ const useAllMedia = () => {
   const [data, setData] = useState([]);
 
   const fetchUrl = async () => {
-    const response = await fetch(baseUrl + 'tags/haunder');
+    const response = await fetch(baseUrl + 'tags/haunderTest');
     const json = await response.json();
 
     // haetaan yksittäiset kuvat, jotta saadan thumbnailit

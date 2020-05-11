@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import useUploadForm from '../hooks/UploadHooks';
-import { upload } from '../hooks/ApiHooks';
+import {upload} from '../hooks/ApiHooks';
 import {
   Button,
   Grid,
@@ -9,7 +9,7 @@ import {
   Slider,
   Typography,
 } from '@material-ui/core';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import BackButton from '../components/BackButton';
 import {makeStyles} from '@material-ui/core/styles';
 
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Upload = ({ history }) => {
+const Upload = ({history}) => {
   const classes = useStyles();
   const tag = 'haunderTest';
   const [loading, setLoading] = useState(false);
@@ -65,17 +65,17 @@ const Upload = ({ history }) => {
     const reader = new FileReader();
 
     reader.addEventListener(
-      'load',
-      () => {
+        'load',
+        () => {
         // convert image file to base64 string
-        setInputs((inputs) => {
-          return {
-            ...inputs,
-            dataUrl: reader.result,
-          };
-        });
-      },
-      false
+          setInputs((inputs) => {
+            return {
+              ...inputs,
+              dataUrl: reader.result,
+            };
+          });
+        },
+        false,
     );
 
     if (inputs.file !== null) {
@@ -109,7 +109,7 @@ const Upload = ({ history }) => {
             noValidate
           >
             <Grid container >
-              <Grid container item  className={classes.text}>
+              <Grid container item className={classes.text}>
                 <TextValidator
                   fullWidth
                   label='Title'
@@ -121,7 +121,7 @@ const Upload = ({ history }) => {
                   errorMessages={['this field is required']}
                 />
               </Grid>
-              <Grid container item  className={classes.text}>
+              <Grid container item className={classes.text}>
                 <TextValidator
                   fullWidth
                   label='Description'
@@ -129,12 +129,12 @@ const Upload = ({ history }) => {
                   value={inputs.description}
                   onChange={handleInputChange}
                   validators={[
-                    "matchRegexp:^[a-öA-Ö]+(([',. -][a-öA-Ö ])?[a-öA-Ö]*)*$",
+                    'matchRegexp:^[a-öA-Ö]+(([\',. -][a-öA-Ö ])?[a-öA-Ö]*)*$',
                   ]}
                   errorMessages={['text only']}
                 />
               </Grid>
-              <Grid container item  className={classes.text}>
+              <Grid container item className={classes.text}>
                 <TextValidator
                   fullWidth
                   type='file'
