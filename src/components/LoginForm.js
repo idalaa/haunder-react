@@ -45,7 +45,7 @@ const LoginForm = ({ history }) => {
     <Card className={classes.card}>
       <Grid container>
         <Grid item xs={12}>
-          <Typography component='h1' variant='h2' gutterBottom>
+          <Typography component='h1' variant='h4' gutterBottom>
             Login
           </Typography>
         </Grid>

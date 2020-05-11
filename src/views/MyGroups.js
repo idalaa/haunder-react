@@ -6,7 +6,7 @@ import GroupTable from '../components/MyGroupTable';
 const MyGroups = () => {
   return (
     <>
-      <Typography component='h1' variant='h2' gutterBottom>
+      <Typography component='h1' variant='h4' gutterBottom>
         My groups
       </Typography>
       <MyGroupTable />

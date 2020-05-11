@@ -68,7 +68,7 @@ const RegisterForm = ({ history }) => {
     <Card className={classes.card}>
       <Grid container>
         <Grid item xs={12}>
-          <Typography component='h1' variant='h2' gutterBottom>
+          <Typography component='h1' variant='h4' gutterBottom>
             Register
           </Typography>
         </Grid>

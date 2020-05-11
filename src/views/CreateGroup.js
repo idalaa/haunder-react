@@ -91,7 +91,7 @@ const CreateGroup = ({ history }) => {
   return (
     <>
       <Grid container>
-        <Typography component='h1' variant='h2' gutterBottom>
+        <Typography component='h1' variant='h4' gutterBottom>
           Create Groups
         </Typography>
         <Grid item xs={12}></Grid>

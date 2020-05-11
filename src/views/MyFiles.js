@@ -7,7 +7,7 @@ const MyFiles = () => {
     <>
       <Typography
         component="h1"
-        variant="h2"
+        variant="h4"
         gutterBottom>My Files</Typography>
       <MyTable />
     </>

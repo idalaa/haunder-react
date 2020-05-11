@@ -16,6 +16,7 @@ import Modify from './views/Modify';
 import Groups from './views/Groups';
 import Search from './views/Search';
 import MySingle from './views/MySingle';
+import Favourite from './views/Favourite';
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
                 <Route path='/groups' component={Groups} />
                 <Route path='/search' component={Search} />
                 <Route path='/mysingle/:id' component={MySingle} />
+                <Route path='/favourite' component={Favourite} />
               </Switch>
             </main>
           </Container>

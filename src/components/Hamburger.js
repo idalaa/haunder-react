@@ -38,6 +38,30 @@ const FadeMenu = () => {
           onClick={handleClose}
           color='inherit'
           component={RouterLink}
+          to='/home'
+        >
+          Home
+        </MenuItem>
+        <MenuItem
+          onClick={handleClose}
+          color='inherit'
+          component={RouterLink}
+          to='/search'
+        >
+          Search
+        </MenuItem>
+        <MenuItem
+          onClick={handleClose}
+          color='inherit'
+          component={RouterLink}
+          to='/upload'
+        >
+          Upload
+        </MenuItem>
+        <MenuItem
+          onClick={handleClose}
+          color='inherit'
+          component={RouterLink}
           to='/profile'
         >
           Profile

@@ -160,7 +160,7 @@ const Nav = ({ history }) => {
             value='favorites'
             icon={<FavoriteIcon />}
             component={RouterLink}
-            to='/'
+            to='/favourite'
           />
           <BottomNavigationAction
           className={classes.logo}
