@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 const MediaTable = () => {
   const classes = useStyles();
   // const matches = useMediaQuery('(min-width:697px)');
-  const picArray = useAllMedia().reverse();
+  const picArray = useAllMedia();
 
   return (
     <div className={classes.root}>

@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import PropTypes from 'prop-types';
 import useCommentForm from '../hooks/CommentHooks';
 import {withRouter} from 'react-router-dom';
-import {comment, useAllComments} from '../hooks/ApiHooks';
+import {comment, getAllComments} from '../hooks/ApiHooks';
 import {
   Button,
   makeStyles,
@@ -16,6 +16,7 @@ import {
 } from '@material-ui/core';
 // import {red} from '@material-ui/core/colors';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import { CommentContext } from '../contexts/CommentContext';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: 'rgb(236, 236, 236)',
-    width: '100%', 
+    width: '100%',
   },
   container: {
     display: 'grid',
@@ -51,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CommentForm = ({fileId, history}) => {
+  const [comments, setComments] = useContext(CommentContext);
   console.log('commentForm');
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
@@ -68,8 +70,10 @@ const CommentForm = ({fileId, history}) => {
       // setTimeout(() => {
       clearForm(fileId);
       setLoading(false);
-      history.push('/home');
-      console.log('end');
+      // history.push('/home');'
+      const kommentit = await getAllComments(fileId);
+      setComments(kommentit);
+      console.log('end', comments);
       // }, 500);
     } catch (e) {
       console.log(e.message);

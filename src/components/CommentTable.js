@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import CommentRow from './CommentRow';
-import {useAllComments} from '../hooks/ApiHooks';
+import {getAllComments} from '../hooks/ApiHooks';
 
 import {
   makeStyles,
@@ -8,6 +8,7 @@ import {
   List,
 } from '@material-ui/core';
 import {red} from '@material-ui/core/colors';
+import {CommentContext} from '../contexts/CommentContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,10 +36,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CommentTable = (file) => {
+  const [comments, setComments] = useContext(CommentContext);
   const classes = useStyles();
   console.log('pre cA');
-  const commentArray = useAllComments(file.file);
-  console.log('cA', commentArray);
+  // const commentArray = useAllComments(file.file);
+  console.log('cA', comments);
+
+  useEffect(() =>{
+    const updateComments = async () => {
+      const kommentit = await getAllComments(file.file);
+      setComments(kommentit);
+    };
+    updateComments();
+  }, []);
 
   return (
     <div className={classes.root}>
@@ -47,7 +57,7 @@ const CommentTable = (file) => {
         className={classes.gridList}
         cols={1}>
         {
-          commentArray.map((file) =>
+          comments.map((file) =>
             <CardMedia key={file.comment_id} className={classes.container}>
               <CommentRow className={classes.media} file={file} />
             </CardMedia>)

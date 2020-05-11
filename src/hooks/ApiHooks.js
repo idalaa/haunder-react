@@ -7,7 +7,8 @@ const useAllMedia = () => {
 
   const fetchUrl = async () => {
     const response = await fetch(baseUrl + 'tags/haunderTest');
-    const json = await response.json();
+    const json1 = await response.json();
+    const json = json1.reverse();
 
     // haetaan yksittäiset kuvat, jotta saadan thumbnailit
     const items = await Promise.all(
@@ -55,10 +56,10 @@ const useSingleMedia = (id) => {
     const item = await response.json();
 
     const response2 = await fetch(
-      baseUrl + 'tags/Havatar_' + item.user_id,
-      console.log('tags/Havatar', baseUrl + 'tags/Havatar_' + item.user_id),
+        baseUrl + 'tags/Havatar_' + item.user_id,
+        console.log('tags/Havatar', baseUrl + 'tags/Havatar_' + item.user_id),
     );
-    const avatar = await response2.json(); 
+    const avatar = await response2.json();
     item.avatar = avatar;
 
     if (localStorage.getItem('token') !== null) {
@@ -79,50 +80,46 @@ const useSingleMedia = (id) => {
   return data;
 };
 
-const useAllComments = (fileId) => {
-  const [data, setData] = useState([]);
+const getAllComments = async (fileId) => {
+  // const [data, setData] = useState([]);
 
-  const fetchUrl = async () => {
-    const response = await fetch(baseUrl + 'comments/file/' + fileId);
-    const json = await response.json();
+  // const fetchUrl = async () => {
+  const response = await fetch(baseUrl + 'comments/file/' + fileId);
+  const json = await response.json();
 
-    // haetaan yksittäiset kuvat, jotta saadan thumbnailit
-    const items = await Promise.all(
-        json.map(async (item) => {
-          //console.log('iTENM', item);
-          // const response = await fetch(baseUrl + 'comments/file/' + fileId);
-          // const kuva = await response.json();
-
-          // hae avatar kuva.user_id:n avulla
-          // eslint-disable-next-line
+  // haetaan yksittäiset kuvat, jotta saadan thumbnailit
+  const items = await Promise.all(
+      json.map(async (item) => {
+        // hae avatar kuva.user_id:n avulla
+        // eslint-disable-next-line
           const response2 = await fetch(
-              baseUrl + 'tags/Havatar_' + item.user_id,
+            baseUrl + 'tags/Havatar_' + item.user_id,
+        );
+        const avatar = await response2.json();
+        console.log('avat', avatar);
+        // lisää avatar kuvaan
+        item.avatar = avatar;
+
+        // jos on token niin näkee muiden nimet
+        if (localStorage.getItem('token') !== null) {
+          const userResponse = await getUser(
+              item.user_id,
+              localStorage.getItem('token'),
           );
-          const avatar = await response2.json();
-          console.log('avat', avatar);
-          // lisää avatar kuvaan
-          item.avatar = avatar;
+          item.user = userResponse;
+        }
+        return item;
+      }),
+  );
+  console.log(items);
+  // setData(items);
+  // };
 
-          // jos on token niin näkee muiden nimet
-          if (localStorage.getItem('token') !== null) {
-            const userResponse = await getUser(
-                item.user_id,
-                localStorage.getItem('token'),
-            );
-            item.user = userResponse;
-          }
-          return item;
-        }),
-    );
-    console.log(items);
-    setData(items);
-  };
+  // useEffect(() => {
+  //   fetchUrl();
+  // }, []);
 
-  useEffect(() => {
-    fetchUrl();
-  }, []);
-
-  return data;
+  return items;
 };
 //     if (localStorage.getItem('token') !== null) {
 //       const users = Promise.all(json.map(async (item) => {
@@ -591,7 +588,7 @@ const useMyGroups = (tag) => {
 export {
   useAllMedia,
   useSingleMedia,
-  useAllComments,
+  getAllComments,
   register,
   login,
   checkUserAvailable,

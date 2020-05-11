@@ -96,7 +96,7 @@ const MediaRow = ({file, myfiles}) => {
   console.log('avatar lenght ', file.avatar);
   return (
     <div className={classes.root}>
-      <ListItem key={file.file_id} className={classes.jaa}>
+      <List key={file.file_id} className={classes.jaa}>
         <Card className={classes.jaa}>
           <CardHeader
             avatar={
@@ -168,7 +168,7 @@ const MediaRow = ({file, myfiles}) => {
             </ListItem>
           </List>
         </Card>
-      </ListItem>
+      </List>
     </div>
   );
 };

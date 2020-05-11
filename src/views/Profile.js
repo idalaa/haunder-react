@@ -71,7 +71,7 @@ const Profile = () => {
   return (
     <>
       <BackButton pekka='home' />
-      <Typography component='h1' variant='h2' gutterBottom>
+      <Typography component='h1' variant='h4' gutterBottom>
         Profile
       </Typography>
       {user !== null && (
