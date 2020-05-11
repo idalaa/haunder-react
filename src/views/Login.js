@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
-import { makeStyles, Button } from '@material-ui/core';
+import { backgroundImage, makeStyles, Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   body: {

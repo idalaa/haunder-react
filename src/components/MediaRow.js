@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link as RouterLink} from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import logo from '../img/audio-logo.jpg';
 import {
   IconButton,
@@ -22,9 +22,9 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 // import DeleteIcon from '@material-ui/icons/Delete';
 // import {deleteFile} from '../hooks/ApiHooks';
 import clsx from 'clsx';
-import {MoreHoriz} from '@material-ui/icons';
+import { MoreHoriz } from '@material-ui/icons';
 import Collapse from '@material-ui/core/Collapse';
-import {red} from '@material-ui/core/colors';
+import { red } from '@material-ui/core/colors';
 
 import CommentTable from './CommentTable';
 import CommentForm from '../views/CommentForm';
@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MediaRow = ({file, myfiles}) => {
+const MediaRow = ({ file, myfiles }) => {
   const description = JSON.parse(file.description);
   const classes = useStyles();
   let thumb = logo;
@@ -112,17 +112,25 @@ const MediaRow = ({file, myfiles}) => {
                 <Avatar aria-label='user picture' className={classes.avatar} />
               )
             }
-            action={
-              <IconButton aria-label='settings'>
-                <MoreHoriz />
-              </IconButton>
-            }
+            // action={
+            //   // <IconButton aria-label='settings'>
+            //   //   <MoreHoriz />
+            //   // </IconButton>
+            // }
             title={file.user ? file.user.username : 'log in to see user data'}
             subheader={<TimeConvert time={file.time_added} />}
           />
-          <ListItem><Typography component='h4' variant='h5'>{file.title}</Typography></ListItem>
+          <ListItem>
+            <Typography component='h4' variant='h5'>
+              {file.title}
+            </Typography>
+          </ListItem>
           <div className={classes.container}>
-            <ButtonBase component={RouterLink} to={'/single/' + file.file_id} className={classes.media}>
+            <ButtonBase
+              component={RouterLink}
+              to={'/single/' + file.file_id}
+              className={classes.media}
+            >
               <img
                 src={thumb}
                 alt={file.title}
@@ -138,7 +146,6 @@ const MediaRow = ({file, myfiles}) => {
             </ButtonBase>
           </div>
           <List className={classes.list}>
-
             <ListItem>{myfiles ? '' : description.desc}</ListItem>
             <ListItem>
               <CardActions disableSpacing>
@@ -158,7 +165,7 @@ const MediaRow = ({file, myfiles}) => {
               </CardActions>
             </ListItem>
             <ListItem className={classes.w}>
-              <Collapse in={expanded} timeout='auto' unmountOnExit >
+              <Collapse in={expanded} timeout='auto' unmountOnExit>
                 <CardContent>
                   <Typography paragraph>COMMENTS</Typography>
                   <CommentTable file={file.file_id} />

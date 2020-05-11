@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-
   image: {
     width: 125,
     height: 176,

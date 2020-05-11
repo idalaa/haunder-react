@@ -131,7 +131,7 @@ const Nav = ({ history }) => {
           className={classes.root}
         >
           <BottomNavigationAction
-          className={classes.logo}
+            className={classes.logo}
             label='Home'
             value='home'
             icon={<HomeIcon />}
@@ -139,7 +139,7 @@ const Nav = ({ history }) => {
             to='/home'
           />
           <BottomNavigationAction
-          className={classes.logo}
+            className={classes.logo}
             label='Search'
             value='search'
             icon={<SearchIcon />}
@@ -147,23 +147,23 @@ const Nav = ({ history }) => {
             to='/search'
           />
           <BottomNavigationAction
-          className={classes.logo}
+            className={classes.logo}
             label='Upload'
             value='upload'
             icon={<AddCircleOutlineIcon />}
             component={RouterLink}
             to='/upload'
           />
-          <BottomNavigationAction
+          {/* <BottomNavigationAction
           className={classes.logo}
             label='Favorites'
             value='favorites'
             icon={<FavoriteIcon />}
             component={RouterLink}
             to='/'
-          />
+          /> */}
           <BottomNavigationAction
-          className={classes.logo}
+            className={classes.logo}
             label='Profile'
             value='profile'
             icon={<AccountBoxIcon />}
