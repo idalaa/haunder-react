@@ -42,6 +42,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
     /* paddingLeft: '43%', */
   },
+  bottomN: {
+    minWidth: '10px',
+    maxWidth: '168px',
+  },
   logo: {
     zIndex: 1,
     flexGrow: 1,
@@ -97,9 +101,7 @@ const Nav = ({history}) => {
         className={classes.logo}
         src={logo}
         />
-       
-        
-        <Typography variant='h6' className={classes.title}>
+          <Typography variant='h6' className={classes.title}>
             HAUNDER
           </Typography>
           <IconButton
@@ -112,6 +114,7 @@ const Nav = ({history}) => {
             {/* <MenuIcon /> */}
             <FadeMenu />
           </IconButton>
+          
         </Toolbar>
       </AppBar>
 
@@ -122,7 +125,7 @@ const Nav = ({history}) => {
           className={classes.root}
         >
           <BottomNavigationAction
-            className={classes.logo}
+            className={classes.bottomN}
             label='Home'
             value='home'
             icon={<HomeIcon />}
@@ -130,7 +133,7 @@ const Nav = ({history}) => {
             to='/home'
           />
           <BottomNavigationAction
-            className={classes.logo}
+            className={classes.bottomN}
             label='Search'
             value='search'
             icon={<SearchIcon />}
@@ -138,7 +141,7 @@ const Nav = ({history}) => {
             to='/search'
           />
           <BottomNavigationAction
-            className={classes.logo}
+            className={classes.bottomN}
             label='Upload'
             value='upload'
             icon={<AddCircleOutlineIcon />}
@@ -146,7 +149,7 @@ const Nav = ({history}) => {
             to='/upload'
           />
           <BottomNavigationAction
-            className={classes.logo}
+            className={classes.bottomN}
             label='Favorites'
             value='favorites'
             icon={<FavoriteIcon />}
@@ -154,7 +157,7 @@ const Nav = ({history}) => {
             to='/favourite'
           />
           <BottomNavigationAction
-            className={classes.logo}
+            className={classes.bottomN}
             label='Profile'
             value='profile'
             icon={<AccountBoxIcon />}
