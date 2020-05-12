@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: '50px',
   },
   but:{
-    flexGrow: 0.9,
+    flexGrow: 1,
     justifyContent: 'end !important',
   },
 }));
@@ -105,18 +105,19 @@ const Nav = ({history}) => {
     <>
       <AppBar>
         <Toolbar>
-          <IconButton
-          className={classes.but}
-          value='home'
-          component={RouterLink}
-          to='/home'
-          /* onClick={refreshPage} */
-          >
-            <img
-            className={classes.logo}
-            src={logo}
-            />
-        </IconButton>
+          <div className={classes.but}>
+            <IconButton
+            value='home'
+            component={RouterLink}
+            to='/home'
+            /* onClick={refreshPage} */
+            >
+              <img
+              className={classes.logo}
+              src={logo}
+              />
+          </IconButton>
+        </div>
           <Typography variant='h6' className={classes.title}>
             HAUNDER
           </Typography>
