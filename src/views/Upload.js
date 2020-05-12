@@ -8,6 +8,7 @@ import {
   CircularProgress,
   Slider,
   Typography,
+  Card,
 } from '@material-ui/core';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import BackButton from '../components/BackButton';
@@ -16,6 +17,12 @@ import {makeStyles} from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   text: {
     paddingBottom: '20px',
+  },
+  card: {
+    marginTop: '10px',
+    padding: '30px 30px 30px 30px',
+    background:
+      'linear-gradient(to bottom, rgba(248,248,248, 0.6), rgba(220,220,220, 0.5))',
   },
 }));
 
@@ -96,7 +103,8 @@ const Upload = ({history}) => {
   return (
     <>
       <BackButton />
-      <Grid container >
+      <Card className={classes.card}>
+      <Grid container style={{display: 'block'}}>
         <Grid item xs={12}>
           <Typography component='h1' variant='h4' gutterBottom>
             Upload
@@ -212,6 +220,7 @@ const Upload = ({history}) => {
           )}
         </Grid>
       </Grid>
+      </Card>
     </>
   );
 };

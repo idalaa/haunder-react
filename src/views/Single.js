@@ -39,7 +39,7 @@ const Single = ({match, myfiles}) => {
         <>
           <BackButton />
           <Card key={file.file_id}>
-            <Paper>
+            <Paper style={{boxShadow: 'none'}}>
               {description &&
                 <Media file={file} description={description} />
               }

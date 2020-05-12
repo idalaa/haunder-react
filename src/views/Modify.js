@@ -20,8 +20,10 @@ const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    backgroundColor: '#fff',
-    padding: '30px 20px 20px 20px',
+    marginTop: '10px',
+    padding: '30px 30px 30px 30px',
+    background:
+      'linear-gradient(to bottom, rgba(248,248,248, 0.6), rgba(220,220,220, 0.5))',
   },
 }));
 
@@ -90,7 +92,7 @@ const Modify = ({history, match}) => {
     <>
       <BackButton />
       <Card className={classes.card}>
-        <Grid container>
+        <Grid container style={{display: 'block'}}>
           <Grid item xs={12}>
             <Typography
               component="h1"
