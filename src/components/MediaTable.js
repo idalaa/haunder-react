@@ -1,6 +1,6 @@
 import React from 'react';
 import MediaRow from './MediaRow';
-import {useAllMedia} from '../hooks/ApiHooks';
+import PropTypes from 'prop-types';
 
 import {
   makeStyles,
@@ -23,10 +23,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MediaTable = () => {
+const MediaTable = (mediaArray) => {
   const classes = useStyles();
-  // const matches = useMediaQuery('(min-width:697px)');
-  const picArray = useAllMedia();
 
   return (
     <div className={classes.root}>
@@ -35,7 +33,7 @@ const MediaTable = () => {
         className={classes.gridList}
         cols={1}>
         {
-          picArray.map((file) =>
+          mediaArray.mediaArray.map((file) =>
 
             <CardMedia key={file.file_id} className={classes.container}>
               <MediaRow className={classes.media} file={file} size={'w640'}/>
@@ -44,6 +42,10 @@ const MediaTable = () => {
       </List>
     </div>
   );
+};
+
+MediaTable.propTypes = {
+  mediaArray: PropTypes.array,
 };
 
 export default MediaTable;
