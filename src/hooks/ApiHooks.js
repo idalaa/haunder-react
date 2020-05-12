@@ -549,78 +549,6 @@ const useMyGroups = (tag) => {
     return data;
 };
 
-//uusi yritys ryhmille
-
-const getMyFavourites = async(fileId) => {
-    // const [data, setData] = useState([]);
-
-    // const fetchUrl = async () => {
-    const response = await getGroups();
-    const json = await response.json();
-
-    // haetaan yksittäiset kuvat, jotta saadan thumbnailit
-    const items = await Promise.all(
-        json.map(async(item) => {
-            // hae avatar kuva.user_id:n avulla
-            // eslint-disable-next-line
-            const response2 = await fetch(
-                baseUrl + 'tags/haunderGroups' + item.user_id
-            );
-            const avatar = await response2.json();
-            console.log('avat', avatar);
-            // lisää avatar kuvaan
-            item.avatar = avatar;
-
-            // jos on token niin näkee muiden nimet
-            if (localStorage.getItem('token') !== null) {
-                const userResponse = await getUser(
-                    item.user_id,
-                    localStorage.getItem('token')
-                );
-                item.user = userResponse;
-            }
-            return item;
-        })
-    );
-    console.log('UVU UVUV AAUAUUAA', items);
-    // setData(items);
-    // };
-
-    // useEffect(() => {
-    //   fetchUrl();
-    // }, []);
-
-    return items;
-};
-
-const getAllFavourites = async(fileId) => {
-    const response = await fetch(baseUrl + 'favourites');
-    const json = await response.json();
-
-    const items = await Promise.all(
-        json.map(async(item) => {
-            // hae avatar kuva.user_id:n avulla
-            // eslint-disable-next-line
-            const response2 = await fetch(baseUrl + 'tags/Havatar_' + item.user_id);
-            const avatar = await response2.json();
-            console.log('avat', avatar);
-            // lisää avatar kuvaan
-            item.avatar = avatar;
-
-            // jos on token niin näkee muiden nimet
-            if (localStorage.getItem('token') !== null) {
-                const userResponse = await getFavourites(
-                    item.user_id,
-                    localStorage.getItem('token')
-                );
-                item.user = userResponse;
-            }
-            return item;
-        })
-    );
-    return items;
-};
-
 export {
     useAllMedia,
     useSingleMedia,
@@ -635,7 +563,6 @@ export {
     comment,
     favourite,
     getFavourites,
-    getMyFavourites,
     addTag,
     getUser,
     useMyGroups,
