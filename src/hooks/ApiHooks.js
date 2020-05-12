@@ -535,7 +535,7 @@ const useMyGroups = (tag) => {
           console.log('Group response', groupResponse);
         }
 
-        return kuva.group;
+        return kuva;
       })
     );
     console.log('items', items);

@@ -11,7 +11,7 @@ import { Button, Grid } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import useProfileForm from '../hooks/ProfileHooks';
 import AvatarForm from './AvatarForm';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   text: {
@@ -90,7 +90,7 @@ const ProfileForm = ({ history }) => {
               <Grid container>
                 <Grid container item>
                   <TextValidator
-                  className={classes.text}
+                    className={classes.text}
                     fullWidth
                     type='text'
                     name='username'
@@ -112,7 +112,7 @@ const ProfileForm = ({ history }) => {
 
                 <Grid container item>
                   <TextValidator
-                  className={classes.text}
+                    className={classes.text}
                     fullWidth
                     type='email'
                     name='email'
@@ -129,7 +129,7 @@ const ProfileForm = ({ history }) => {
 
                 <Grid container item>
                   <TextValidator
-                  className={classes.text}
+                    className={classes.text}
                     fullWidth
                     type='text'
                     name='full_name'

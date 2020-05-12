@@ -1,5 +1,5 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {MediaContext} from '../contexts/MediaContext';
+import React, { useContext, useEffect, useState } from 'react';
+import { MediaContext } from '../contexts/MediaContext';
 import {
   // Card,
   // CardContent,
@@ -16,7 +16,7 @@ import {
   ButtonBase,
   Avatar,
 } from '@material-ui/core';
-import {getAvatarImage} from '../hooks/ApiHooks';
+import { getAvatarImage } from '../hooks/ApiHooks';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
@@ -24,7 +24,7 @@ import ProfileForm from '../components/ProfileForm';
 
 import BackButton from '../components/BackButton';
 // import {Link as RouterLink} from 'react-router-dom';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import MyFiles from './MyFiles';
 // import AvatarForm from '../components/AvatarForm';
 
@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     margin: 'auto',
+    marginBottom: '20px',
 
     /* maxWidth: 500, */
   },
@@ -78,29 +79,30 @@ const Profile = () => {
         <Paper className={classes.paper}>
           <Grid container spacing={2}>
             {avatar.length > 0 ? (
-              console.log('MITAE', avatar),
+              (console.log('MITAE', avatar),
+              (
+                <Grid item>
+                  <ButtonBase className={classes.image}>
+                    <CardMedia
+                      className={classes.img}
+                      component='img'
+                      image={mediaUrl + avatar[0].filename}
+                      alt='Avatar image'
+                      title='Avatar image'
+                    />
+                  </ButtonBase>
+                </Grid>
+              ))
+            ) : (
               <Grid item>
                 <ButtonBase className={classes.image}>
-                  <CardMedia
-                    className={classes.img}
-                    component='img'
-                    image={mediaUrl + avatar[0].filename}
-                    alt='Avatar image'
-                    title='Avatar image'
+                  <Avatar
+                    aria-label='user picture'
+                    className={classes.avatar}
                   />
                 </ButtonBase>
               </Grid>
-            ):(
-            <Grid item>
-              <ButtonBase className={classes.image}>
-                <Avatar
-                  aria-label='user picture'
-                  className={classes.avatar}
-                />
-              </ButtonBase>
-            </Grid>
-            )
-            }
+            )}
             <Grid item xs={12} sm container>
               <Grid
                 item
@@ -140,6 +142,5 @@ const Profile = () => {
     </>
   );
 };
-
 
 export default Profile;
