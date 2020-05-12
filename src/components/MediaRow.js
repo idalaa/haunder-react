@@ -94,7 +94,6 @@ const MediaRow = ({file, myfiles, size}) => {
   if (file.thumbnails) {
     thumb = mediaUrl + file.thumbnails[size];
   }
-  console.log('avatar lenght ', file.avatar);
   return (
     <div className={classes.root}>
       <List key={file.file_id} className={classes.jaa}>
@@ -121,7 +120,7 @@ const MediaRow = ({file, myfiles, size}) => {
             title={file.user ? file.user.username : 'log in to see user data'}
             subheader={<TimeConvert time={file.time_added} />}
           />
-          <ListItem><Typography component='h4' variant='h5'>{file.title}</Typography></ListItem>
+          <ListItem><Typography component='h4' variant='h6'>{file.title}</Typography></ListItem>
           <div className={classes.container}>
             <ButtonBase component={RouterLink} to={'/single/' + file.file_id} className={classes.media}>
               <img

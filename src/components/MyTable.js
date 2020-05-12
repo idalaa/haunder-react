@@ -54,7 +54,7 @@ const MyTable = () => {
           ></GridListTile>
           {newPicArray.map((file) => (
             <GridListTile key={file.file_id}>
-              <MyRow file={file} myfiles={true} size={'w160'}/>
+              <MyRow file={file} myfiles={true} size={'w320'}/>
             </GridListTile>
           ))}
         </GridList>
