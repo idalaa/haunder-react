@@ -8,13 +8,11 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  Button,
   Typography,
   makeStyles,
 } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -113,6 +111,7 @@ const Nav = ({history}) => {
             /* onClick={refreshPage} */
             >
               <img
+              alt="Haunder logo"
               className={classes.logo}
               src={logo}
               />
