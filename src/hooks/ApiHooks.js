@@ -79,7 +79,6 @@ const useSingleMedia = (id) => {
 };
 
 const getAllComments = async (fileId) => {
-
   const response = await fetch(baseUrl + 'comments/file/' + fileId);
   const json = await response.json();
 
@@ -120,7 +119,6 @@ const useAllAvatars = (id) => {
     const json = await response.json();
     // haetaan yksittäiset kuvat, jotta saadan thumbnailit
     const items = await Promise.all(
-<<<<<<< HEAD
       json.map(async (item) => {
         const response = await fetch(baseUrl + 'media/' + item.file_id);
         const kuva = await response.json();
@@ -139,31 +137,8 @@ const useAllAvatars = (id) => {
           );
           kuva.user = userResponse;
         }
-
         return kuva;
       })
-=======
-        json.map(async (item) => {
-          const response = await fetch(baseUrl + 'media/' + item.file_id);
-          const kuva = await response.json();
-
-          // hae avatar kuva.user_id:n avulla
-          const response2 = await fetch(baseUrl + 'tags/Havatar_' + kuva.user_id);
-          const avatar = await response2.json();
-          // lisää avatar kuvaan
-          kuva.avatar = avatar;
-
-          // jos on token niin näkee muiden nimet
-          if (localStorage.getItem('token') !== null) {
-            const userResponse = await getUser(
-                kuva.user_id,
-                localStorage.getItem('token'),
-            );
-            kuva.user = userResponse;
-          }
-          return kuva;
-        }),
->>>>>>> 5623f3003f12db233b5035eb945bd2060ca61448
     );
     console.log(items);
     setData(items);

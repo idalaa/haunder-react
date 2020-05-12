@@ -1,0 +1,11 @@
+body,
+html {
+    height: 100vh;
+}
+
+root {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: url('../img/puppybg.png') no-repeat center center fixed;
+    background-size: cover;
+}
