@@ -13,15 +13,3 @@ body {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
-
-.bg {
-    background-image: url('./img/puppybg.png');
-    height: 100vh;
-    width: 100vw;
-    left: 0;
-    right: 0;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-position: fixed;
-    background-size: cover;
-}
