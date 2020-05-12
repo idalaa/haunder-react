@@ -51,9 +51,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     justifyContent: 'space-around',
     /* minWidth: '10px', */
-    maxWidth: '70px',
+    maxWidth: '50px',
     /* minHeight: '10px', */
-    maxHeight: '70px',
+    maxHeight: '50px',
   },
 }));
 
@@ -93,14 +93,26 @@ const Nav = ({history}) => {
     setValue(newValue);
   };
 
+  /* function refreshPage() {
+    window.location.reload(false);
+  } */
+
   return (
     <>
       <AppBar>
         <Toolbar>
-        <img
-        className={classes.logo}
-        src={logo}
-        />
+          <IconButton
+          
+          value='home'
+          component={RouterLink}
+          to='/home'
+          /* onClick={refreshPage} */
+          >
+            <img
+            className={classes.logo}
+            src={logo}
+            />
+        </IconButton>
           <Typography variant='h6' className={classes.title}>
             HAUNDER
           </Typography>
