@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import MyGroupTable from '../components/MyGroupTable';
 import GroupTable from '../components/MyGroupTable';
-import { getMyFavourites } from '../hooks/ApiHooks';
+import { getFavourites } from '../hooks/ApiHooks';
 
 const MyGroups = () => {
   return (
@@ -11,7 +11,7 @@ const MyGroups = () => {
         My groups
       </Typography>
       <MyGroupTable />
-      <getMyFavourites />
+      <getFavourites />
     </>
   );
 };
