@@ -55,6 +55,10 @@ const useStyles = makeStyles((theme) => ({
     /* minHeight: '10px', */
     maxHeight: '50px',
   },
+  but:{
+    flexGrow: 0.9,
+    justifyContent: 'end !important',
+  },
 }));
 
 const Nav = ({history}) => {
@@ -102,7 +106,7 @@ const Nav = ({history}) => {
       <AppBar>
         <Toolbar>
           <IconButton
-          
+          className={classes.but}
           value='home'
           component={RouterLink}
           to='/home'
