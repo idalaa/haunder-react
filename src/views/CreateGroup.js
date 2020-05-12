@@ -4,6 +4,7 @@ import useGroupForm from '../hooks/GroupHooks';
 import { createGroup } from '../hooks/ApiHooks';
 import { makeStyles, Button, Grid, Typography, Card } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import GroupIcon from '@material-ui/icons/Group';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -14,6 +15,10 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: '20px 0 0 0',
+  },
+  icon: {
+    color: 'rgb(191, 54, 12)',
+    marginRight: '10px',
   },
 }));
 
@@ -96,6 +101,7 @@ const CreateGroup = ({ history }) => {
       <Card className={classes.card}>
         <Grid container>
           <Typography component='h1' variant='h4' gutterBottom>
+            <GroupIcon className={classes.icon} />
             Create Group
           </Typography>
           <Grid item xs={12}></Grid>
