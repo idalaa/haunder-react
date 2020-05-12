@@ -29,7 +29,7 @@ const FadeMenu = () => {
         onClick={handleClick}
       ></MenuIcon>
       <Menu
-        /* id='fade-menu' */
+        id='fade-menu'
         anchorEl={anchorEl}
         keepMounted
         open={open}
