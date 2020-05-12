@@ -93,8 +93,8 @@ const Single = ({match, myfiles}) => {
               </Typography>
             </CardContent>
             <CardContent>
-              <CommentForm fileId = {file.file_id}/>
               <CommentTable file ={file.file_id}/>
+              <CommentForm fileId = {file.file_id}/>
             </CardContent>
           </Card>
         </>

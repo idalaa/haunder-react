@@ -13,6 +13,7 @@ import {
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import BackButton from '../components/BackButton';
 import useModifyForm from '../hooks/ModifyHooks';
+import {Link as RouterLink} from 'react-router-dom';
 // import classes from '*.module.css';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
@@ -48,7 +49,7 @@ const Modify = ({history, match}) => {
       console.log(result);
       setTimeout(() => {
         setLoading(false);
-        history.push('/myfiles');
+        history.push('/profile');
       }, 2000);
     } catch (e) {
       console.log(e.message);

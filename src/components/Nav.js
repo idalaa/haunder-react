@@ -100,25 +100,6 @@ const Nav = ({history}) => {
           <Typography variant='h6' className={classes.title}>
             HAUNDER
           </Typography>
-          {user === null ? (
-            <Button
-              color='inherit'
-              startIcon={<ExitToAppIcon />}
-              component={RouterLink}
-              to='/'
-            >
-              Login
-            </Button>
-          ) : (
-            <Button
-              color='inherit'
-              startIcon={<ExitToAppIcon />}
-              component={RouterLink}
-              to='/logout'
-            >
-              Logout
-            </Button>
-          )}
         </Toolbar>
       </AppBar>
 
