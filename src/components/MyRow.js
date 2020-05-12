@@ -86,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MyRow = ({file, myfiles}) => {
+const MyRow = ({file, myfiles, size}) => {
   const description = JSON.parse(file.description);
   const classes = useStyles();
   let thumb = 'https://via.placeholder.com/320x200.png?text=Audio';
@@ -96,7 +96,7 @@ const MyRow = ({file, myfiles}) => {
     setExpanded(!expanded);
   }; */
   if (file.thumbnails) {
-    thumb = mediaUrl + file.thumbnails.w320;
+    thumb = mediaUrl + file.thumbnails[size];
   }
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -163,7 +163,7 @@ const MyRow = ({file, myfiles}) => {
                     aria-label={`Delete file`}
                     color='inherit'
                     component={RouterLink}
-                    to='/myfiles'
+                    to='/profile'
                   >
                         Delete
                   </MenuItem>
@@ -203,6 +203,7 @@ const MyRow = ({file, myfiles}) => {
 MyRow.propTypes = {
   file: PropTypes.any,
   myfiles: PropTypes.bool,
+  size: PropTypes.number,
 };
 
 export default MyRow;

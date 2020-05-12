@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
-import { checkToken } from '../hooks/ApiHooks';
-import { withRouter } from 'react-router-dom';
+import React, {useContext, useEffect} from 'react';
+import {Link as RouterLink, useLocation} from 'react-router-dom';
+import {checkToken} from '../hooks/ApiHooks';
+import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { MediaContext } from '../contexts/MediaContext';
+import {MediaContext} from '../contexts/MediaContext';
 import {
   AppBar,
   Toolbar,
@@ -12,12 +12,9 @@ import {
   Typography,
   makeStyles,
 } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-// import PublishIcon from '@material-ui/icons/Publish';
-// import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -50,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Nav = ({ history }) => {
+const Nav = ({history}) => {
   const classes = useStyles();
   const [user, setUser, value, setValue] = useContext(MediaContext);
   // eslint-disable-next-line
@@ -71,6 +68,7 @@ const Nav = ({ history }) => {
         history.push('/');
       }
     };
+    checkUser();
   }, [history, setUser]);
 
   const location = useLocation();
@@ -131,7 +129,7 @@ const Nav = ({ history }) => {
           className={classes.root}
         >
           <BottomNavigationAction
-          className={classes.logo}
+            className={classes.logo}
             label='Home'
             value='home'
             icon={<HomeIcon />}
@@ -139,7 +137,7 @@ const Nav = ({ history }) => {
             to='/home'
           />
           <BottomNavigationAction
-          className={classes.logo}
+            className={classes.logo}
             label='Search'
             value='search'
             icon={<SearchIcon />}
@@ -147,7 +145,7 @@ const Nav = ({ history }) => {
             to='/search'
           />
           <BottomNavigationAction
-          className={classes.logo}
+            className={classes.logo}
             label='Upload'
             value='upload'
             icon={<AddCircleOutlineIcon />}
@@ -155,7 +153,7 @@ const Nav = ({ history }) => {
             to='/upload'
           />
           <BottomNavigationAction
-          className={classes.logo}
+            className={classes.logo}
             label='Favorites'
             value='favorites'
             icon={<FavoriteIcon />}
@@ -163,7 +161,7 @@ const Nav = ({ history }) => {
             to='/favourite'
           />
           <BottomNavigationAction
-          className={classes.logo}
+            className={classes.logo}
             label='Profile'
             value='profile'
             icon={<AccountBoxIcon />}

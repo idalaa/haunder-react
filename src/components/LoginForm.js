@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import useLoginForm from '../hooks/LoginHooks';
-import { login } from '../hooks/ApiHooks';
-import { withRouter } from 'react-router-dom';
-import { MediaContext } from '../contexts/MediaContext';
+import {login} from '../hooks/ApiHooks';
+import {withRouter} from 'react-router-dom';
+import {MediaContext} from '../contexts/MediaContext';
 import {
   makeStyles,
   Button,
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginForm = ({ history }) => {
+const LoginForm = ({history}) => {
   const classes = useStyles();
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useContext(MediaContext);
@@ -40,7 +40,7 @@ const LoginForm = ({ history }) => {
       // TODO: näytä vihe
     }
   };
-  const { inputs, handleInputChange, handleSubmit } = useLoginForm(doLogin);
+  const {inputs, handleInputChange, handleSubmit} = useLoginForm(doLogin);
   return (
     <Card className={classes.card}>
       <Grid container>

@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
+    /* backgroundColor: theme.palette.background.paper, */
   },
   gridList: {
     width: '100%',
@@ -54,7 +54,7 @@ const MyTable = () => {
           ></GridListTile>
           {newPicArray.map((file) => (
             <GridListTile key={file.file_id}>
-              <MyRow file={file} myfiles={true} />
+              <MyRow file={file} myfiles={true} size={'w320'}/>
             </GridListTile>
           ))}
         </GridList>

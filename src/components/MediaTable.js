@@ -14,12 +14,12 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    /* backgroundColor: theme.palette.background.paper, */
   },
   gridList: {
+    maxWidth: '600px',
     width: '100%',
     height: '100%',
-    
+
   },
 }));
 
@@ -38,7 +38,7 @@ const MediaTable = () => {
           picArray.map((file) =>
 
             <CardMedia key={file.file_id} className={classes.container}>
-              <MediaRow className={classes.media} file={file} />
+              <MediaRow className={classes.media} file={file} size={'w640'}/>
             </CardMedia>)
         }
       </List>

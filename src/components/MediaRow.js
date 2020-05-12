@@ -35,22 +35,22 @@ const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    /* display: 'flex', */
+    /*  flexWrap: 'wrap',
     justifyContent: 'space-around',
-    overflow: 'hidden',
+    overflow: 'hidden', */
     /* backgroundColor: theme.palette.background.paper, */
   },
   list: {
     height: '100%',
     width: '100%',
   },
-  jaa: {
+  /* jaa: {
     display: 'block',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-  },
+  }, */
   /* icon: {
     color: 'rgba(255, 0, 0, 0.54)',
   }, */
@@ -59,8 +59,9 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     display: 'grid',
-    justifyContent: 'center',
+    /* justifyContent: 'center', */
     alignItems: 'center',
+    width: '100%',
   },
   media: {
     width: '100%',
@@ -81,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MediaRow = ({file, myfiles}) => {
+const MediaRow = ({file, myfiles, size}) => {
   const description = JSON.parse(file.description);
   const classes = useStyles();
   let thumb = logo;
@@ -91,9 +92,8 @@ const MediaRow = ({file, myfiles}) => {
     setExpanded(!expanded);
   };
   if (file.thumbnails) {
-    thumb = mediaUrl + file.thumbnails.w320;
+    thumb = mediaUrl + file.thumbnails[size];
   }
-  console.log('avatar lenght ', file.avatar);
   return (
     <div className={classes.root}>
       <List key={file.file_id} className={classes.jaa}>
@@ -120,13 +120,15 @@ const MediaRow = ({file, myfiles}) => {
             title={file.user ? file.user.username : 'log in to see user data'}
             subheader={<TimeConvert time={file.time_added} />}
           />
-          <ListItem><Typography component='h4' variant='h5'>{file.title}</Typography></ListItem>
+          <ListItem><Typography component='h4' variant='h6'>{file.title}</Typography></ListItem>
           <div className={classes.container}>
             <ButtonBase component={RouterLink} to={'/single/' + file.file_id} className={classes.media}>
               <img
                 src={thumb}
                 alt={file.title}
                 style={{
+                  height: '100%',
+                  width: '100%',
                   filter: `
                  brightness(${description.filters.brightness}%)
                  contrast(${description.filters.contrast}%) 
@@ -176,6 +178,7 @@ const MediaRow = ({file, myfiles}) => {
 MediaRow.propTypes = {
   file: PropTypes.any,
   myfiles: PropTypes.bool,
+  size: PropTypes.number,
 };
 
 export default MediaRow;
