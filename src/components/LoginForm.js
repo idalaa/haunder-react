@@ -16,7 +16,10 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   card: {
+    marginTop: '100px',
     padding: '30px 20px 20px 20px',
+    background:
+      'linear-gradient(to bottom, rgba(248,248,248, 0.5), rgba(220,220,220, 0.5))',
   },
   button: {
     margin: '20px 0 0 0',
