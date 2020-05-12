@@ -28,8 +28,9 @@ const SearchForm = (data) => {
     setSearchTerm(event.target.value);
   };
   useEffect(() => {
-    const results = data.data.filter((result) =>
-      (result.description).toLowerCase().includes(searchTerm),
+    const results = data.data.filter((result) =>  
+      (result.description, result.title, result.user.username).toLowerCase().includes(searchTerm),
+      /* console.log('data', data.data), */
     );
     console.log('results', results);
     setSearchResults(results);

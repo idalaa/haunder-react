@@ -22,6 +22,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import SearchIcon from '@material-ui/icons/Search';
 import FadeMenu from './Hamburger';
+import logo from '../img/whitelogo.png';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,8 +43,13 @@ const useStyles = makeStyles((theme) => ({
     /* paddingLeft: '43%', */
   },
   logo: {
-    minWidth: '10px',
-    maxWidth: '168px',
+    zIndex: 1,
+    flexGrow: 1,
+    justifyContent: 'space-around',
+    /* minWidth: '10px', */
+    maxWidth: '70px',
+    /* minHeight: '10px', */
+    maxHeight: '70px',
   },
 }));
 
@@ -87,6 +93,15 @@ const Nav = ({history}) => {
     <>
       <AppBar>
         <Toolbar>
+        <img
+        className={classes.logo}
+        src={logo}
+        />
+       
+        
+        <Typography variant='h6' className={classes.title}>
+            HAUNDER
+          </Typography>
           <IconButton
             edge='start'
             className={classes.menuButton}
@@ -97,9 +112,6 @@ const Nav = ({history}) => {
             {/* <MenuIcon /> */}
             <FadeMenu />
           </IconButton>
-          <Typography variant='h6' className={classes.title}>
-            HAUNDER
-          </Typography>
         </Toolbar>
       </AppBar>
 
