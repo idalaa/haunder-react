@@ -75,6 +75,8 @@ const Single = ({match, myfiles}) => {
                       deleteFile(file.file_id);
                     }
                   }}
+                  component={RouterLink}
+                    to='/profile'
                   className={classes.icon}
                 >
                   <DeleteIcon fontSize="large" />

@@ -163,7 +163,7 @@ const MyRow = ({file, myfiles, size}) => {
                     aria-label={`Delete file`}
                     color='inherit'
                     component={RouterLink}
-                    to='/myfiles'
+                    to='/profile'
                   >
                         Delete
                   </MenuItem>
