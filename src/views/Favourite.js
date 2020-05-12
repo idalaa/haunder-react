@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import useJoinGroupForm from '../hooks/JoinHooks';
-import {favourite} from '../hooks/ApiHooks';
-import {Button, Grid, CircularProgress, Typography} from '@material-ui/core';
-import {ValidatorForm} from 'react-material-ui-form-validator';
+import { favourite } from '../hooks/ApiHooks';
+import { Button, Grid, CircularProgress, Typography } from '@material-ui/core';
+import { ValidatorForm } from 'react-material-ui-form-validator';
 
-const Favourite = ({file_id, history}) => {
+const Favourite = ({ file_id, history }) => {
   const [loading, setLoading] = useState(false);
   console.log('jjjj', file_id);
   const doUpload = async () => {
@@ -17,8 +17,8 @@ const Favourite = ({file_id, history}) => {
       };
 
       const result = await favourite(
-          uploadObject,
-          localStorage.getItem('token'),
+        uploadObject,
+        localStorage.getItem('token')
       );
       console.log(result);
       setTimeout(() => {

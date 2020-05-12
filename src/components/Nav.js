@@ -22,6 +22,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import SearchIcon from '@material-ui/icons/Search';
 import FadeMenu from './Hamburger';
+import logo from '../img/whitelogo.png';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,9 +42,22 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
     /* paddingLeft: '43%', */
   },
-  logo: {
+  bottomN: {
     minWidth: '10px',
     maxWidth: '168px',
+  },
+  logo: {
+    zIndex: 1,
+    flexGrow: 1,
+    justifyContent: 'space-around',
+    /* minWidth: '10px', */
+    maxWidth: '50px',
+    /* minHeight: '10px', */
+    maxHeight: '50px',
+  },
+  but:{
+    flexGrow: 1,
+    justifyContent: 'end !important',
   },
 }));
 
@@ -83,10 +97,30 @@ const Nav = ({history}) => {
     setValue(newValue);
   };
 
+  /* function refreshPage() {
+    window.location.reload(false);
+  } */
+
   return (
     <>
       <AppBar>
         <Toolbar>
+          <div className={classes.but}>
+            <IconButton
+            value='home'
+            component={RouterLink}
+            to='/home'
+            /* onClick={refreshPage} */
+            >
+              <img
+              className={classes.logo}
+              src={logo}
+              />
+          </IconButton>
+        </div>
+          <Typography variant='h6' className={classes.title}>
+            HAUNDER
+          </Typography>
           <IconButton
             edge='start'
             className={classes.menuButton}
@@ -97,28 +131,7 @@ const Nav = ({history}) => {
             {/* <MenuIcon /> */}
             <FadeMenu />
           </IconButton>
-          <Typography variant='h6' className={classes.title}>
-            HAUNDER
-          </Typography>
-          {user === null ? (
-            <Button
-              color='inherit'
-              startIcon={<ExitToAppIcon />}
-              component={RouterLink}
-              to='/'
-            >
-              Login
-            </Button>
-          ) : (
-            <Button
-              color='inherit'
-              startIcon={<ExitToAppIcon />}
-              component={RouterLink}
-              to='/logout'
-            >
-              Logout
-            </Button>
-          )}
+          
         </Toolbar>
       </AppBar>
 
@@ -129,7 +142,7 @@ const Nav = ({history}) => {
           className={classes.root}
         >
           <BottomNavigationAction
-            className={classes.logo}
+            className={classes.bottomN}
             label='Home'
             value='home'
             icon={<HomeIcon />}
@@ -137,7 +150,7 @@ const Nav = ({history}) => {
             to='/home'
           />
           <BottomNavigationAction
-            className={classes.logo}
+            className={classes.bottomN}
             label='Search'
             value='search'
             icon={<SearchIcon />}
@@ -145,7 +158,7 @@ const Nav = ({history}) => {
             to='/search'
           />
           <BottomNavigationAction
-            className={classes.logo}
+            className={classes.bottomN}
             label='Upload'
             value='upload'
             icon={<AddCircleOutlineIcon />}
@@ -153,7 +166,7 @@ const Nav = ({history}) => {
             to='/upload'
           />
           <BottomNavigationAction
-            className={classes.logo}
+            className={classes.bottomN}
             label='Favorites'
             value='favorites'
             icon={<FavoriteIcon />}
@@ -161,7 +174,7 @@ const Nav = ({history}) => {
             to='/favourite'
           />
           <BottomNavigationAction
-            className={classes.logo}
+            className={classes.bottomN}
             label='Profile'
             value='profile'
             icon={<AccountBoxIcon />}

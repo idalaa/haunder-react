@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import {Link as RouterLink} from 'react-router-dom';
 import logo from '../img/audio-logo.jpg';
@@ -29,6 +29,7 @@ import {red} from '@material-ui/core/colors';
 import CommentTable from './CommentTable';
 import CommentForm from '../views/CommentForm';
 import TimeConvert from './TimeConvert';
+import { MediaContext } from '../contexts/MediaContext';
 // import {useAllMedia} from '../hooks/ApiHooks';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
@@ -84,6 +85,7 @@ const useStyles = makeStyles((theme) => ({
 
 const MediaRow = ({file, myfiles, size}) => {
   const description = JSON.parse(file.description);
+  const [user] = useContext(MediaContext);
   const classes = useStyles();
   let thumb = logo;
   const [expanded, setExpanded] = React.useState(false);
@@ -162,9 +164,11 @@ const MediaRow = ({file, myfiles, size}) => {
             <ListItem className={classes.w}>
               <Collapse in={expanded} timeout='auto' unmountOnExit >
                 <CardContent>
-                  <Typography paragraph>COMMENTS</Typography>
+                  {/* <Typography paragraph>COMMENTS</Typography> */}
                   <CommentTable file={file.file_id} />
+                  {user !== null && (
                   <CommentForm fileId={file.file_id} />
+                  )}
                 </CardContent>
               </Collapse>
             </ListItem>

@@ -17,6 +17,7 @@ import {
 // import {red} from '@material-ui/core/colors';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import { CommentContext } from '../contexts/CommentContext';
+import { MediaContext } from '../contexts/MediaContext';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -53,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CommentForm = ({fileId, history}) => {
   const [comments, setComments] = useContext(CommentContext);
+  const [user] = useContext(MediaContext);
   console.log('commentForm');
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
@@ -97,9 +99,9 @@ const CommentForm = ({fileId, history}) => {
   return (
     <>
       <List>
+      {user !== null && (
         <Card className={classes.jaa}>
-          <CardHeader title={
-            <Typography paragraph>NEW COMMENT</Typography>}
+          <CardHeader 
           />
 
           <ValidatorForm
@@ -111,7 +113,7 @@ const CommentForm = ({fileId, history}) => {
 
               <TextValidator
                 fullWidth
-                label="Comment"
+                label="New Comment"
                 type="text"
                 name="comment"
                 value={inputs.comment}
@@ -142,6 +144,7 @@ const CommentForm = ({fileId, history}) => {
           </ListItem>
           }
         </Card>
+      )}
       </List>
     </>
   );
