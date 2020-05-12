@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import MyGroupRow from './MyGroupRow';
 import { useMyGroups } from '../hooks/ApiHooks';
+import { getGroups } from '../hooks/ApiHooks';
 import {
   GridList,
   GridListTile,
@@ -57,6 +58,7 @@ const MyGroupTable = () => {
           </GridListTile>
         ))}
       </GridList>
+      <getGroups />
     </div>
   );
 };
