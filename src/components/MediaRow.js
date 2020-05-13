@@ -143,7 +143,7 @@ const MediaRow = ({file, myfiles, size}) => {
           </div>
           <List className={classes.list}>
 
-            <ListItem>{myfiles ? '' : description.desc}</ListItem>
+            <ListItem><Typography>{myfiles ? '' : description.desc}</Typography></ListItem>
             <ListItem>
               <CardActions disableSpacing>
                 <Favourite file = {file.file_id}/>
