@@ -1,9 +1,9 @@
-import React, {useContext, useEffect} from 'react';
-import {Link as RouterLink, useLocation} from 'react-router-dom';
-import {checkToken} from '../hooks/ApiHooks';
-import {withRouter} from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { checkToken } from '../hooks/ApiHooks';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {MediaContext} from '../contexts/MediaContext';
+import { MediaContext } from '../contexts/MediaContext';
 import {
   AppBar,
   Toolbar,
@@ -16,7 +16,7 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import GroupIcon from '@material-ui/icons/Group';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import SearchIcon from '@material-ui/icons/Search';
 import FadeMenu from './Hamburger';
@@ -53,13 +53,13 @@ const useStyles = makeStyles((theme) => ({
     /* minHeight: '10px', */
     maxHeight: '50px',
   },
-  but:{
+  but: {
     flexGrow: 1,
     justifyContent: 'end !important',
   },
 }));
 
-const Nav = ({history}) => {
+const Nav = ({ history }) => {
   const classes = useStyles();
   const [user, setUser, value, setValue] = useContext(MediaContext);
   // eslint-disable-next-line
@@ -105,18 +105,14 @@ const Nav = ({history}) => {
         <Toolbar>
           <div className={classes.but}>
             <IconButton
-            value='home'
-            component={RouterLink}
-            to='/home'
-            /* onClick={refreshPage} */
+              value='home'
+              component={RouterLink}
+              to='/home'
+              /* onClick={refreshPage} */
             >
-              <img
-              alt="Haunder logo"
-              className={classes.logo}
-              src={logo}
-              />
-          </IconButton>
-        </div>
+              <img alt='Haunder logo' className={classes.logo} src={logo} />
+            </IconButton>
+          </div>
           <Typography variant='h6' className={classes.title}>
             HAUNDER
           </Typography>
@@ -130,7 +126,6 @@ const Nav = ({history}) => {
             {/* <MenuIcon /> */}
             <FadeMenu />
           </IconButton>
-          
         </Toolbar>
       </AppBar>
 
@@ -166,11 +161,11 @@ const Nav = ({history}) => {
           />
           <BottomNavigationAction
             className={classes.bottomN}
-            label='Favorites'
+            label='My Groups'
             value='favorites'
-            icon={<FavoriteIcon />}
+            icon={<GroupIcon />}
             component={RouterLink}
-            to='/favourite'
+            to='/mygroups'
           />
           <BottomNavigationAction
             className={classes.bottomN}

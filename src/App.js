@@ -17,7 +17,7 @@ import Groups from './views/Groups';
 import GroupSingle from './views/GroupSingle';
 import Search from './views/Search';
 import MySingle from './views/MySingle';
-import Favourite from './views/Favourite';
+import MyGroups from './views/MyGroups';
 
 const App = () => {
   return (
@@ -40,7 +40,7 @@ const App = () => {
                 <Route path='/groupsingle/:id' component={GroupSingle} />
                 <Route path='/search' component={Search} />
                 <Route path='/mysingle/:id' component={MySingle} />
-                <Route path='/favourite' component={Favourite} />
+                <Route path='/mygroups' component={MyGroups} />
               </Switch>
             </main>
           </Container>
