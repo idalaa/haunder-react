@@ -32,6 +32,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Fade from '@material-ui/core/Fade';
 import Favourite from '../views/Favourite';
+import Media from './Media';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
@@ -106,16 +107,16 @@ const MyGroupRow = ({ file, myfiles }) => {
         <img
           src={thumb}
           alt={file.title}
-          // style={{
-          //   height: '100%',
-          //   width: '100%',
-          //   filter: `
-          //  brightness(${description.filters.brightness}%)
-          //  contrast(${description.filters.contrast}%)
-          //  saturate(${description.filters.saturation}%)
-          //  sepia(${description.filters.sepia}%)
-          //  `,
-          // }}
+          style={{
+            height: '100%',
+            width: '100%',
+            filter: `
+           brightness(${description.filters.brightness}%)
+           contrast(${description.filters.contrast}%)
+           saturate(${description.filters.saturation}%)
+           sepia(${description.filters.sepia}%)
+           `,
+          }}
         />
       </ButtonBase>
 
