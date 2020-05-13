@@ -18,7 +18,7 @@ import GroupSingle from './views/GroupSingle';
 import Search from './views/Search';
 import MySingle from './views/MySingle';
 import Favourite from './views/Favourite';
-// import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+// import { createMuiTheme, MuiThemeProvider } from   '@material-ui/core/styles';
 
 // const font = "'Lato', sans-serif";
 

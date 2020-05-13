@@ -67,7 +67,7 @@ const CreateGroup = ({ history }) => {
       console.log(result);
       setTimeout(() => {
         setLoading(false);
-        history.push('/groups');
+        history.push('/home');
       }, 2000);
     } catch (e) {
       console.log(e.message);
