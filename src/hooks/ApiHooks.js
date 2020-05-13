@@ -461,34 +461,34 @@ const getGroups = async () => {
   }
 };
 
-// fetch all groups
-const useAllGroups = (id) => {
-  const [data, setData] = useState([]);
-  const fetchUrl = async () => {
-    // haetaan ryhmät tagilla
-    const response = await fetch(baseUrl + 'tags/haunderGroup');
-    const json = await response.json();
+// // fetch all groups
+// const useAllGroups = (id) => {
+//   const [data, setData] = useState([]);
+//   const fetchUrl = async () => {
+//     // haetaan ryhmät tagilla
+//     const response = await fetch(baseUrl + 'tags/haunderGroup');
+//     const json = await response.json();
 
-    // fetch individual groups
-    const items = await Promise.all(
-      json.map(async (item) => {
-        const response = await fetch(baseUrl + 'media/' + item.file_id);
-        const kuva = await response.json();
+//     // fetch individual groups
+//     const items = await Promise.all(
+//       json.map(async (item) => {
+//         const response = await fetch(baseUrl + 'media/' + item.file_id);
+//         const kuva = await response.json();
 
-        return kuva;
-      })
-    );
+//         return kuva;
+//       })
+//     );
 
-    console.log('all group items', items);
-    setData(items);
-  };
+//     console.log('all group items', items);
+//     setData(items);
+//   };
 
-  useEffect(() => {
-    fetchUrl();
-  }, []);
+//   useEffect(() => {
+//     fetchUrl();
+//   }, []);
 
-  return data;
-};
+//   return data;
+// };
 
 // delete groups
 const deleteGroup = async (id) => {
@@ -538,6 +538,49 @@ const useMyGroups = (tag) => {
       })
     );
     console.log('items', items);
+    setData(items);
+  };
+
+  useEffect(() => {
+    fetchUrl();
+  }, []);
+
+  return data;
+};
+
+const useAllGroups = () => {
+  const [data, setData] = useState([]);
+
+  const fetchUrl = async () => {
+    const response = await fetch(baseUrl + 'tags/haunderGroup');
+    const json1 = await response.json();
+    const json = json1.reverse();
+
+    // haetaan yksittäiset kuvat, jotta saadan thumbnailit
+    const items = await Promise.all(
+      json.map(async (item) => {
+        const response = await fetch(baseUrl + 'media/' + item.file_id);
+        const kuva = await response.json();
+
+        // hae avatar kuva.user_id:n avulla
+        // eslint-disable-next-line
+        const response2 = await fetch(baseUrl + 'tags/Havatar_' + kuva.user_id);
+        const avatar = await response2.json();
+        // lisää avatar kuvaan
+        kuva.avatar = avatar;
+
+        // jos on token niin näkee muiden nimet
+        if (localStorage.getItem('token') !== null) {
+          const userResponse = await getUser(
+            kuva.user_id,
+            localStorage.getItem('token')
+          );
+          kuva.user = userResponse;
+        }
+        return kuva;
+      })
+    );
+    console.log(items);
     setData(items);
   };
 

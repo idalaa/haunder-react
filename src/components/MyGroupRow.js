@@ -98,7 +98,27 @@ const MyGroupRow = ({ file, myfiles }) => {
 
   return (
     <>
-      <img src={thumb} alt={file.title} />
+      <ButtonBase
+        component={RouterLink}
+        to={'/single/' + file.file_id}
+        className={classes.media}
+      >
+        <img
+          src={thumb}
+          alt={file.title}
+          style={{
+            height: '100%',
+            width: '100%',
+            filter: `
+           brightness(${description.filters.brightness}%)
+           contrast(${description.filters.contrast}%)
+           saturate(${description.filters.saturation}%)
+           sepia(${description.filters.sepia}%)
+           `,
+          }}
+        />
+      </ButtonBase>
+
       <GridListTileBar
         title={file.title}
         subtitle={myfiles ? '' : description.desc}
