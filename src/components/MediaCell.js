@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {Link as RouterLink} from 'react-router-dom';
 import logo from '../img/audio-logo.jpg';
@@ -10,6 +10,7 @@ import {
   GridListTileBar,
   GridListTile,
   Card,
+  List,
 } from '@material-ui/core';
 import {MoreHoriz} from '@material-ui/icons';
 import TimeConvert from './TimeConvert';
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-  },  
+  },
   gridList: {
     width: '100%',
     height: '100%',
@@ -98,97 +99,94 @@ const MediaCell = ({file, myfiles, size}) => {
 
   return (
     <>
-      <ListItem key={file.file_id} >
-        <GridListTile className={classes.card} 
-          onMouseEnter={() => setIsShown(true)}
-          onMouseLeave={() => setIsShown(false)}>
+      <List key={file.file_id} className={classes.card}
+        onMouseEnter={() => setIsShown(true)}
+        onMouseLeave={() => setIsShown(false)}>
 
-          {isShown && ( 
-            <GridListTileBar className={classes.header}
-              title={file.title}
-              subtitle={
-                <TimeConvert time = {file.time_added}/>
-              }  
-                actionIcon={
-                  <>
-                    <IconButton aria-label='settings'>
-                      <MoreHoriz
-                      className={classes.more}
-                        aria-controls='fade-menu'
-                        aria-haspopup='true'
-                        onClick={handleClick}
-                      />
-                    </IconButton>
+        {isShown && (
+          <GridListTileBar className={classes.header}
+            title={file.title}
+            subtitle={
+              <TimeConvert time = {file.time_added}/>
+            }
+            actionIcon={
+              <>
+                <IconButton aria-label='settings'>
+                  <MoreHoriz
+                    className={classes.more}
+                    aria-controls='fade-menu'
+                    aria-haspopup='true'
+                    onClick={handleClick}
+                  />
+                </IconButton>
 
-                    <Menu
-                      id='fade-menu'
-                      anchorEl={anchorEl}
-                      keepMounted
-                      open={open}
-                      onClose={handleClose}
-                      TransitionComponent={Fade}>
-                      <MenuItem
-                        onClick={handleClose}
-                        aria-label={`View file`}
-                        color='inherit'
-                        component={RouterLink}
-                        to={'/mysingle/' + file.file_id}
-                      >
+                <Menu
+                  id='fade-menu'
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={open}
+                  onClose={handleClose}
+                  TransitionComponent={Fade}>
+                  <MenuItem
+                    onClick={handleClose}
+                    aria-label={`View file`}
+                    color='inherit'
+                    component={RouterLink}
+                    to={'/mysingle/' + file.file_id}
+                  >
                             View
-                      </MenuItem>
+                  </MenuItem>
 
-                      <MenuItem
-                        onClick={handleClose}
-                        aria-label={`Modify file`}
-                        color='inherit'
-                        component={RouterLink}
-                        to={'/modify/' + file.file_id}
-                      >
+                  <MenuItem
+                    onClick={handleClose}
+                    aria-label={`Modify file`}
+                    color='inherit'
+                    component={RouterLink}
+                    to={'/modify/' + file.file_id}
+                  >
                             Modify
-                      </MenuItem>
+                  </MenuItem>
 
-                      <MenuItem
-                        // onClick={handleClose}
-                        onClick={() => {
-                          const delOK = window.confirm('Do you really want to delete?');
-                          if (delOK) {
-                            deleteFile(file.file_id);
-                            window.location.reload(false);
-                          }
-                        }}
-                        aria-label={`Delete file`}
-                        color='inherit'
-                        component={RouterLink}
-                        to='/profile'
-                      >
+                  <MenuItem
+                    // onClick={handleClose}
+                    onClick={() => {
+                      const delOK = window.confirm('Do you really want to delete?');
+                      if (delOK) {
+                        deleteFile(file.file_id);
+                        window.location.reload(false);
+                      }
+                    }}
+                    aria-label={`Delete file`}
+                    color='inherit'
+                    component={RouterLink}
+                    to='/profile'
+                  >
                             Delete
-                      </MenuItem>
-                    </Menu>
-                  </>
-                }              
-            />
-          )} 
-          <ButtonBase component={RouterLink}
-            to={'/mysingle/' + file.file_id}>
-            <img
-              src={thumb}
-              alt={file.title}
+                  </MenuItem>
+                </Menu>
+              </>
+            }
+          />
+        )}
+        <ButtonBase component={RouterLink}
+          to={'/mysingle/' + file.file_id}>
+          <img
+            src={thumb}
+            alt={file.title}
 
-              style={
-                {
-                  filter: `
+            style={
+              {
+                filter: `
                  brightness(${description.filters.brightness}%)
                  contrast(${description.filters.contrast}%) 
                  saturate(${description.filters.saturation}%)
                  sepia(${description.filters.sepia}%)
                  `,
-                }
               }
-            />
-          </ButtonBase>
-
-        </GridListTile>
-      </ListItem>
+            }
+          />
+        </ButtonBase>
+      </List>
     </>
   );
 };

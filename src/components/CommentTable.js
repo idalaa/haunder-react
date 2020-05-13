@@ -32,9 +32,6 @@ const useStyles = makeStyles((theme) => ({
 const CommentTable = (file) => {
   const [comments, setComments] = useContext(CommentContext);
   const classes = useStyles();
-  console.log('pre cA');
-
-  console.log('cA', comments);
 
   useEffect(() => {
     const updateComments = async () => {

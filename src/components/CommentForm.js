@@ -102,7 +102,7 @@ const CommentForm = ({fileId}) => {
               <Card >
 
                 <TextValidator
-                className={classes.form}
+                  className={classes.form}
                   label="New Comment"
                   type="text"
                   name="comment"

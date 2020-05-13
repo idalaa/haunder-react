@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 import {
   makeStyles,
   GridList,
+  Grid,
   GridListTile,
+  GridListTileBar,
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
