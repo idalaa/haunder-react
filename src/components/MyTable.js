@@ -27,17 +27,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MyTable = () => {
-  const [user] = useContext(MediaContext);
-  const classes = useStyles();
+const MyTable = (mediaArray) => {
+  /* const classes = useStyles();
   const matches = useMediaQuery('(min-width:697px)');
-  const tag = 'haunderTest';
-  const picArray = useAllMedia(tag);
-  console.log(picArray);
-  let newPicArray = [];
-  if (picArray.length > 0 && user !== null) {
-    newPicArray = picArray.filter((pic) => pic.user_id === user.user_id);
-  }
+  const [user] = useContext(MediaContext);
 
   return (
     <div className={classes.root}>
@@ -60,7 +53,7 @@ const MyTable = () => {
         </GridList>
       )}
     </div>
-  );
+  ); */
 };
 
 export default MyTable;
