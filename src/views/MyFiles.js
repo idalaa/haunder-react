@@ -8,7 +8,7 @@ import { MediaContext } from '../contexts/MediaContext';
 const MyFiles = () => {
   const [user] = useContext(MediaContext);
   const matches = useMediaQuery('(min-width:697px)');
-  const picArray = useAllMedia();
+  const picArray = useAllMedia('haunderTest');
   console.log(picArray);
   let newPicArray = [];
   if (picArray.length > 0 && user !== null) {
