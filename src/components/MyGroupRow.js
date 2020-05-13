@@ -117,19 +117,19 @@ const MyGroupRow = ({ file, myfiles }) => {
           //  `,
           // }}
         />
-      </ButtonBase>
 
-      <GridListTileBar
-        title={file.title}
-        subtitle={myfiles ? '' : description.desc}
-        actionIcon={
-          <>
-            <Button className={classes.icon}>
-              <Favourite file_id={file.file_id} />
-            </Button>
-          </>
-        }
-      />
+        <GridListTileBar
+          title={file.title}
+          subtitle={myfiles ? '' : description.desc}
+          actionIcon={
+            <>
+              <Button className={classes.icon}>
+                <Favourite file_id={file.file_id} />
+              </Button>
+            </>
+          }
+        />
+      </ButtonBase>
     </>
   );
 };
