@@ -18,19 +18,9 @@ import GroupSingle from './views/GroupSingle';
 import Search from './views/Search';
 import MySingle from './views/MySingle';
 import Favourite from './views/Favourite';
-// import { createMuiTheme, MuiThemeProvider } from   '@material-ui/core/styles';
-
-// const font = "'Lato', sans-serif";
-
-// const muiTheme = createMuiTheme({
-//   fontFamily: font,
-// });
 
 const App = () => {
   return (
-    // <MuiThemeProvider muiTheme={muiTheme}>
-    //   <div style={{ fontFamily: font }}>
-    // eslint-disable-next-line no-undef
     <Router basename={process.env.PUBLIC_URL}>
       <MediaProvider>
         <CommentProvider>
@@ -57,8 +47,6 @@ const App = () => {
         </CommentProvider>
       </MediaProvider>
     </Router>
-    // </div>
-    // </MuiThemeProvider>
   );
 };
 

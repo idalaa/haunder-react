@@ -7,26 +7,18 @@ import {
   Card,
   CardContent,
   makeStyles,
-  Avatar,
-  CardHeader,
 } from '@material-ui/core';
 import BackButton from '../components/BackButton';
+import GroupIcon from '@material-ui/icons/Group';
 import GroupMedia from '../components/GroupMedia';
 import CommentTable from '../components/CommentTable';
 import CommentForm from './CommentForm';
 
-// import {Link as RouterLink} from 'react-router-dom';
-// import PageviewIcon from '@material-ui/icons/Pageview';
-// import CreateIcon from '@material-ui/icons/Create';
-// import DeleteIcon from '@material-ui/icons/Delete';
-// import {deleteFile} from '../hooks/ApiHooks';
-import Moment from 'react-moment';
-
-const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
-
 const useStyles = makeStyles((theme) => ({
   icon: {
-    color: 'rgba(255, 0, 0, 0.54)',
+    color: 'rgb(191, 54, 12)',
+    fontSize: '40px',
+    marginRight: '10px',
   },
 }));
 
@@ -39,7 +31,6 @@ const GroupSingle = ({ match, myfiles }) => {
   if (file !== null) {
     description = JSON.parse(file.description);
   }
-  console.log('avatar lenght ', file);
   return (
     <>
       {file !== null && (
@@ -52,45 +43,8 @@ const GroupSingle = ({ match, myfiles }) => {
               )}
             </Paper>
             <CardContent>
-              {/* <CardHeader
-                avatar={
-                  <Avatar
-                    avatar={
-                      file.avatar.length > 0 ? (
-                        <Avatar
-                          aria-label='user picture'
-                          className={classes.avatar}
-                          src={mediaUrl + file.avatar[0].filename}
-                          alt='Avatar image'
-                          title='Avatar image'
-                        />
-                      ) : (
-                        <Avatar
-                          aria-label='user picture'
-                          className={classes.avatar}
-                        />
-                      )
-                    }
-                  />
-                }
-                title={file.user ? file.user.username : 'login to see userdata'}
-                subheader={
-                  <Moment format='DD.MM.YYYY, HH:MM'>{file.time_added}</Moment>
-                }
-              /> */}
-              {/* <Typography
-                component="h6"
-                variant="h6"
-                gutterBottom>
-                {file.user ? file.user.username : 'login to see userdata'}
-              </Typography>
-              <Typography
-                component="h6"
-                variant="h6"
-                gutterBottom>
-                {<Moment format='DD.MM.YYYY, HH:MM'>{file.time_added}</Moment>}
-              </Typography> */}
               <Typography component='h4' variant='h4' gutterBottom>
+                <GroupIcon className={classes.icon} />
                 {file.title}
               </Typography>
               <Typography component='h5' variant='h5' gutterBottom>
