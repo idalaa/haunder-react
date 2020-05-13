@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '40px',
     marginRight: '10px',
   },
+  card: {
+    marginTop: '30px',
+  },
 }));
 
 const GroupSingle = ({ match, myfiles }) => {
@@ -36,7 +39,11 @@ const GroupSingle = ({ match, myfiles }) => {
       {file !== null && (
         <>
           <BackButton />
-          <Card key={file.file_id}>
+          <Typography component='h1' variant='h4' gutterBottom>
+            <GroupIcon className={classes.icon} />
+            Groups
+          </Typography>
+          <Card key={file.file_id} className={classes.card}>
             <Paper style={{ boxShadow: 'none' }}>
               {description && (
                 <GroupMedia file={file} description={description} />
