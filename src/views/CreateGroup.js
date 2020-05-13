@@ -12,9 +12,7 @@ import {
   Card,
 } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import BackButton from '../components/BackButton';
 import { makeStyles } from '@material-ui/core/styles';
-
 import GroupIcon from '@material-ui/icons/Group';
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '10px',
     padding: '30px 30px 30px 30px',
     background:
-      'linear-gradient(to bottom, rgba(248,248,248, 0.7), rgba(220,220,220, 0.7))',
+      'linear-gradient(to bottom, rgba(248,248,248, 0.8), rgba(220,220,220, 0.8))',
   },
   button: {
     margin: '20px 0 0 0',
