@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   form: {
-
+    width: '100%',
   },
 }));
 
@@ -99,9 +99,10 @@ const CommentForm = ({fileId}) => {
               instantValidate={false}
               noValidate
             >
-              <Card className={classes.form}>
+              <Card >
 
                 <TextValidator
+                className={classes.form}
                   label="New Comment"
                   type="text"
                   name="comment"
