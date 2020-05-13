@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link as RouterLink, withRouter } from 'react-router-dom';
 import useUploadForm from '../hooks/UploadHooks';
 import { upload } from '../hooks/ApiHooks';
 import {
@@ -66,7 +67,7 @@ const CreateGroup = ({ history }) => {
       console.log(result);
       setTimeout(() => {
         setLoading(false);
-        history.push('/home');
+        history.push('/groups');
       }, 2000);
     } catch (e) {
       console.log(e.message);
@@ -247,4 +248,4 @@ CreateGroup.propTypes = {
   history: PropTypes.object,
 };
 
-export default CreateGroup;
+export default withRouter(CreateGroup);

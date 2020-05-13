@@ -9,7 +9,7 @@ import '../App.css';
 
 const Favourite = ({ file_id, history }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const onSubmit = (data) => {
+  const onSubmit = () => {
     setIsSubmitted(true);
   };
 
@@ -37,12 +37,9 @@ const Favourite = ({ file_id, history }) => {
     }
   };
 
-  const {
-    inputs,
-    setInputs,
-    handleSubmit,
-    formState,
-  } = useJoinGroupForm(doUpload, { mode: 'onChange' });
+  const { inputs, setInputs, handleSubmit } = useJoinGroupForm(doUpload, {
+    mode: 'onChange',
+  });
 
   useEffect(() => {
     setIsSubmitted(false);
@@ -54,7 +51,7 @@ const Favourite = ({ file_id, history }) => {
         <Grid item>
           <ValidatorForm
             onSubmit={handleSubmit}
-            disabled={isSubmitted}
+            disabled={onSubmit}
             instantValidate={false}
             noValidate
           >
