@@ -1,15 +1,12 @@
-import React,  { useContext } from 'react';
-import {Typography, useMediaQuery,} from '@material-ui/core';
-import MyTable from '../components/MyTable';
-import { useAllMedia } from '../hooks/ApiHooks';
+import React, {useContext} from 'react';
+import {Typography} from '@material-ui/core';
+import {useAllMedia} from '../hooks/ApiHooks';
 import MediaGrid from '../components/MediaGrid';
-import { MediaContext } from '../contexts/MediaContext';
+import {MediaContext} from '../contexts/MediaContext';
 
 const MyFiles = () => {
   const [user] = useContext(MediaContext);
-  const matches = useMediaQuery('(min-width:697px)');
   const picArray = useAllMedia('haunderTest');
-  console.log(picArray);
   let newPicArray = [];
   if (picArray.length > 0 && user !== null) {
     newPicArray = picArray.filter((pic) => pic.user_id === user.user_id);
