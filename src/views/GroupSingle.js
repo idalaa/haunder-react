@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '10px',
   },
   card: {
-    margin: '30px 0 30px 0',
+    margin: '20px 0 20px 0',
   },
 }));
 
