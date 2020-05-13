@@ -1,15 +1,12 @@
 import React from 'react';
-import MediaRow from './MediaRow';
 import MediaCell from './MediaCell';
 import PropTypes from 'prop-types';
 
 import {
   makeStyles,
-  CardMedia,
   GridList,
   GridListTile,
 } from '@material-ui/core';
-import MyRow from './MyRow';
 
 const useStyles = makeStyles((theme) => ({
   root: {
