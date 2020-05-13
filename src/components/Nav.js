@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
-import { checkToken } from '../hooks/ApiHooks';
-import { withRouter } from 'react-router-dom';
+import React, {useContext, useEffect} from 'react';
+import {Link as RouterLink, useLocation} from 'react-router-dom';
+import {checkToken} from '../hooks/ApiHooks';
+import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { MediaContext } from '../contexts/MediaContext';
+import {MediaContext} from '../contexts/MediaContext';
 import {
   AppBar,
   Toolbar,
@@ -24,7 +24,6 @@ import logo from '../img/whitelogo.png';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    /* flexGrow: 1, */
     width: '100%',
     position: 'fixed',
     bottom: 0,
@@ -38,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     justifyContent: 'space-around',
-    /* paddingLeft: '43%', */
   },
   bottomN: {
     minWidth: '10px',
@@ -48,9 +46,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 1,
     flexGrow: 1,
     justifyContent: 'space-around',
-    /* minWidth: '10px', */
     maxWidth: '50px',
-    /* minHeight: '10px', */
     maxHeight: '50px',
   },
   but: {
@@ -59,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Nav = ({ history }) => {
+const Nav = ({history}) => {
   const classes = useStyles();
   const [user, setUser, value, setValue] = useContext(MediaContext);
   // eslint-disable-next-line
@@ -94,10 +90,6 @@ const Nav = ({ history }) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  /* function refreshPage() {
-    window.location.reload(false);
-  } */
 
   return (
     <>

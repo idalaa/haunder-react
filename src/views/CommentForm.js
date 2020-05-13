@@ -102,7 +102,6 @@ const CommentForm = ({fileId}) => {
               <Card className={classes.form}>
 
                 <TextValidator
-                  fullWidth
                   label="New Comment"
                   type="text"
                   name="comment"
