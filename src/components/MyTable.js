@@ -27,10 +27,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MyTable = (mediaArray) => {
-  /* const classes = useStyles();
+const MyTable = () => {
+  /* const [user] = useContext(MediaContext);
+  const classes = useStyles();
   const matches = useMediaQuery('(min-width:697px)');
-  const [user] = useContext(MediaContext);
+  const tag = 'haunderTest';
+  const picArray = useAllMedia(tag);
+  console.log(picArray);
+  let newPicArray = [];
+  if (picArray.length > 0 && user !== null) {
+    newPicArray = picArray.filter((pic) => pic.user_id === user.user_id);
+  }
 
   return (
     <div className={classes.root}>
