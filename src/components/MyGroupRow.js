@@ -2,37 +2,36 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 import {
-  IconButton,
-  Card,
-  CardHeader,
+  // IconButton,
+  // Card,
+  // CardHeader,
   Button,
   GridListTileBar,
-  Avatar,
+  // Avatar,
   makeStyles,
-  CardActions,
-  List,
-  ListItem,
-  CardContent,
-  Typography,
+  // CardActions,
+  // List,
+  // ListItem,
+  // CardContent,
+  // Typography,
   ButtonBase,
 } from '@material-ui/core';
 
-import clsx from 'clsx';
-import { MoreHoriz } from '@material-ui/icons';
-import Collapse from '@material-ui/core/Collapse';
+// import clsx from 'clsx';
+// import { MoreHoriz } from '@material-ui/icons';
+// import Collapse from '@material-ui/core/Collapse';
 import { red } from '@material-ui/core/colors';
-import CommentForm from '../views/CommentForm';
-import PageviewIcon from '@material-ui/icons/Pageview';
-import DeleteIcon from '@material-ui/icons/Delete';
-import { deleteFile } from '../hooks/ApiHooks';
-import CreateIcon from '@material-ui/icons/Create';
-import TimeConvert from './TimeConvert';
-import MenuIcon from '@material-ui/icons/Menu';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Fade from '@material-ui/core/Fade';
+// import CommentForm from '../views/CommentForm';
+// import PageviewIcon from '@material-ui/icons/Pageview';
+// import DeleteIcon from '@material-ui/icons/Delete';
+// import { deleteFile } from '../hooks/ApiHooks';
+// import CreateIcon from '@material-ui/icons/Create';
+// import TimeConvert from './TimeConvert';
+// import MenuIcon from '@material-ui/icons/Menu';
+// import Menu from '@material-ui/core/Menu';
+// import MenuItem from '@material-ui/core/MenuItem';
+// import Fade from '@material-ui/core/Fade';
 import Favourite from '../views/Favourite';
-import Media from './Media';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
@@ -101,22 +100,22 @@ const MyGroupRow = ({ file, myfiles }) => {
     <>
       <ButtonBase
         component={RouterLink}
-        to={'/single/' + file.file_id}
+        to={'/groupsingle/' + file.file_id}
         className={classes.media}
       >
         <img
           src={thumb}
-          alt={file.title}
-          style={{
-            height: '100%',
-            width: '100%',
-            filter: `
-           brightness(${description.filters.brightness}%)
-           contrast(${description.filters.contrast}%)
-           saturate(${description.filters.saturation}%)
-           sepia(${description.filters.sepia}%)
-           `,
-          }}
+          // alt={file.title}
+          // style={{
+          //   height: '100%',
+          //   width: '100%',
+          //   filter: `
+          //  brightness(${description.filters.brightness}%)
+          //  contrast(${description.filters.contrast}%)
+          //  saturate(${description.filters.saturation}%)
+          //  sepia(${description.filters.sepia}%)
+          //  `,
+          // }}
         />
       </ButtonBase>
 
