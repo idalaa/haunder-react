@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {Link as RouterLink} from 'react-router-dom';
 import {
@@ -13,6 +13,8 @@ import {
   CardContent,
   Typography,
   ButtonBase,
+  GridListTileBar,
+  GridListTile,
 } from '@material-ui/core';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -46,12 +48,11 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
     width: '100%',
   },
-  jaa: {
+  card: {
     display: 'block',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    /* backgroundColor: theme.palette.background.paper, */
   },
   gridList: {
     width: '100%',
@@ -84,6 +85,14 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: 'rotate(0deg)',
   },
+  header: {
+    zIndex: 1,
+    top: 0,
+    height: '50px',
+  },
+  more: {
+    color: '#fff',
+  },
 }));
 
 const MyRow = ({file, myfiles, size}) => {
@@ -110,71 +119,79 @@ const MyRow = ({file, myfiles, size}) => {
     setAnchorEl(null);
   };
 
+  const [isShown, setIsShown] = useState(false);
+
   return (
     <>
       <ListItem key={file.file_id} >
-        <Card className={classes.jaa}>
-          <CardHeader
-            action={
-              <>
-                <IconButton aria-label='settings'>
-                  <MoreHoriz
-                    aria-controls='fade-menu'
-                    aria-haspopup='true'
-                    onClick={handleClick}
-                  />
-                </IconButton>
+        <GridListTile className={classes.card} 
+          onMouseEnter={() => setIsShown(true)}
+          onMouseLeave={() => setIsShown(false)}>
 
-                <Menu
-                  id='fade-menu'
-                  anchorEl={anchorEl}
-                  keepMounted
-                  open={open}
-                  onClose={handleClose}
-                  TransitionComponent={Fade}>
-                  <MenuItem
-                    onClick={handleClose}
-                    aria-label={`View file`}
-                    color='inherit'
-                    component={RouterLink}
-                    to={'/mysingle/' + file.file_id}
-                  >
-                        View
-                  </MenuItem>
+          {/* {isShown && ( */}
+            <GridListTileBar className={classes.header}
+              title={file.title}
+              subtitle={
+                <TimeConvert time = {file.time_added}/>
+              }  
+                actionIcon={
+                  <>
+                    <IconButton aria-label='settings'>
+                      <MoreHoriz
+                      className={classes.more}
+                        aria-controls='fade-menu'
+                        aria-haspopup='true'
+                        onClick={handleClick}
+                      />
+                    </IconButton>
 
-                  <MenuItem
-                    onClick={handleClose}
-                    aria-label={`Modify file`}
-                    color='inherit'
-                    component={RouterLink}
-                    to={'/modify/' + file.file_id}
-                  >
-                        Modify
-                  </MenuItem>
+                    <Menu
+                      id='fade-menu'
+                      anchorEl={anchorEl}
+                      keepMounted
+                      open={open}
+                      onClose={handleClose}
+                      TransitionComponent={Fade}>
+                      <MenuItem
+                        onClick={handleClose}
+                        aria-label={`View file`}
+                        color='inherit'
+                        component={RouterLink}
+                        to={'/mysingle/' + file.file_id}
+                      >
+                            View
+                      </MenuItem>
 
-                  <MenuItem
-                    // onClick={handleClose}
-                    onClick={() => {
-                      const delOK = window.confirm('Do you really want to delete?');
-                      if (delOK) {
-                        deleteFile(file.file_id);
-                      }
-                    }}
-                    aria-label={`Delete file`}
-                    color='inherit'
-                    component={RouterLink}
-                    to='/profile'
-                  >
-                        Delete
-                  </MenuItem>
-                </Menu>
+                      <MenuItem
+                        onClick={handleClose}
+                        aria-label={`Modify file`}
+                        color='inherit'
+                        component={RouterLink}
+                        to={'/modify/' + file.file_id}
+                      >
+                            Modify
+                      </MenuItem>
 
-              </>
-            }
-            subheader={
-              <TimeConvert time = {file.time_added}/>
-            }
-          />
+                      <MenuItem
+                        // onClick={handleClose}
+                        onClick={() => {
+                          const delOK = window.confirm('Do you really want to delete?');
+                          if (delOK) {
+                            deleteFile(file.file_id);
+                          }
+                        }}
+                        aria-label={`Delete file`}
+                        color='inherit'
+                        component={RouterLink}
+                        to='/profile'
+                      >
+                            Delete
+                      </MenuItem>
+                    </Menu>
+                  </>
+                }              
+            />
+          {/* )} */}
           <ButtonBase component={RouterLink}
             to={'/mysingle/' + file.file_id}>
             <img
@@ -194,7 +211,7 @@ const MyRow = ({file, myfiles, size}) => {
             />
           </ButtonBase>
 
-        </Card>
+        </GridListTile>
       </ListItem>
     </>
   );
