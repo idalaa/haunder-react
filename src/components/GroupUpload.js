@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import useUploadForm from '../hooks/UploadHooks';
-import {upload} from '../hooks/ApiHooks';
-import {withRouter} from 'react-router-dom';
+import { upload } from '../hooks/ApiHooks';
+import { withRouter } from 'react-router-dom';
 import {
   Button,
   Grid,
@@ -11,9 +11,9 @@ import {
   Typography,
   Card,
 } from '@material-ui/core';
-import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import BackButton from '../components/BackButton';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   text: {
@@ -27,8 +27,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const GroupUpload = ({history, tag}) => {
-    console.log('tag', tag);
+const GroupUpload = ({ history, tag }) => {
+  console.log('tag', tag);
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
   const doUpload = async () => {
@@ -47,7 +47,11 @@ const GroupUpload = ({history, tag}) => {
         }),
         file: inputs.file,
       };
-      const result = await upload(uploadObject, localStorage.getItem('token'), 'group_' + tag);
+      const result = await upload(
+        uploadObject,
+        localStorage.getItem('token'),
+        'group_' + tag
+      );
       console.log(result);
       setTimeout(() => {
         setLoading(false);
@@ -73,17 +77,17 @@ const GroupUpload = ({history, tag}) => {
     const reader = new FileReader();
 
     reader.addEventListener(
-        'load',
-        () => {
+      'load',
+      () => {
         // convert image file to base64 string
-          setInputs((inputs) => {
-            return {
-              ...inputs,
-              dataUrl: reader.result,
-            };
-          });
-        },
-        false,
+        setInputs((inputs) => {
+          return {
+            ...inputs,
+            dataUrl: reader.result,
+          };
+        });
+      },
+      false
     );
 
     if (inputs.file !== null) {
@@ -103,21 +107,20 @@ const GroupUpload = ({history, tag}) => {
 
   return (
     <>
-      <BackButton />
       <Card className={classes.card}>
-        <Grid container style={{display: 'block'}}>
+        <Grid container style={{ display: 'block' }}>
           <Grid item xs={12}>
             <Typography component='h1' variant='h4' gutterBottom>
-            Upload
+              Post
             </Typography>
           </Grid>
-          <Grid item >
+          <Grid item>
             <ValidatorForm
               onSubmit={handleSubmit}
               instantValidate={false}
               noValidate
             >
-              <Grid container >
+              <Grid container>
                 <Grid container item className={classes.text}>
                   <TextValidator
                     fullWidth
@@ -156,7 +159,7 @@ const GroupUpload = ({history, tag}) => {
                     type='submit'
                     variant='contained'
                   >
-                  Upload
+                    Upload
                   </Button>
                 </Grid>
               </Grid>
