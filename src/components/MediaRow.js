@@ -139,7 +139,6 @@ const MediaRow = ({file, myfiles, size}) => {
             <ListItem className={classes.w}>
               <Collapse in={expanded} timeout='auto' unmountOnExit >
                 <CardContent>
-                  {/* <Typography paragraph>COMMENTS</Typography> */}
                   <CommentTable file={file.file_id} />
                   {user !== null && (
                     <CommentForm fileId={file.file_id} />

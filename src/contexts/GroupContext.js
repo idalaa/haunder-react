@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 
 const GroupContext = React.createContext();
 
-const GroupProvider = ({ children }) => {
+const GroupProvider = ({children}) => {
   const [user, setUser] = useState(null);
   const [value, setValue] = useState('home');
   return (
@@ -17,4 +17,4 @@ GroupProvider.propTypes = {
   children: PropTypes.node,
 };
 
-export { GroupContext, GroupProvider };
+export {GroupContext, GroupProvider};
