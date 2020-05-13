@@ -34,7 +34,6 @@ const MediaTable = (mediaArray) => {
         cols={1}>
         {
           mediaArray.mediaArray.map((file) =>
-
             <CardMedia key={file.file_id} className={classes.container}>
               <MediaRow className={classes.media} file={file} size={'w640'}/>
             </CardMedia>)

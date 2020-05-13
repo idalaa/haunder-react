@@ -16,10 +16,6 @@ import {
   ButtonBase,
 } from '@material-ui/core';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
-// import PageviewIcon from '@material-ui/icons/Pageview';
-// import CreateIcon from '@material-ui/icons/Create';
-// import DeleteIcon from '@material-ui/icons/Delete';
-// import {deleteFile} from '../hooks/ApiHooks';
 import clsx from 'clsx';
 import {MoreHoriz} from '@material-ui/icons';
 import Collapse from '@material-ui/core/Collapse';
@@ -30,37 +26,19 @@ import CommentForm from '../views/CommentForm';
 import TimeConvert from './TimeConvert';
 import {MediaContext} from '../contexts/MediaContext';
 import Favourite from './Favourite';
-// import {useAllMedia} from '../hooks/ApiHooks';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    /* display: 'flex', */
-    /*  flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden', */
-    /* backgroundColor: theme.palette.background.paper, */
-  },
   list: {
     height: '100%',
     width: '100%',
   },
-  /* jaa: {
-    display: 'block',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-  }, */
-  /* icon: {
-    color: 'rgba(255, 0, 0, 0.54)',
-  }, */
   avatar: {
     backgroundColor: red[500],
   },
   container: {
     display: 'grid',
-    /* justifyContent: 'center', */
     alignItems: 'center',
     width: '100%',
   },
@@ -70,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
   },
   expand: {
     transform: 'rotate(0deg)',
-    /* marginLeft: 'auto', */
     transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.shortest,
     }),

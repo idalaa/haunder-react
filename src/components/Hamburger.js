@@ -1,12 +1,10 @@
-import React, { useContext } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import Button from '@material-ui/core/Button';
+import React, {useContext} from 'react';
+import {Link as RouterLink} from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Fade from '@material-ui/core/Fade';
-import { MediaContext } from '../contexts/MediaContext';
+import {MediaContext} from '../contexts/MediaContext';
 
 const FadeMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -36,61 +34,61 @@ const FadeMenu = () => {
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-          <MenuItem
-            onClick={handleClose}
-            color='inherit'
-            component={RouterLink}
-            to='/home'
-          >
+        <MenuItem
+          onClick={handleClose}
+          color='inherit'
+          component={RouterLink}
+          to='/home'
+        >
             Home
-          </MenuItem>
-          <MenuItem
-            onClick={handleClose}
-            color='inherit'
-            component={RouterLink}
-            to='/search'
-          >
+        </MenuItem>
+        <MenuItem
+          onClick={handleClose}
+          color='inherit'
+          component={RouterLink}
+          to='/search'
+        >
             Search
-          </MenuItem>
+        </MenuItem>
         {user !== null && (
           <>
-          <MenuItem
-            onClick={handleClose}
-            color='inherit'
-            component={RouterLink}
-            to='/upload'
-          >
+            <MenuItem
+              onClick={handleClose}
+              color='inherit'
+              component={RouterLink}
+              to='/upload'
+            >
             Upload
-          </MenuItem>
-          <MenuItem
-            onClick={handleClose}
-            color='inherit'
-            component={RouterLink}
-            to='/profile'
-          >
+            </MenuItem>
+            <MenuItem
+              onClick={handleClose}
+              color='inherit'
+              component={RouterLink}
+              to='/profile'
+            >
             Profile
-          </MenuItem>
-          <MenuItem
-            onClick={handleClose}
-            onClick={handleClose}
-            color='inherit'
-            component={RouterLink}
-            to='/groups'
-          >
+            </MenuItem>
+            <MenuItem
+              onClick={handleClose}
+              onClick={handleClose}
+              color='inherit'
+              component={RouterLink}
+              to='/groups'
+            >
             My Groups
-          </MenuItem>
+            </MenuItem>
           </>
         )}
         {user === null ? (
           <MenuItem
-          onClick={handleClose}
-          onClick={handleClose}
-          color='inherit'
-          component={RouterLink}
-          to='/'
-        >
+            onClick={handleClose}
+            onClick={handleClose}
+            color='inherit'
+            component={RouterLink}
+            to='/'
+          >
           Login
-        </MenuItem>
+          </MenuItem>
         ):(
           <MenuItem
             onClick={handleClose}
