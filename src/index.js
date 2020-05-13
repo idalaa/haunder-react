@@ -12,7 +12,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 const theme = createMuiTheme({
   typography: {
-    fontFamily: 'Noto Sans, Sans serif',
+    fontFamily: 'Proxima Nova, Sans serif',
   },
   palette: {
     primary: {
