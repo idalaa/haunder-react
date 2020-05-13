@@ -156,7 +156,7 @@ const MediaRow = ({file, myfiles, size}) => {
 MediaRow.propTypes = {
   file: PropTypes.any,
   myfiles: PropTypes.bool,
-  size: PropTypes.number,
+  size: PropTypes.string,
 };
 
 export default MediaRow;

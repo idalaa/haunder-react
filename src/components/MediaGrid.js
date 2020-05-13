@@ -5,9 +5,7 @@ import PropTypes from 'prop-types';
 import {
   makeStyles,
   GridList,
-  Grid,
-  GridListTile,
-  GridListTileBar,
+  List,
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -35,9 +33,9 @@ const MediaGrid = (mediaArray) => {
         cols={4}>
         {
           mediaArray.mediaArray.map((file) =>
-            <GridListTile key={file.file_id} className={classes.container}>
+            <List key={file.file_id} className={classes.container}>
               <MediaCell file={file} size={'w320'}/>
-            </GridListTile>)
+            </List>)
         }
       </GridList>
     </div>

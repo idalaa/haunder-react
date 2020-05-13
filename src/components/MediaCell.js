@@ -1,15 +1,11 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {Link as RouterLink} from 'react-router-dom';
-import logo from '../img/audio-logo.jpg';
 import {
   makeStyles,
   ButtonBase,
   IconButton,
-  ListItem,
   GridListTileBar,
-  GridListTile,
-  Card,
   List,
 } from '@material-ui/core';
 import {MoreHoriz} from '@material-ui/icons';
@@ -48,11 +44,9 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '100%',
     borderRadius: 6,
-    // marginLeft: '33%',
   },
   expand: {
     transform: 'rotate(0deg)',
-    /* marginLeft: 'auto', */
     transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.shortest,
     }),
@@ -75,11 +69,7 @@ const MediaCell = ({file, myfiles, size}) => {
   const description = JSON.parse(file.description);
   const classes = useStyles();
   let thumb = 'https://via.placeholder.com/320x200.png?text=Audio';
-  /* const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  }; */
   if (file.thumbnails) {
     thumb = mediaUrl + file.thumbnails[size];
   }

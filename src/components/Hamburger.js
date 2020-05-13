@@ -62,7 +62,6 @@ const FadeMenu = () => {
             </MenuItem>
             <MenuItem
               onClick={handleClose}
-              onClick={handleClose}
               color='inherit'
               component={RouterLink}
               to='/groups'
@@ -82,7 +81,6 @@ const FadeMenu = () => {
         {user === null ? (
           <MenuItem
             onClick={handleClose}
-            onClick={handleClose}
             color='inherit'
             component={RouterLink}
             to='/'
@@ -91,7 +89,6 @@ const FadeMenu = () => {
           </MenuItem>
         ):(
           <MenuItem
-            onClick={handleClose}
             onClick={handleClose}
             color='inherit'
             component={RouterLink}

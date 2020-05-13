@@ -38,7 +38,7 @@ const Favourite = (file) => {
 };
 
 Favourite.propTypes = {
-  file: PropTypes.string,
+  file: PropTypes.number,
 };
 
 export default Favourite;
