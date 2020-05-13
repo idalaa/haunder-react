@@ -103,20 +103,7 @@ const MyGroupRow = ({ file, myfiles }) => {
         to={'/groupsingle/' + file.file_id}
         className={classes.media}
       >
-        <img
-          src={thumb}
-          // alt={file.title}
-          // style={{
-          //   height: '100%',
-          //   width: '100%',
-          //   filter: `
-          //  brightness(${description.filters.brightness}%)
-          //  contrast(${description.filters.contrast}%)
-          //  saturate(${description.filters.saturation}%)
-          //  sepia(${description.filters.sepia}%)
-          //  `,
-          // }}
-        />
+        <img src={thumb} />
 
         <GridListTileBar
           title={file.title}

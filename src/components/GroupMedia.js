@@ -6,7 +6,9 @@ const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const useStyles = makeStyles((theme) => ({
   image: {
-    width: '100%',
+    height: '20vh',
+    width: '100vw',
+    objectFit: 'cover',
     borderRadius: 4,
     marginBottom: -3,
   },
