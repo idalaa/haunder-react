@@ -7,6 +7,7 @@ import {
   makeStyles,
   CardMedia,
   GridList,
+  GridListTile,
 } from '@material-ui/core';
 import MyRow from './MyRow';
 
@@ -22,10 +23,10 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '100%',
   },
-  container: {
-    width:  '100%',
+ /*  container: {
     height: 'auto',
-  },
+    width: 'auto',
+  }, */
 }));
 
 const MediaGrid = (mediaArray) => {
@@ -39,9 +40,9 @@ const MediaGrid = (mediaArray) => {
         cols={4}>
         {
           mediaArray.mediaArray.map((file) =>
-            <CardMedia key={file.file_id} /* className={classes.container} */>
-              <MyRow /* className={classes.media} */ file={file} size={'w160'}/>
-            </CardMedia>)
+            <GridListTile key={file.file_id} className={classes.container}>
+              <MediaCell /* className={classes.media} */ file={file} size={'w320'}/>
+            </GridListTile>)
         }
       </GridList>
     </div>

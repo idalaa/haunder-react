@@ -25,12 +25,12 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
     width: '100%',
   },
-  /* card: {
-    display: 'block',
+  card: {
+    display: 'contents',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-  }, */
+  },  
   gridList: {
     width: '100%',
     height: '100%',
@@ -99,11 +99,11 @@ const MediaCell = ({file, myfiles, size}) => {
   return (
     <>
       <ListItem key={file.file_id} >
-        <Card className={classes.card} 
+        <GridListTile className={classes.card} 
           onMouseEnter={() => setIsShown(true)}
           onMouseLeave={() => setIsShown(false)}>
 
-          {isShown && (
+          {isShown && ( 
             <GridListTileBar className={classes.header}
               title={file.title}
               subtitle={
@@ -166,7 +166,7 @@ const MediaCell = ({file, myfiles, size}) => {
                   </>
                 }              
             />
-          )}
+          )} 
           <ButtonBase component={RouterLink}
             to={'/mysingle/' + file.file_id}>
             <img
@@ -186,7 +186,7 @@ const MediaCell = ({file, myfiles, size}) => {
             />
           </ButtonBase>
 
-        </Card>
+        </GridListTile>
       </ListItem>
     </>
   );
