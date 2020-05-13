@@ -52,7 +52,7 @@ const GroupSingle = ({ match, myfiles }) => {
               )}
             </Paper>
             <CardContent>
-              <CardHeader
+              {/* <CardHeader
                 avatar={
                   <Avatar
                     avatar={
@@ -77,7 +77,7 @@ const GroupSingle = ({ match, myfiles }) => {
                 subheader={
                   <Moment format='DD.MM.YYYY, HH:MM'>{file.time_added}</Moment>
                 }
-              />
+              /> */}
               {/* <Typography
                 component="h6"
                 variant="h6"
