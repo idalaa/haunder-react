@@ -124,7 +124,7 @@ const MyRow = ({file, myfiles, size}) => {
   return (
     <>
       <ListItem key={file.file_id} >
-        <GridListTile className={classes.card} 
+        <Card className={classes.card} 
           onMouseEnter={() => setIsShown(true)}
           onMouseLeave={() => setIsShown(false)}>
 
@@ -211,7 +211,7 @@ const MyRow = ({file, myfiles, size}) => {
             />
           </ButtonBase>
 
-        </GridListTile>
+        </Card>
       </ListItem>
     </>
   );

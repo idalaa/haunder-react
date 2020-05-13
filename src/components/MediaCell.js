@@ -153,6 +153,7 @@ const MediaCell = ({file, myfiles, size}) => {
                           const delOK = window.confirm('Do you really want to delete?');
                           if (delOK) {
                             deleteFile(file.file_id);
+                            window.location.reload(false);
                           }
                         }}
                         aria-label={`Delete file`}
