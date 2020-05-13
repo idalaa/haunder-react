@@ -5,9 +5,6 @@ import {
   Card,
   CardHeader,
   Avatar,
-  // CardMedia,
-  // CardActions,
-  // CardContent,
   Typography,
   Container,
   Grid,
@@ -15,7 +12,7 @@ import {
   CardContent,
   Divider,
 } from '@material-ui/core';
-import {red} from '@material-ui/core/colors';
+import { red } from '@material-ui/core/colors';
 import TimeConvert from './TimeConvert';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
@@ -35,38 +32,43 @@ const useStyles = makeStyles((theme) => ({
     padding: '0 16px',
   },
 }));
-const CommentRow = ({file}) => {
+const CommentRow = ({ file }) => {
   console.log('commentRow');
   const classes = useStyles();
 
   return (
-
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <Grid container wrap="nowrap" spacing={2}>
-          <Grid item >
-            <CardHeader className={classes.griditem}
+        <Grid container wrap='nowrap' spacing={2}>
+          <Grid item>
+            <CardHeader
+              className={classes.griditem}
               avatar={
-          file.avatar.length > 0 ? (
-            <Avatar
-              aria-label='user picture'
-              className={classes.avatar}
-              src={mediaUrl + file.avatar[0].filename}
-              alt='Avatar image'
-              title='Avatar image'
-            />
-          ) : (
-            <Avatar aria-label='user picture' className={classes.avatar} />
-          )
+                file.avatar.length > 0 ? (
+                  <Avatar
+                    aria-label='user picture'
+                    className={classes.avatar}
+                    src={mediaUrl + file.avatar[0].filename}
+                    alt='Avatar image'
+                    title='Avatar image'
+                  />
+                ) : (
+                  <Avatar
+                    aria-label='user picture'
+                    className={classes.avatar}
+                  />
+                )
               }
               title={file.user ? file.user.username : 'log in to see user data'}
               subheader={<TimeConvert time={file.time_added} />}
             />
           </Grid>
-          <Divider orientation="vertical" flexItem />
+          <Divider orientation='vertical' flexItem />
           <Grid item xs>
             <CardContent className={classes.griditem}>
-              <Typography component='p' variant='body1'>{file.comment}</Typography>
+              <Typography component='p' variant='body1'>
+                {file.comment}
+              </Typography>
             </CardContent>
           </Grid>
         </Grid>
@@ -81,4 +83,3 @@ CommentRow.propTypes = {
 };
 
 export default CommentRow;
-

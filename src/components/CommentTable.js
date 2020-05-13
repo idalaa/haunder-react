@@ -1,14 +1,10 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import CommentRow from './CommentRow';
-import {getAllComments} from '../hooks/ApiHooks';
+import { getAllComments } from '../hooks/ApiHooks';
 
-import {
-  makeStyles,
-  CardMedia,
-  List,
-} from '@material-ui/core';
-import {red} from '@material-ui/core/colors';
-import {CommentContext} from '../contexts/CommentContext';
+import { makeStyles, CardMedia, List } from '@material-ui/core';
+import { red } from '@material-ui/core/colors';
+import { CommentContext } from '../contexts/CommentContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,7 +38,7 @@ const CommentTable = (file) => {
   // const commentArray = useAllComments(file.file);
   console.log('cA', comments);
 
-  useEffect(() =>{
+  useEffect(() => {
     const updateComments = async () => {
       const kommentit = await getAllComments(file.file);
       setComments(kommentit);
@@ -52,16 +48,12 @@ const CommentTable = (file) => {
 
   return (
     <div className={classes.root}>
-      <List
-        cellheight={580}
-        className={classes.gridList}
-        cols={1}>
-        {
-          comments.map((file) =>
-            <CardMedia key={file.comment_id} className={classes.container}>
-              <CommentRow className={classes.media} file={file} />
-            </CardMedia>)
-        }
+      <List cellheight={580} className={classes.gridList} cols={1}>
+        {comments.map((file) => (
+          <CardMedia key={file.comment_id} className={classes.container}>
+            <CommentRow className={classes.media} file={file} />
+          </CardMedia>
+        ))}
       </List>
     </div>
   );
