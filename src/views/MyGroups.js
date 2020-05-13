@@ -9,7 +9,7 @@ const MyGroups = () => {
       <Typography component='h1' variant='h4' gutterBottom>
         My groups
       </Typography>
-      <MyGroupTable />
+      <GroupTable />
     </>
   );
 };

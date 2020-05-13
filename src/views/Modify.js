@@ -19,11 +19,14 @@ import {Link as RouterLink} from 'react-router-dom';
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const useStyles = makeStyles((theme) => ({
+  text: {
+    paddingBottom: '20px',
+  },
   card: {
     marginTop: '10px',
     padding: '30px 30px 30px 30px',
     background:
-      'linear-gradient(to bottom, rgba(248,248,248, 0.6), rgba(220,220,220, 0.5))',
+    'linear-gradient(to bottom, rgba(248,248,248, 0.7), rgba(220,220,220, 0.7))',
   },
 }));
 
@@ -106,7 +109,7 @@ const Modify = ({history, match}) => {
               noValidate
             >
               <Grid container>
-                <Grid container item>
+                <Grid container item className={classes.text}>
                   <TextValidator
                     fullWidth
                     label="Title"
@@ -122,7 +125,7 @@ const Modify = ({history, match}) => {
                     ]}
                   />
                 </Grid>
-                <Grid container item>
+                <Grid container item className={classes.text}>
                   <TextValidator
                     fullWidth
                     label="Description"
@@ -149,7 +152,7 @@ const Modify = ({history, match}) => {
             </Grid>
             }
             {inputs.filename.length > 0 &&
-            <Grid item>
+            <Grid item >
               <img
                 style={
                   {
@@ -163,7 +166,8 @@ const Modify = ({history, match}) => {
                   }
                 }
                 src={mediaUrl + inputs.filename}
-                alt="preview" />
+                alt="preview" 
+                className={classes.text}/>
               <Typography>Brightness</Typography>
               <Slider
                 name="brightness"

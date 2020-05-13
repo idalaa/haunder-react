@@ -3,12 +3,19 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import useJoinGroupForm from '../hooks/JoinHooks';
 import { favourite } from '../hooks/ApiHooks';
-import { Button, Grid, CircularProgress, Typography } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import { ValidatorForm } from 'react-material-ui-form-validator';
+import '../App.css';
 
 const Favourite = ({ file_id, history }) => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const onSubmit = (data) => {
+    setIsSubmitted(true);
+  };
+
   const [loading, setLoading] = useState(false);
   console.log('jjjj', file_id);
+
   const doUpload = async () => {
     setLoading(true);
     try {
@@ -33,11 +40,13 @@ const Favourite = ({ file_id, history }) => {
   const {
     inputs,
     setInputs,
-    handleInputChange,
     handleSubmit,
-  } = useJoinGroupForm(doUpload);
+    formState,
+  } = useJoinGroupForm(doUpload, { mode: 'onChange' });
 
-  useEffect(() => {}, [inputs.file_id, setInputs]);
+  useEffect(() => {
+    setIsSubmitted(false);
+  }, [inputs.file_id, setInputs]);
 
   return (
     <>
@@ -45,6 +54,7 @@ const Favourite = ({ file_id, history }) => {
         <Grid item>
           <ValidatorForm
             onSubmit={handleSubmit}
+            disabled={isSubmitted}
             instantValidate={false}
             noValidate
           >

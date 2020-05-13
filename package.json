@@ -12,6 +12,7 @@
     "moment-timezone": "^0.5.28",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-hook-form": "^5.7.2",
     "react-material-ui-form-validator": "^2.0.10",
     "react-moment": "^0.9.7",
     "react-router-dom": "^5.1.2",

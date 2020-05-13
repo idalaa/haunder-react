@@ -1,7 +1,8 @@
-import React from 'react'; // useContext, useEffect, useState
+import React from 'react';
 import GroupRow from './GroupRow';
-import { useAllGroups } from '../hooks/ApiHooks';
-import { makeStyles, useMediaQuery, CardMedia, List } from '@material-ui/core';
+import PropTypes from 'prop-types';
+
+import { makeStyles, CardMedia, List } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -9,36 +10,32 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    /* backgroundColor: theme.palette.background.paper, */
   },
   gridList: {
+    maxWidth: '600px',
     width: '100%',
     height: '100%',
   },
 }));
 
-const GroupTable = () => {
+const GroupTable = (mediaArray) => {
   const classes = useStyles();
-  const matches = useMediaQuery('(min-width:697px)');
-  const tag = 'haunderGroup';
-
-  const picArray = useAllGroups(tag);
 
   return (
     <div className={classes.root}>
-      <List
-        cellheight={580}
-        className={classes.gridList}
-        cols={matches ? 1 : 1}
-      >
-        {picArray.map((file) => (
+      <List cellheight={580} className={classes.gridList} cols={1}>
+        {mediaArray.mediaArray.map((file) => (
           <CardMedia key={file.file_id} className={classes.container}>
-            <GroupRow className={classes.media} file={file} />
+            <GroupRow className={classes.media} file={file} size={'w640'} />
           </CardMedia>
         ))}
       </List>
     </div>
   );
+};
+
+GroupTable.propTypes = {
+  mediaArray: PropTypes.array,
 };
 
 export default GroupTable;
