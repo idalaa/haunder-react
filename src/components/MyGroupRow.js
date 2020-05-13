@@ -106,16 +106,16 @@ const MyGroupRow = ({ file, myfiles }) => {
         <img
           src={thumb}
           alt={file.title}
-          style={{
-            height: '100%',
-            width: '100%',
-            filter: `
-           brightness(${description.filters.brightness}%)
-           contrast(${description.filters.contrast}%)
-           saturate(${description.filters.saturation}%)
-           sepia(${description.filters.sepia}%)
-           `,
-          }}
+          // style={{
+          //   height: '100%',
+          //   width: '100%',
+          //   filter: `
+          //  brightness(${description.filters.brightness}%)
+          //  contrast(${description.filters.contrast}%)
+          //  saturate(${description.filters.saturation}%)
+          //  sepia(${description.filters.sepia}%)
+          //  `,
+          // }}
         />
       </ButtonBase>
 
