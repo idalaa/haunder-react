@@ -4,7 +4,7 @@ import {useAllMedia} from '../hooks/ApiHooks';
 // import MediaGrid from '../components/MediaGrid';
 
 const Home = () => {
-  const picArray = useAllMedia();
+  const picArray = useAllMedia('haunderTest');
   return (
     <>
       <MediaTable mediaArray={picArray}/>

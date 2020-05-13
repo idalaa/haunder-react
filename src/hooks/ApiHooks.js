@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 
 const baseUrl = 'http://media.mw.metropolia.fi/wbma/';
 
-const useAllMedia = () => {
+const useAllMedia = (tag) => {
   const [data, setData] = useState([]);
 
   const fetchUrl = async () => {
-    const response = await fetch(baseUrl + 'tags/haunderTest');
+    const response = await fetch(baseUrl + 'tags/' + tag);
     const json1 = await response.json();
     const json = json1.reverse();
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSingleMedia } from '../hooks/ApiHooks';
+import {useSingleMedia, useAllMedia} from '../hooks/ApiHooks';
 import {
   Typography,
   Paper,
@@ -11,8 +11,8 @@ import {
 import BackButton from '../components/BackButton';
 import GroupIcon from '@material-ui/icons/Group';
 import GroupMedia from '../components/GroupMedia';
-import CommentTable from '../components/CommentTable';
-import CommentForm from './CommentForm';
+import GroupUpload from '../components/GroupUpload';
+import MediaTable from '../components/MediaTable';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -25,15 +25,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const GroupSingle = ({ match, myfiles }) => {
+const GroupSingle = ({match, myfiles}) => {
   const classes = useStyles();
   console.log('match', match.params.id);
   const file = useSingleMedia(match.params.id);
-  console.log('file', file);
   let description = undefined;
   if (file !== null) {
     description = JSON.parse(file.description);
   }
+  const picArray = useAllMedia('group_' + match.params.id);
   return (
     <>
       {file !== null && (
@@ -44,7 +44,7 @@ const GroupSingle = ({ match, myfiles }) => {
             Groups
           </Typography>
           <Card key={file.file_id} className={classes.card}>
-            <Paper style={{ boxShadow: 'none' }}>
+            <Paper style={{boxShadow: 'none'}}>
               {description && (
                 <GroupMedia file={file} description={description} />
               )}
@@ -59,8 +59,8 @@ const GroupSingle = ({ match, myfiles }) => {
               </Typography>
             </CardContent>
             <CardContent>
-              <CommentTable file={file.file_id} />
-              <CommentForm fileId={file.file_id} />
+              <GroupUpload tag = {match.params.id}/>
+              <MediaTable mediaArray = {picArray}/>
             </CardContent>
           </Card>
         </>
