@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import CommentRow from './CommentRow';
 import { getAllComments } from '../hooks/ApiHooks';
 
@@ -12,10 +12,8 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'left',
     overflow: 'hidden',
-    /* backgroundColor: theme.palette.background.paper, */
   },
   gridList: {
-    // width: '100%',
     height: '100%',
   },
   icon: {
@@ -35,7 +33,7 @@ const CommentTable = (file) => {
   const [comments, setComments] = useContext(CommentContext);
   const classes = useStyles();
   console.log('pre cA');
-  // const commentArray = useAllComments(file.file);
+
   console.log('cA', comments);
 
   useEffect(() => {

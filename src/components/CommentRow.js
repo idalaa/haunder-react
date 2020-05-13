@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   makeStyles,
-  Card,
   CardHeader,
   Avatar,
   Typography,
-  Container,
   Grid,
   Paper,
   CardContent,

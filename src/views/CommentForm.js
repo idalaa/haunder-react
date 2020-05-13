@@ -11,10 +11,7 @@ import {
   Card,
   CardHeader,
   CircularProgress,
-  Typography,
-  TextField,
 } from '@material-ui/core';
-// import {red} from '@material-ui/core/colors';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { CommentContext } from '../contexts/CommentContext';
 import { MediaContext } from '../contexts/MediaContext';
@@ -32,14 +29,12 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    /* backgroundColor: theme.palette.background.paper, */
   },
   jaa: {
     display: 'block',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    // backgroundColor: 'rgb(236, 236, 236)',
     width: '100%',
     boxShadow: 'none',
   },
@@ -50,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {
     backgroundColor: 'rgb(236, 236, 236)',
-    // boxShadow: 'none',
     borderRadius: '6',
   },
 }));
@@ -72,17 +66,15 @@ const CommentForm = ({ fileId, history }) => {
       console.log('try');
       const result = await comment(uploadObject, localStorage.getItem('token'));
       console.log('comment posted', result);
-      // setTimeout(() => {
+
       clearForm(fileId);
       setLoading(false);
-      // history.push('/home');'
+
       const kommentit = await getAllComments(fileId);
       setComments(kommentit);
       console.log('end', comments);
-      // }, 500);
     } catch (e) {
       console.log(e.message);
-      // TODO: näytä vihe
     }
   };
 
