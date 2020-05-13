@@ -68,11 +68,17 @@ const ProfileForm = ({ history }) => {
     });
   }, [user, setInputs]);
 
+  function refreshPage() {
+    if(ValidatorForm === true){
+    window.location.reload(false);
+    }
+  };
+
   return (
     <Grid container>
       <Grid item>
         <Button fullWidth color='primary' onClick={showHide}>
-          Update profile
+          Edit profile
         </Button>
       </Grid>
 
@@ -149,6 +155,7 @@ const ProfileForm = ({ history }) => {
                     color='primary'
                     type='submit'
                     variant='contained'
+                    onClick={refreshPage}
                   >
                     Save profile
                   </Button>

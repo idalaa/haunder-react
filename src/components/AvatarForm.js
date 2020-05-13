@@ -134,6 +134,7 @@ const AvatarForm = ({history}) => {
                   color='primary'
                   type='submit'
                   variant='contained'
+                  onClick={() => window.location.reload(false)}
                 >
                   Upload Profile Picture
                 </Button>
