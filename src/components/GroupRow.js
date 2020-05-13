@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link as RouterLink } from 'react-router-dom';
+import {Link as RouterLink} from 'react-router-dom';
 import {
   IconButton,
   Card,
   CardHeader,
-  Avatar,
+  // Avatar,
   makeStyles,
   CardActions,
   List,
@@ -21,9 +21,9 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 // import DeleteIcon from '@material-ui/icons/Delete';
 // import {deleteFile} from '../hooks/ApiHooks';
 import clsx from 'clsx';
-import { MoreHoriz } from '@material-ui/icons';
+import {MoreHoriz} from '@material-ui/icons';
 import Collapse from '@material-ui/core/Collapse';
-import { red } from '@material-ui/core/colors';
+import {red} from '@material-ui/core/colors';
 
 import CommentTable from './CommentTable';
 import CommentForm from '../views/CommentForm';
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const GroupRow = ({ file, myfiles }) => {
+const GroupRow = ({file, myfiles}) => {
   const description = JSON.parse(file.description);
   const classes = useStyles();
   let thumb = 'https://via.placeholder.com/320x200.png?text=Audio';
@@ -102,7 +102,7 @@ const GroupRow = ({ file, myfiles }) => {
           }
           title={file.user ? file.user.username : 'log in to see user data'}
           subheader={<TimeConvert time={file.time_added} />}
-          />
+
           <ButtonBase component={RouterLink} to={'/single/' + file.file_id}>
             <img
               src={thumb}

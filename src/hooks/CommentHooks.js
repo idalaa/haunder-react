@@ -12,7 +12,6 @@ const useCommentForm = (callback) => {
     if (event) {
       event.preventDefault();
     }
-    console.log('callback', callback);
     callback();
   };
   const handleInputChange = (event) => {
