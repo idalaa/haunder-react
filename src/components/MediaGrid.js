@@ -16,15 +16,10 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
   },
   gridList: {
-    // maxWidth: '600px',
     width: '100%',
     height: '100%',
     display: 'flex',
   },
- /*  container: {
-    height: 'auto',
-    width: 'auto',
-  }, */
 }));
 
 const MediaGrid = (mediaArray) => {
@@ -39,7 +34,7 @@ const MediaGrid = (mediaArray) => {
         {
           mediaArray.mediaArray.map((file) =>
             <GridListTile key={file.file_id} className={classes.container}>
-              <MediaCell /* className={classes.media} */ file={file} size={'w320'}/>
+              <MediaCell file={file} size={'w320'}/>
             </GridListTile>)
         }
       </GridList>

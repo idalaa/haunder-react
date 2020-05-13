@@ -1,8 +1,8 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import {Typography} from '@material-ui/core';
 import MyGroupTable from '../components/MyGroupTable';
-import { useAllGroups } from '../hooks/ApiHooks';
-import { withRouter } from 'react-router-dom';
+import {useAllGroups} from '../hooks/ApiHooks';
+import {withRouter} from 'react-router-dom';
 
 const MyGroups = () => {
   const picArray = useAllGroups();

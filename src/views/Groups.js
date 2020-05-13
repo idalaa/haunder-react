@@ -1,27 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { MediaContext } from '../contexts/MediaContext';
+import React, {useContext, useEffect, useState} from 'react';
+import {MediaContext} from '../contexts/MediaContext';
 import {
-  Typography,
   ListItem,
   Grid,
-  ButtonBase,
-  Avatar,
 } from '@material-ui/core';
-import { getAvatarImage } from '../hooks/ApiHooks';
+import {getAvatarImage} from '../hooks/ApiHooks';
 import CreateGroup from './CreateGroup';
 import BackButton from '../components/BackButton';
-// import {Link as RouterLink} from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import MyGroups from './MyGroups';
-// import AvatarForm from '../components/AvatarForm';
-
-const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-
   image: {
     width: 125,
     height: 176,
@@ -31,9 +23,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     maxWidth: '100%',
     maxHeight: '100%',
-  },
-  text: {
-    /* paddingLeft: '20%', */
   },
 }));
 

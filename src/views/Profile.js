@@ -1,11 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { MediaContext } from '../contexts/MediaContext';
+import React, {useContext, useEffect, useState} from 'react';
+import {MediaContext} from '../contexts/MediaContext';
 import {
-  // Card,
-  // CardContent,
-  // List,
-  // Button,
-  // ListItemAvatar,
   CardMedia,
   Typography,
   ListItem,
@@ -16,17 +11,15 @@ import {
   ButtonBase,
   Avatar,
 } from '@material-ui/core';
-import { getAvatarImage } from '../hooks/ApiHooks';
+import {getAvatarImage} from '../hooks/ApiHooks';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
 import ProfileForm from '../components/ProfileForm';
 
 import BackButton from '../components/BackButton';
-// import {Link as RouterLink} from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import MyFiles from './MyFiles';
-// import AvatarForm from '../components/AvatarForm';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
@@ -38,8 +31,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     margin: 'auto',
     marginBottom: '20px',
-
-    /* maxWidth: 500, */
   },
   image: {
     width: 200,
@@ -50,9 +41,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     maxWidth: '100%',
     maxHeight: '100%',
-  },
-  text: {
-    /* paddingLeft: '20%', */
   },
 }));
 
