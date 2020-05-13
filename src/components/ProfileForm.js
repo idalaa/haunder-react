@@ -56,7 +56,6 @@ const ProfileForm = ({ history }) => {
       try {
         if (value !== user.username) {
           const response = await checkUserAvailable(value);
-          console.log(response);
           return response.available;
         } else {
           return true;
@@ -68,11 +67,7 @@ const ProfileForm = ({ history }) => {
     });
   }, [user, setInputs]);
 
-  function refreshPage() {
-    if(ValidatorForm === true){
-    window.location.reload(false);
-    }
-  };
+
 
   return (
     <Grid container>
@@ -155,7 +150,6 @@ const ProfileForm = ({ history }) => {
                     color='primary'
                     type='submit'
                     variant='contained'
-                    onClick={refreshPage}
                   >
                     Save profile
                   </Button>
