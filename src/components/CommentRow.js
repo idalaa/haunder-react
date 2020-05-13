@@ -10,7 +10,6 @@ import {
   CardContent,
   Divider,
 } from '@material-ui/core';
-import { red } from '@material-ui/core/colors';
 import TimeConvert from './TimeConvert';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
@@ -30,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
     padding: '0 16px',
   },
 }));
-const CommentRow = ({ file }) => {
-  console.log('commentRow');
+
+const CommentRow = ({file}) => {
   const classes = useStyles();
 
   return (
