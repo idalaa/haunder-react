@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import {Link as RouterLink} from 'react-router-dom';
 import logo from '../img/audio-logo.jpg';
@@ -16,7 +16,6 @@ import {
   ButtonBase,
 } from '@material-ui/core';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 // import PageviewIcon from '@material-ui/icons/Pageview';
 // import CreateIcon from '@material-ui/icons/Create';
 // import DeleteIcon from '@material-ui/icons/Delete';
@@ -29,7 +28,8 @@ import {red} from '@material-ui/core/colors';
 import CommentTable from './CommentTable';
 import CommentForm from '../views/CommentForm';
 import TimeConvert from './TimeConvert';
-import { MediaContext } from '../contexts/MediaContext';
+import {MediaContext} from '../contexts/MediaContext';
+import Favourite from './Favourite';
 // import {useAllMedia} from '../hooks/ApiHooks';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
@@ -146,9 +146,7 @@ const MediaRow = ({file, myfiles, size}) => {
             <ListItem>{myfiles ? '' : description.desc}</ListItem>
             <ListItem>
               <CardActions disableSpacing>
-                <IconButton aria-label='Add to favorites'>
-                  <FavoriteIcon />
-                </IconButton>
+                <Favourite file = {file.file_id}/>
                 <IconButton
                   aria-label='Comment'
                   className={clsx(classes.expand, {
@@ -167,7 +165,7 @@ const MediaRow = ({file, myfiles, size}) => {
                   {/* <Typography paragraph>COMMENTS</Typography> */}
                   <CommentTable file={file.file_id} />
                   {user !== null && (
-                  <CommentForm fileId={file.file_id} />
+                    <CommentForm fileId={file.file_id} />
                   )}
                 </CardContent>
               </Collapse>
