@@ -152,10 +152,10 @@ const Nav = ({history}) => {
           <BottomNavigationAction
             className={classes.bottomN}
             label='My Groups'
-            value='favorites'
+            value='groups'
             icon={<GroupIcon />}
             component={RouterLink}
-            to='/mygroups'
+            to='/groups'
           />
           <BottomNavigationAction
             className={classes.bottomN}
