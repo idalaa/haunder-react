@@ -9,7 +9,6 @@ const useMakeFavourite = (callback) => {
     if (event) {
       event.preventDefault();
     }
-    console.log('favcallback');
     callback();
   };
 

@@ -1,18 +1,14 @@
 import {useState} from 'react';
-import { useAllComments } from './ApiHooks';
 
 const useCommentForm = (callback) => {
-  console.log('useCForm');
   const [inputs, setInputs] = useState({
     file_id: null,
     comment: '',
   });
   const handleSubmit = (event) => {
-    console.log('handleSub');
     if (event) {
       event.preventDefault();
     }
-    console.log('callback', callback);
     callback();
   };
   const handleInputChange = (event) => {
@@ -26,7 +22,6 @@ const useCommentForm = (callback) => {
   };
 
   const clearForm = (fileId) =>{
-    console.log('clear');
     setInputs({
       file_id: null,
       comment: '',

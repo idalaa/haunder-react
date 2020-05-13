@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSingleMedia } from '../hooks/ApiHooks';
+import {useSingleMedia} from '../hooks/ApiHooks';
 import {
   Typography,
   Paper,
   Card,
   CardContent,
-  IconButton,
   makeStyles,
   Avatar,
   CardHeader,
@@ -25,23 +24,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Single = ({ match, myfiles }) => {
+const Single = ({match, myfiles}) => {
   const classes = useStyles();
-  console.log('match', match.params.id);
   const file = useSingleMedia(match.params.id);
-  console.log('file', file);
   let description = undefined;
   if (file !== null) {
     description = JSON.parse(file.description);
   }
-  console.log('avatar lenght ', file);
   return (
     <>
       {file !== null && (
         <>
           <BackButton />
           <Card key={file.file_id}>
-            <Paper style={{ boxShadow: 'none' }}>
+            <Paper style={{boxShadow: 'none'}}>
               {description && <Media file={file} description={description} />}
             </Paper>
             <CardContent>

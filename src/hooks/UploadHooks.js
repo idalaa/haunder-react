@@ -42,8 +42,6 @@ const useUploadForm = (callback) => {
     if (event.target !== null &&
       event.target.previousElementSibling !== null &&
       event.target.previousElementSibling.name !== undefined) {
-      // console.log('nimi', event.target.previousElementSibling.name);
-      // console.log('arvo', value);
       setInputs((inputs) => {
         return {
           ...inputs,
