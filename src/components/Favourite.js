@@ -6,7 +6,7 @@ import useMakeFavourite from '../hooks/FavoriteHooks';
 import {favourite} from '../hooks/ApiHooks';
 
 const Favourite = (file) => {
-  console.log('favfile', file.file);
+  // eslint-disable-next-line
   const [loading, setLoading] = useState(false);
   const makeFavourite = async () => {
     setLoading(true);
@@ -14,7 +14,9 @@ const Favourite = (file) => {
       const favouriteObject ={
         file_id: file.file,
       };
+      // eslint-disable-next-line
       const result = await favourite(favouriteObject, localStorage.getItem('token'));
+
       setTimeout(() => {
         setLoading(false);
       }, 2000);

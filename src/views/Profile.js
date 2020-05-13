@@ -67,7 +67,7 @@ const Profile = () => {
         <Paper className={classes.paper}>
           <Grid container spacing={2}>
             {avatar.length > 0 ? (
-              (console.log('MITAE', avatar),
+              (
               (
                 <Grid item>
                   <ButtonBase className={classes.image}>

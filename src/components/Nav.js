@@ -69,7 +69,6 @@ const Nav = ({history}) => {
     const checkUser = async () => {
       try {
         const userdata = await checkToken(localStorage.getItem('token'));
-        console.log(userdata);
         setUser(userdata);
       } catch (e) {
         // send to login
@@ -82,7 +81,6 @@ const Nav = ({history}) => {
   const location = useLocation();
   useEffect(() => {
     const loc = location.pathname.substr(1);
-    console.log(location.pathname);
     setValue(loc);
   }, [location, setValue]);
 
