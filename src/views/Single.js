@@ -13,7 +13,7 @@ import {
 import BackButton from '../components/BackButton';
 import Media from '../components/Media';
 import CommentTable from '../components/CommentTable';
-import CommentForm from './CommentForm';
+import CommentForm from '../components/CommentForm';
 import Moment from 'react-moment';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';

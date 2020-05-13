@@ -5,7 +5,7 @@ import {Typography, Paper, Card, CardContent, IconButton, makeStyles} from '@mat
 import BackButton from '../components/BackButton';
 import Media from '../components/Media';
 import CommentTable from '../components/CommentTable';
-import CommentForm from './CommentForm';
+import CommentForm from '../components/CommentForm';
 
 import {Link as RouterLink} from 'react-router-dom';
 import CreateIcon from '@material-ui/icons/Create';

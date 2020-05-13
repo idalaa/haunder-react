@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import { Link as RouterLink, withRouter } from 'react-router-dom';
+import {Link as RouterLink, withRouter} from 'react-router-dom';
 import useUploadForm from '../hooks/UploadHooks';
-import { upload } from '../hooks/ApiHooks';
+import {upload} from '../hooks/ApiHooks';
 import {
   Button,
   Grid,
@@ -11,8 +11,8 @@ import {
   Typography,
   Card,
 } from '@material-ui/core';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import { makeStyles } from '@material-ui/core/styles';
+import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import {makeStyles} from '@material-ui/core/styles';
 import GroupIcon from '@material-ui/icons/Group';
 
 const useStyles = makeStyles((theme) => ({
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CreateGroup = ({ history }) => {
+const CreateGroup = ({history}) => {
   const classes = useStyles();
   const tag = 'haunderGroup';
   const [loading, setLoading] = useState(false);
@@ -58,9 +58,9 @@ const CreateGroup = ({ history }) => {
         file: inputs.file,
       };
       const result = await upload(
-        uploadObject,
-        localStorage.getItem('token'),
-        tag
+          uploadObject,
+          localStorage.getItem('token'),
+          tag,
       );
       console.log(result);
       setTimeout(() => {
@@ -87,17 +87,17 @@ const CreateGroup = ({ history }) => {
     const reader = new FileReader();
 
     reader.addEventListener(
-      'load',
-      () => {
+        'load',
+        () => {
         // convert image file to base64 string
-        setInputs((inputs) => {
-          return {
-            ...inputs,
-            dataUrl: reader.result,
-          };
-        });
-      },
-      false
+          setInputs((inputs) => {
+            return {
+              ...inputs,
+              dataUrl: reader.result,
+            };
+          });
+        },
+        false,
     );
 
     if (inputs.file !== null) {
@@ -119,7 +119,7 @@ const CreateGroup = ({ history }) => {
     <>
       <Grid container className={classes.root}>
         <Card className={classes.card}>
-          <Grid container style={{ display: 'block' }}>
+          <Grid container style={{display: 'block'}}>
             <Grid item xs={12}>
               <Typography component='h1' variant='h4' gutterBottom>
                 <GroupIcon className={classes.icon} />

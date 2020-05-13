@@ -22,7 +22,7 @@ import Collapse from '@material-ui/core/Collapse';
 import {red} from '@material-ui/core/colors';
 
 import CommentTable from './CommentTable';
-import CommentForm from '../views/CommentForm';
+import CommentForm from './CommentForm';
 import TimeConvert from './TimeConvert';
 import {MediaContext} from '../contexts/MediaContext';
 import Favourite from './Favourite';
